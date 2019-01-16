@@ -45,10 +45,10 @@ $active_record = TRUE;
     // $db['default']['dbdriver'] = 'mysql';
     // $db['default']['dbprefix'] = '';
 
-    $db['default']['hostname'] = 'localhost';
+    $db['default']['hostname'] = '45.117.170.40';
     $db['default']['username'] = 'root';
-    $db['default']['password'] = '';
-    $db['default']['database'] = 'tripexpress';
+    $db['default']['password'] = 'dothanhvinh';
+    $db['default']['database'] = 'haydi';
     $db['default']['dbdriver'] = 'mysqli';
     $db['default']['dbprefix'] = '';
 

@@ -22,19 +22,18 @@ class Suppliers extends CI_Controller
                 }
             } elseif (isset($_POST['userName'])) {
                 $userName = $_POST['userName'];
-                $password = $_POST['password'];
-                $fullname = $_POST['fullname'];
-                $type = $_POST['type'];
-                $status = $_POST['status'];
-                $this->addSupplier($userName, $password, $fullname,  $type, $status);
+                $FullName = $_POST['FullName'];
+                $SupplierType = $_POST['SupplierType'];
+                $active = $_POST['active'];
+                $sup_profile_id = $_POST['sup_profile_id'];
+                $this->addSupplier($userName, $FullName, $SupplierType, $active, $sup_profile_id);
 
             } elseif ($_POST['supplier_search'] != null) {
                 $this->isCheck = true;
                 $supplier_cd = $_POST['supplier_search'];
 //                $this->list_suppliers($supplier_cd);
-                $this->list_suppliers_by_search($supplier_cd);
-            }
-             else {
+                $this->list_suppliers_by_id($supplier_cd);
+            } else {
                 $this->isCheck = false;
 //                $supplier_cd = $_POST['supplier_search'];
                 $this->list_suppliers();
@@ -53,7 +52,7 @@ class Suppliers extends CI_Controller
 
         $config['base_url'] = base_url() . 'admin/suppliers/list_suppliers';
         $config['total_rows'] = $this->supplier->total_suppliers();
-        $config['per_page'] = 10;
+        $config['per_page'] = 2;
         $config["uri_segment"] = 4;
         //pagination styling
         $config['num_tag_open'] = '<li>';
@@ -69,12 +68,7 @@ class Suppliers extends CI_Controller
 
         $this->pagination->initialize($config);
         $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-
-//        if ($this->isCheck) {
-//            $data['suppliers'] = $this->supplier->show_suppliers($config['per_page'], $page, $supplier_cd);
-//        } else {
-            $data['suppliers'] = $this->supplier->show_all_suppliers($config['per_page'], $page);
-//        }
+        $data['suppliers'] = $this->supplier->show_all_suppliers($config['per_page'], $page);
 
         $data['links'] = $this->pagination->create_links();
         $data['main_content'] = 'backend/suppliers/suppliers';
@@ -91,17 +85,13 @@ class Suppliers extends CI_Controller
         $data['suppliers'] = $this->supplier->show_suppliers($supplier_cd);
 
         $data['links'] = $this->pagination->create_links();
-        $data['main_content'] = 'backend/suppliers/suppliers_info';
+        $data['main_content'] = 'backend/suppliers/suppliers';
         $data['title'] = 'suppliers';
-       /* if ($_POST['supplier_search'] != null) {
-            
-        }else{*/
-           // redirect('admin/suppliers', 'refresh');
+        $this->load->view('includes/template', $data);
+//        redirect('admin/suppliers', 'refresh');
+    }
 
-            $this->load->view('includes/template', $data);
-        }        
-
-    function list_suppliers_by_search($supplier_cd)
+    function search_suppliers_by_id($supplier_cd)
     {
         $this->load->library('pagination');
         $this->load->model('supplier');
@@ -111,42 +101,21 @@ class Suppliers extends CI_Controller
         $data['links'] = $this->pagination->create_links();
         $data['main_content'] = 'backend/suppliers/suppliers';
         $data['title'] = 'suppliers';
-       /* if ($_POST['supplier_search'] != null) {
-            
-        }else{*/
-           // redirect('admin/suppliers', 'refresh');
-
-            $this->load->view('includes/template', $data);
-        }        
-    
-    
+        $this->load->view('includes/template', $data);
+//        redirect('admin/suppliers', 'refresh');
+    }
 
     //them thong tin
-    function addSupplier($userName, $password, $fullname, $type, $status)
+    function addSupplier($supplierName, $supplierFullName, $supplierType, $active, $supplierProfileId)
     {
         //TODO chua hien thi len view con da them dc
         $this->load->library('pagination');
         $this->load->model('supplier');
 
-        $data['supplier'] = $this->supplier->insert_infomation( $userName, $password, $fullname, (int)$type, $status);
+        $data['supplier'] = $this->supplier->insert_infomation(uniqid(), $supplierName, $supplierFullName, (int)$supplierType, $active, $supplierProfileId);
         redirect('admin/suppliers', 'refresh');
     }
-    //sua thogn tin
-     function updateSupplier()
-    {
-        //TODO chua hien thi len view con da them dc
-          $userName = $_GET['userName'];
-                $password = $_GET['password'];
-                $fullname = $_GET['fullname'];
-                $type = $_GET['type'];
-                $status = $_GET['status'];
-                 $id = $_GET['id'];
-        $this->load->library('pagination');
-        $this->load->model('supplier');
-       
-        $data['supplier'] = $this->supplier->update_Supplier( $userName, $password, $fullname, $type, $status, $id);
-        redirect('admin/suppliers', 'refresh');
-    }
+
     private function is_logged_in()
     {
         $is_logged_in = $this->session->userdata('is_logged_in');
@@ -158,7 +127,7 @@ class Suppliers extends CI_Controller
     function delete_supplier($id)
     {
         $this->load->model('supplier');
-        $this->session->set_flashdata('message', 'Suppliers successfully deleted');
+        $this->session->set_flashdata('message', 'Ticket successfully deleted');
         $this->supplier->delete_supplier($id);
         redirect('admin/suppliers', 'refresh');
     }

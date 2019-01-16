@@ -8,7 +8,7 @@ Class User extends CI_Model
 	   $this->db->where('blocked', "0");
 	  // $this -> db -> limit(1);
 
-	   $query = $this->db->get('users');
+	   $query = $this->db->get('users_admin');
 
 	   if($query->num_rows != 0)
 	   {
@@ -20,13 +20,13 @@ Class User extends CI_Model
 	{
 		$this->db->limit($limit, $start);
 		$this->db->where('id !=', 1);
-	 	$query = $this->db->get('users');
+	 	$query = $this->db->get('users_admin');
 	 	return $query->result();
 	}
 	function get_user($id)
 	{
 		$this->db->where('id', $id);
-		$query = $this->db->get('users');
+		$query = $this->db->get('users_admin');
 		if($query->num_rows() > 0)
 		{
 			$row = $query->row();
@@ -44,18 +44,18 @@ Class User extends CI_Model
 		}
 
 		$this->db->where('id', $id);
-		$this->db->update('users', $crop_data);
+		$this->db->update('users_admin', $crop_data);
 	}
 	function create_user($data)
 	{
 		$crop_data = elements(array('firstname','lastname','username','password','role','email'), $data);
-		$add_user = $this->db->insert_string('users', $crop_data);
+		$add_user = $this->db->insert_string('users_admin', $crop_data);
 		$this->db->query($add_user);
 	}
 	function delete_member($id)
 	{
 		$this->db->where('id', $id);
-     	$this->db->delete('users');
+     	$this->db->delete('users_admin');
 	}
 	function block_member($id)
 	{
@@ -67,12 +67,12 @@ Class User extends CI_Model
 	{
 		$this->db->set('blocked', "0");
 		$this->db->where('id', $id);
-     	$this->db->update('users');
+     	$this->db->update('users_admin');
 	}
 	function member_role($username){
 		$this->db->select('role');
 		$this->db->where('username',$username);
-		$query = $this->db->get('users');
+		$query = $this->db->get('users_admin');
 
 		if ($query->num_rows() > 0)
 		{
@@ -83,7 +83,7 @@ Class User extends CI_Model
 	function member_id($username){
 		$this->db->select('id');
 		$this->db->where('username',$username);
-		$query = $this->db->get('users');
+		$query = $this->db->get('users_admin');
 
 		if ($query->num_rows() > 0)
 		{
@@ -94,7 +94,7 @@ Class User extends CI_Model
 	function member_language($username){
 		$this->db->select('language');
 		$this->db->where('username',$username);
-		$query = $this->db->get('users');
+		$query = $this->db->get('users_admin');
 
 		if ($query->num_rows() > 0)
 		{

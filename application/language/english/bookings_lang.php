@@ -36,5 +36,11 @@ $lang['Ticket for'] = "Ticket for";
 $lang['was booked successfully'] = "was booked successfully";
 $lang['Print invoice'] = "Print invoice";
 $lang['Go back to search'] = "Go back to search";
-
+$lang['Holding'] = "Holding";
+$lang['Paid'] = "Paid";
+$lang['Not Paid'] = "Not Paid";
+$lang['Expired'] = "Expired";
+$lang['Guide'] = "Guide";
+$lang['HomeStay'] = "HomeStay";
+$lang['Car'] = "Car";
 ?>

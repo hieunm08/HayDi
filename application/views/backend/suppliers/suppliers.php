@@ -14,7 +14,7 @@
         <hr>
     </div>
     <div class="row" style="margin-right:0px;margin-bottom: 10px;width: 500px">
-        <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
+       <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
             <form class="form-inline" method="POST" action="../admin/suppliers" style="float:left">
                 <div class="form-group">
                     <input type="text" class="form-control" id="supplier_search" name="supplier_search"
@@ -44,13 +44,13 @@
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th>STT</th>
+                    <th><?php echo $this->session->userdata['user_id'] ?></th>
                     <th><?php echo lang('ID number'); ?></th>
-                    <th><?php echo lang('Username'); ?></th>
-                    <th>Password</th>
-                    <th>Fullname</th>
-                    <th>Type</th>
-                    <th>Status</th>
+                    <th><?php echo lang('First name'); ?></th>
+                    <th><?php echo lang('Last name'); ?></th>
+                    <th><?php echo lang('Supplier'); ?></th>
+                    <th><?php echo lang('Supplier'); ?></th>
+                    <th><?php echo lang('Supplier'); ?></th>
                     <th><?php echo lang('Options'); ?></th>
                 </tr>
                 </thead>
@@ -65,13 +65,12 @@
                     <tr>
 
                         <td><?php echo $i ?></td>
-                        <td><?php echo $supplier->supplier_ID ?></td>
-                        <td><?php echo $supplier->supplier_User ?></td>
-                        <td><?php echo $supplier->supplier_Pass ?></td>
-                        <td><?php echo $supplier->supplier_Fullname ?></td>
-                        <td><?php echo $this->supplier->show_Supplier_Type($supplier->supplier_Type) ?></td>
-                        <td><?php echo $this->supplier->show_Supplier_Status($supplier->supplier_Status) ?></td>
-
+                        <td><?php echo $supplier->sup_id ?></td>
+                        <td><?php echo $supplier->sup_name ?></td>
+                        <td><?php echo $supplier->sup_fullname ?></td>
+                        <td><?php echo $supplier->sup_type ?></td>
+                        <td><?php echo $supplier->active ?></td>
+                        <td><?php echo $supplier->sup_profile_id ?></td>
 
                         <!--  // cái list_tickets là gì đấuy
                          //hinh nhu no la cai danh sách thoi ông
@@ -82,17 +81,13 @@
                                 <!--                                <a href="" onclick="return confirm('Are you sure you want to delete this booking ticket?')" class="btn btn-default btn-xs"><span class="icon-cancel-2" style="color:red"></span> -->
                                 <?php //echo lang('Delete')
                                 ?><!--</a>-->
-                                 <a href="<?php echo base_url('admin/suppliers/list_suppliers_by_id/' . $supplier->supplier_ID); ?>"class="btn btn-default btn-xs">
-                                   <span class="icon-search"><?php echo lang('View') ?></span></a>
-
-
-                                <a href="<?php echo base_url('admin/suppliers/delete_supplier/' . $supplier->supplier_ID); ?>"
-                                   onclick="return confirm('Are you sure you want to delete this supplier?')"
+                                <a href="<?php echo base_url('admin/suppliers/delete_supplier/' . $supplier->sup_id); ?>"
+                                   onclick="return confirm('Are you sure you want to delete this booking ticket?')"
                                    class="btn btn-default btn-xs"><span
                                             class="icon-cancel-2" 6
                                             style="color:red"></span>
                                     <?php echo lang('Delete') ?></a>
-                               
+
                             </div>
                         </td>
 
@@ -107,27 +102,27 @@
 </div>
 
 <div
-"form-2" id="dialog-form" style="display: none; " title="Create Supplier">
+"form-2" id="dialog-form" style="display: none; " title="Create new user">
 <p class="validateTips">All form fields are required.</p>
 
 <form name="myform" method="POST" action="../admin/suppliers" onsubmit="return validateForm()">
     <fieldset>
 
-        <label style="width: 300px" for="userName">Username</label>
+        <label style="width: 300px" for="userName">Name</label>
         <input type="text" name="userName" id="userName" value="" class="text ui-widget-content ui-corner-all">
 
-        <label style="width: 300px" for="FullName">Password</label>
-        <input type="password" name="password" id="FullName" value="" class="text ui-widget-content ui-corner-all">
+        <label style="width: 300px" for="FullName">SupplierFullName</label>
+        <input type="text" name="FullName" id="FullName" value="" class="text ui-widget-content ui-corner-all">
 
-        <label style="width: 300px" for="SupplierType">Full name</label>
-        <input type="text" name="fullname" id="SupplierType" value=""
+        <label style="width: 300px" for="SupplierType">Supplier Type</label>
+        <input type="text" name="SupplierType" id="SupplierType" value=""
                class="text ui-widget-content ui-corner-all">
 
-        <label style="width: 300px" for="active">Type</label>
-        <input type="text" name="type" id="active" value="" class="text ui-widget-content ui-corner-all">
+        <label style="width: 300px" for="active">active</label>
+        <input type="text" name="active" id="active" value="" class="text ui-widget-content ui-corner-all">
 
-        <label style="width: 300px" for="sup_profile_id">Status</label>
-        <input type="text" name="status" id="sup_profile_id" value=""
+        <label style="width: 300px" for="sup_profile_id">Sup profile id</label>
+        <input type="text" name="sup_profile_id" id="sup_profile_id" value=""
                class="text ui-widget-content ui-corner-all">
         <!--            <submit></submit>-->
 

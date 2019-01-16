@@ -13,44 +13,18 @@ class Supplier extends CI_Model
 
     }
 
-    function show_Supplier_Type($supplier_type)
-    {
-        if ($supplier_type==0) {
-            return "Not Guide";
-        }else
-        { 
-            echo '<span class="label label-success">'.lang('Guide').'</span>';
-    }
-}
-
-     function show_Supplier_Status($supplier_status)
-    {
-        if ($supplier_status==0) {
-           echo '<span class="label label-default">'.lang('Inactive').'</span>';
-        }else
-        { 
-          echo '<span class="label label-success">'.lang('Active').'</span>';
-    }
-}
-
     function getAllSuppler()
     {
         $query = $this->db->query();
     }
 
     //insert data
-    function insert_infomation( $supplier_User, $supplier_Pass, $supplier_Fullname, $supplier_Type, $supplier_Status)
+    function insert_infomation($sup_id, $sup_name, $sup_fullname, $dup_type, $active, $sup_profile_id)
     {
         //dang loi
-        $query = $this->db->query("INSERT INTO supplier_mst(supplier_User, supplier_Pass, supplier_Fullname, supplier_Type, supplier_Status) 
-                    VALUES('$supplier_User','$supplier_Pass','$supplier_Fullname','$supplier_Type','$supplier_Status')");
+        $query = $this->db->query("INSERT INTO supplier_mst(sup_id,sup_name,sup_fullname,sup_type,active,sup_profile_id) 
+                    VALUES('$sup_id','$sup_name','$sup_fullname','$dup_type','$active','$sup_profile_id')");
     }
-
-      function update_Supplier($supplier_User, $supplier_Pass, $supplier_Fullname, $supplier_Type, $supplier_Status, $id)
-    {
-           $query = $this->db->query("UPDATE supplier_mst SET supplier_User='$supplier_User', supplier_Pass='$supplier_Pass', supplier_Fullname='$supplier_Fullname', supplier_Type='$supplier_Type', supplier_Status='$supplier_Status' WHERE supplier_ID = '$id' ");
-          
-        }
 
     function show_all_suppliers($limit, $start)
     {
@@ -83,10 +57,10 @@ class Supplier extends CI_Model
         }
     }
 
-     function total_suppliers()
+    public function total_suppliers()
     {
         $this->db->select('*');
-        $this->db->from('supplier_mst');
+            $this->db->from('supplier_mst');
         $query = $this->db->get();
         return $query->num_rows();
     }
@@ -96,7 +70,7 @@ class Supplier extends CI_Model
 //        $this->db->limit($limit, $start);
         $this->db->select("*");
         $this->db->from('supplier_mst');
-        $this->db->where('supplier_ID', $id);
+        $this->db->where('sup_id', $id);
         $query = $this->db->get();
         return $query->result();
     }
@@ -105,10 +79,7 @@ class Supplier extends CI_Model
 
     function delete_supplier($id)
     {
-        $this->db->where('supplier_ID', $id);
+        $this->db->where('sup_id', $id);
         $this->db->delete('supplier_mst');
     }
-
-  
 }
-?>
