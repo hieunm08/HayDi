@@ -93,7 +93,7 @@ class Bookings extends CI_Controller {
 
         function test(){
             echo(hieu);
-
+            echo(list_booking_byID);
         }
 
         function list_booking_byID($book_cd1)
