@@ -91,6 +91,11 @@ class Bookings extends CI_Controller {
             $this->load->view('includes/template', $data);
         }
 
+        function test(){
+            echo(hieu);
+
+        }
+
         function list_booking_byID($book_cd1)
         {
             $this->load->library('pagination');
