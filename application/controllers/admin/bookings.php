@@ -56,9 +56,9 @@ class Bookings extends CI_Controller {
 
             if ($this->session->userdata['role'] == 2) {
                 $this->db->where('created_by', $this->session->userdata['user_id']);
-                $config['total_rows'] = $this->db->count_all_results('bookings');
+                $config['total_rows'] = $this->db->count_all_results('trips');
             } else {
-                $config['total_rows'] = $this->db->count_all_results('bookings');
+                $config['total_rows'] = $this->db->count_all_results('trips');
             }
 
             $config['per_page'] = 10;

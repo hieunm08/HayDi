@@ -14,9 +14,9 @@
               <form  class="form-inline" method="POST" action="../admin/bookings" style="float:left;" >
                   <div class="form-group" style="width: 500px:">
                       <input type="text" class="form-control" id="booking_search" name="booking_search"
-                             placeholder="Key Word">
+                             placeholder="Từ khóa">
                       <button style="margin-right:10px;" type="submit"
-                              class="btn btn-primary"><?php echo lang('Search supplier'); ?>Search
+                              class="btn btn-primary"><?php echo lang('Search supplier'); ?>Tìm kiếm 
                       </button>
                   </div>
               </form>
@@ -28,13 +28,13 @@
                 <h4> Search Detail</h4>
             <div class="form-2" style="float: left; padding-right: 40px;width: 100%; display: ">
                       <input style="margin:6px 6px 6px 0px; width: 10%;float: left" type="text" class="form-control"  id="supplier_search" name="supplier_search"
-                             placeholder="Customer">
+                             placeholder="Tên">
+                      <input style="margin:6px 6px 6px 0px;width: 20%;float: left" type="text" class="form-control" id="supplier_search" name="supplier_search"
+                             placeholder="ID Hướng dẫn viên">
                       <input style="margin:6px 6px 6px 0px;width: 10%;float: left" type="text" class="form-control" id="supplier_search" name="supplier_search"
-                             placeholder="Route">
-                      <input style="margin:6px 6px 6px 0px;width: 10%;float: left" type="text" class="form-control" id="supplier_search" name="supplier_search"
-                             placeholder="Phone">
+                             placeholder="Ngày tạo">
                 <input style="margin:6px 6px 6px 0px;width: 10%;float: left" type="text" class="form-control" id="supplier_search" name="supplier_search"
-                             placeholder="Service">
+                             placeholder="Số ngày ">
 
                 <select class="form-control" name="BookStatus" style="margin:6px 6px 6px 0px;width: 13%;float: left;placeholder="BookStatus">
                     <option  value="0" >Paid</option>
@@ -43,7 +43,7 @@
                 </select>
 
                           <button style="margin-right:5px;margin-bottom: 5px; margin-top:5px;float: left" type="submit"
-                                  class="btn btn-primary"><?php echo lang('Search supplier'); ?>Search
+                                  class="btn btn-primary"><?php echo lang('Search supplier'); ?>Tìm kiếm
                           </button>
                       </div>
                 </div>
@@ -57,19 +57,16 @@
                 <thead>
                   <tr>
                     <th><?php echo $this->session->userdata['user_id']?></th>
-                    <th>Customer</th>
-                    <th>Phone</th>
-                    <th>Trip No</th>
-                    <th>Route</th>
-                    <th>Service</th>
-                    <th>FromDate</th>
-                    <th>To Date</th>
-                    <th>Price</th>
-					<th>Amount</th>
-                      <th>PIC</th>
-                      <th>Detail Booking</th>
-                      <th>Book Status</th>
-                      <th>Pay Status</th>
+                    <th>ID Trip</th>
+                    <th>Tên Khách Hàng</th>
+                    <th>Ngày bắt đầu </th>
+                    <th>Ngày kết thúc</th>
+                    <th>Số ngày</th>
+                    <th>Số đêm</th>
+                    <th>Hướng dẫn viên</th>
+                    <th>Trạng thái</th>
+                    <th>Ngày tạo</th>
+                    <th> Ngày cập nhật</th>
                       <th ><?php echo lang('Options');?></th>
                   </tr>
                 </thead>
@@ -83,33 +80,36 @@
                   ?>
                       <tr>
                       <td><?php echo $i?></td>
-                      <td><?php echo $booking->customer ?></td>
-                      <td><?php echo $booking->phone ?></td>
-                      <td><?php echo $booking->trip_no ?></td>
-                          <td><?php echo $booking->route ?></td>
-                          <td><?php echo $this-> booking-> service_status ($booking->service) ?></td>
+                      <td><?php echo $booking->id?></td>
+                      <td><?php echo $booking->name?></td>
                       <td>
-                        <span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $booking->fromdate))?>
-                        <div class="pull-right"><span class="icon-clock" style="color:red;"></span> <?php echo date('H:i', strtotime( $booking->fromdate)) ?></div>
+                        <span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $booking->time_start))?>
+                        <div class="pull-right"><span class="icon-clock" style="color:red;"></span> <?php echo date('H:i', strtotime( $booking->time_start)) ?></div>
                       </td>
                       <td>
 <!--                        --><?php /*if($booking->returning == '2') { //1 = one way; 2 = returning ticket */?>
-                            <span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $booking->todate))?>
-                          <div class="pull-right"><span class="icon-clock" style="color:red;"></span> <?php echo date('H:i', strtotime( $booking->todate)) ?></div>
+                            <span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $booking->time_end))?>
+                          <div class="pull-right"><span class="icon-clock" style="color:red;"></span> <?php echo date('H:i', strtotime( $booking->time_end)) ?></div>
 <!--                        --><?php /*} */?>
                       </td>
-                          <td><?php echo $booking->price ?></td>
-                          <td><?php echo $booking->price ?></td>
+                          <td><?php echo $booking->days ?></td>
+                          <td><?php echo $booking->nights ?></td>
 
                           <!--                          <td><?php /*echo ($this->booking->get_amount($booking->from)) */?></td>
                           -->
-                          <td><?php echo $booking->PIC ?></td>
-                          <td><?php echo $booking->detail_booking ?></td>
-                          <td><?php echo $this-> booking-> status ($booking->book_status) ?></td>
-                          <td><?php echo $this-> booking-> payment_status ($booking->payment_status) ?></td>
-                      <td style="text-align:center">
+                          <td><?php echo $booking->guider_id ?></td>
+                          <td><?php echo $this-> booking->status_order ($booking->status) ?> </td>
+                          <td>
+                        <span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $booking->created_at))?>
+                        <div class="pull-right"><span class="icon-clock" style="color:red;"></span> <?php echo date('H:i', strtotime( $booking->created_at)) ?></div>
+                      </td>
+                        <td>
+                        <span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $booking->updated_at))?>
+                        <div class="pull-right"><span class="icon-clock" style="color:red;"></span> <?php echo date('H:i', strtotime( $booking->updated_at)) ?></div>
+                      </td>
+                        <td style="text-align:center">
                         <div class="btn-group" role="group">
-                          <a href="<?php echo base_url('admin/bookings/list_booking_byID/'. $booking->book_id) ?>" target="_blank" class="btn btn-default btn-xs"><span class="icon-file-pdf" style="color:red"></span> Update</a>
+                          <a href="<?php echo base_url('admin/bookings/list_booking_byID/'. $booking->id) ?>" target="_blank" class="btn btn-default btn-xs"><span class="icon-file-pdf" style="color:red"></span> Update</a>
                         </div>
                       </td>
                     </tr>

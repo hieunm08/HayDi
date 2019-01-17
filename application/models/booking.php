@@ -27,8 +27,8 @@ Class Booking extends CI_Model
     function show_bookings($limit, $start)
     {
         $this->db->limit($limit, $start);
-        $this->db->from('booking');
-        $this->db->order_by('fromdate','desc');
+        $this->db->from('trips');
+        $this->db->order_by('name','desc');
         $this->db->select("*");
         $query = $this->db->get();
         return $query->result();
@@ -54,10 +54,10 @@ Class Booking extends CI_Model
     }
 
 
-    static function status($book_status){
-        if ($book_status == 0) {
+    static function status_order($status){
+        if ($status == 0) {
             echo '<span class="label label-default">'.lang('Holding').'</span>';
-        }else if ($book_status == 1) {
+        }else if ($status == 1) {
             echo '<span class="label label-success">'.lang('Paid').'</span>';
         }
         else {   echo '<span class="label label-success">'.lang('Expired').'</span>';
