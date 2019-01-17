@@ -93,11 +93,20 @@
                 <tr>
                     <th>STT</th>
                     <th><?php echo lang('ID number'); ?></th>
-                    <th><?php echo lang('Username'); ?></th>
-                    <th>Password</th>
-                    <th>Fullname</th>
+                    <th>Họ tên</th>
+                    <th>SĐT</th>
+                    <th>Facebook ID</th>
+                    <th>Nguồn</th>
+                    <th>Email</th>
+                    <th>Sub Phone</th>
+                    <th>Địa chỉ</th>
+                    <th>Mã quốc gia</th>
+                    <th>Level</th>
+                    <th>Trạng thái</th>
                     <th>Type</th>
-                    <th>Status</th>
+                    <th>Giá</th>
+                    <th>Đơn vị giá</th>
+                    <th>Ngày đăng kí</th>
                     <th><?php echo lang('Options'); ?></th>
                 </tr>
                 </thead>
@@ -112,12 +121,22 @@
                     <tr>
 
                         <td><?php echo $i ?></td>
-                        <td><?php echo $supplier->supplier_ID ?></td>
-                        <td><?php echo $supplier->supplier_User ?></td>
-                        <td><?php echo $supplier->supplier_Pass ?></td>
-                        <td><?php echo $supplier->supplier_Fullname ?></td>
-                        <td><?php echo $this->supplier->show_Supplier_Type($supplier->supplier_Type) ?></td>
-                        <td><?php echo $this->supplier->show_Supplier_Status($supplier->supplier_Status) ?></td>
+                        <td><?php echo $supplier->id ?></td>
+                        <td><?php echo $supplier->name ?></td>
+                        <td><?php echo $supplier->phone ?></td>
+                        <td><?php echo $supplier->facebook_id ?></td>
+                        <td><?php echo $supplier->source ?></td>
+                        <td><?php echo $supplier->email ?></td>
+                        <td><?php echo $supplier->sub_phone ?></td>
+                        <td><?php echo $supplier->address ?></td>
+                        <td><?php echo $supplier->country_code ?></td>
+                        <td><?php echo $supplier->level ?></td>
+                        <td><?php echo $this->supplier->show_Supplier_Status($supplier->status) ?></td>
+                        <td><span class="label label-info"><?php echo $supplier->type ?></span></td>
+                        <td><?php echo $supplier->price ?></td>
+                        <td><?php echo $supplier->price_unit ?></td>
+                        <td><?php echo $supplier->created_at ?></td>
+                   
 
 
                         <!--  // cái list_tickets là gì đấuy
@@ -129,11 +148,11 @@
                                 <!--                                <a href="" onclick="return confirm('Are you sure you want to delete this booking ticket?')" class="btn btn-default btn-xs"><span class="icon-cancel-2" style="color:red"></span> -->
                                 <?php //echo lang('Delete')
                                 ?><!--</a>-->
-                                 <a href="<?php echo base_url('admin/suppliers/list_suppliers_by_id/' . $supplier->supplier_ID); ?>"class="btn btn-info btn-xs">
+                                 <a href="<?php echo base_url('admin/suppliers/list_suppliers_by_id/' . $supplier->id); ?>"class="btn btn-info btn-xs">
                                    <span class="icon-search"><?php echo lang('View') ?></span></a>
 
 
-                                <a href="<?php echo base_url('admin/suppliers/delete_supplier/' . $supplier->supplier_ID); ?>"
+                                <a href="<?php echo base_url('admin/suppliers/delete_supplier/' . $supplier->id); ?>"
                                    onclick="return confirm('Are you sure you want to delete this supplier?')"
                                    class="btn btn-default btn-xs"><span
                                             class="icon-cancel-2" 6

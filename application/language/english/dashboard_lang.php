@@ -9,6 +9,7 @@ $lang['Dashboard'] = "Dashboard";
 $lang['Available tours'] = "Available tours";
 $lang['Departure'] = "Departure";
 $lang['Arrival'] = "Arrival";
+$lang['Suppliers'] = "Suppliers";
 $lang['Departure at'] = "Departure at";
 $lang['Quick booking'] = "Quick booking";
 $lang['Book ticket'] = "Book ticket";

@@ -44,16 +44,15 @@ class Suppliers extends CI_Controller
             $this->list_suppliers();
         }
     }
-    //lay thong tin theo ten
+    
     function list_suppliers()
     {
-
         $this->load->library('pagination');
         $this->load->model('supplier');
 
         $config['base_url'] = base_url() . 'admin/suppliers/list_suppliers';
         $config['total_rows'] = $this->supplier->total_suppliers();
-        $config['per_page'] = 10;
+        $config['per_page'] = 5;
         $config["uri_segment"] = 4;
         //pagination styling
         $config['num_tag_open'] = '<li>';

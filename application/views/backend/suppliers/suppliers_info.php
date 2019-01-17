@@ -18,19 +18,37 @@
             <div class="col-sm-6 col-md-4"> 
               <form method="GET" action="../updateSupplier">
               <div class="form-group"> 
-                <label for="company_name">Username</label>
-                <input type="text" class="form-control" id="company_name" name="userName" value="<?php echo($supplier->supplier_User) ?>">            
+                <label for="company_name">Họ tên</label>
+                <input type="text" class="form-control" id="company_name" name="userName" value="<?php echo($supplier->name) ?>">            
+              </div>
+              <div class="form-group"> 
+                <label for="company_name">SĐT</label>
+                <input type="text" class="form-control" id="company_name" name="userName" value="<?php echo($supplier->phone) ?>">        
+              </div>
+               <div class="form-group"> 
+                <label for="company_name">Email</label>
+                <input type="text" class="form-control" id="company_name" name="userName" value="<?php echo($supplier->email) ?>">        
+              </div>
+               <div class="form-group"> 
+                <label for="company_name">Sub Phone</label>
+                <input type="text" class="form-control" id="company_name" name="userName" value="<?php echo($supplier->sub_phone) ?>">        
               </div>
               <div class="form-group">
+                <label for="company_street">Địa chỉ</label>
+                <input type="text" class="form-control" id="company_street" name="password" value="<?php echo($supplier->address) ?>" >
+                <?php echo form_error('company_street'); ?>
+              </div>
+                <div class="form-group">
+                <label for="company_street">Mã Quốc Gia</label>
+                <input type="text" class="form-control" id="company_street" name="password" value="<?php echo($supplier->country_code) ?>" >
+            </div>
+              </div>
+                <div class="form-group">
                 <label for="company_street">Password</label>
-                <input type="text" class="form-control" id="company_street" name="password" value="<?php echo($supplier->supplier_Pass) ?>" >
+                <input type="text" class="form-control" id="company_street" name="password" value="<?php echo($supplier->address) ?>" >
                 <?php echo form_error('company_street'); ?>
               </div>
-               <div class="form-group">
-                <label for="company_street">Fullname</label>
-                <input type="text" class="form-control" id="company_street" name="fullname" value="<?php echo($supplier->supplier_Fullname) ?> ">
-                <?php echo form_error('company_street'); ?>
-              </div>
+      
               <div class="form-group">
                 <label for="company_street">Type</label>
                   <select class="form-control" id="sel1" name="type">  
@@ -51,7 +69,7 @@
                 <?php echo form_error('company_street'); ?>
               </div>
 
-              <input type="hidden" name="id" value=" <?php echo ($supplier->supplier_ID) ?>">
+              <input type="hidden" name="id" value=" <?php echo ($supplier->id) ?>">
              
            
 

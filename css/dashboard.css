@@ -39,7 +39,7 @@ p {
 .top-nav a {
 display: block;
 padding: 5px 10px;
-color: #323332;
+color: #f14e4b;
 }
 /*
  * Global add-ons
@@ -112,7 +112,7 @@ color: #323332;
 
 .main {
   padding: 20px;
-  background: #FFF;
+  background: #fff !important;
   -webkit-border-top-left-radius: 2px;
   -webkit-border-bottom-left-radius: 2px;
   -moz-border-radius-topleft: 2px;

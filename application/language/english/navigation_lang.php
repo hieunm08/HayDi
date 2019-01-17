@@ -7,6 +7,7 @@ $lang['Tours'] = "Tours";
 $lang['Clients'] = "Clients";
 $lang['Statistics'] = "Statistics";
 $lang['Settings'] = "Settings";
+$lang['Suppliers'] = "Suppliers";
 //  GLOBAL
 $lang['Edit'] = "Edit";
 $lang['Delete'] = "Delete";

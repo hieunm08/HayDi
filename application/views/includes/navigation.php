@@ -32,23 +32,24 @@ $this->lang->load('navigation', $this->session->userdata('language'));
             <li <?php if ($page == "destinations"){ echo "class='active'";} ?>>
               <a href="<?php echo base_url() ?>admin/destinations">
                 <div class="nav-icon"><span class="icon-location"></span></div>
-                <div class="nav-title"><?php echo lang('Destinations');?></div>
+                <div class="nav-title">Hosts</div>
               </a>
             </li>
 
 
-            <li <?php if ($page == "tours"){ echo "class='active'";} ?>>
+           <!--  <li <?php if ($page == "tours"){ echo "class='active'";} ?>>
               <a href="<?php echo base_url() ?>admin/tours">
                 <div class="nav-icon"><span class="icon-calendar"></span></div>
                 <div class="nav-title"><?php echo lang('Tours');?></div>
               </a>
-            </li>
-            <li <?php if ($page == "clients"){ echo "class='active'";} ?>>
+            </li> -->
+            
+           <!--  <li <?php if ($page == "clients"){ echo "class='active'";} ?>>
               <a href="<?php echo base_url() ?>admin/clients">
                 <div class="nav-icon"><span class="icon-user-2"></span></div>
                 <div class="nav-title"><?php echo lang('Clients');?></div>
               </a>
-            </li>
+            </li> -->
 
 
 
@@ -56,17 +57,26 @@ $this->lang->load('navigation', $this->session->userdata('language'));
                <li <?php if ($page == "bookings"){ echo "class='active'";} ?>>
               <a href="<?php echo base_url() ?>admin/suppliers">
                 <div class="nav-icon"><span class="icon-files"></i></span></div>
-                <div class="nav-title"><?php echo lang('supplier');?></div>
+                <div class="nav-title"><?php echo lang('Suppliers');?></div>
               </a>
             </li>
 
             <!-- end... -->
 
 
+
             <li <?php if ($page == "statistics"){ echo "class='active'";} ?>>
               <a href="<?php echo base_url() ?>admin/statistics">
                 <div class="nav-icon"><span class="icon-stats"></span></div>
-                <div class="nav-title"><?php echo lang('Statistics');?></div>
+                <div class="nav-title">Payments</div>
+              </a>
+            </li>
+
+
+            <li <?php if ($page == "statistics"){ echo "class='active'";} ?>>
+              <a href="<?php echo base_url() ?>admin/statistics">
+                <div class="nav-icon"><span class="icon-stats"></span></div>
+                <div class="nav-title">Campaigns</div>
               </a>
             </li>
             <li <?php if ($page == "settings"){ echo "class='active'";} ?>>

@@ -68,7 +68,7 @@ class Supplier extends CI_Model
     function show_all_suppliers($limit, $start)
     {
         $this->db->limit($limit, $start);
-        $this->db->from('supplier_mst');
+        $this->db->from('users');
         $this->db->select("*");
         $query = $this->db->get();  
         return $query->result();
@@ -99,7 +99,7 @@ class Supplier extends CI_Model
      function total_suppliers()
     {
         $this->db->select('*');
-        $this->db->from('supplier_mst');
+        $this->db->from('users');
         $query = $this->db->get();
         return $query->num_rows();
     }
@@ -108,8 +108,8 @@ class Supplier extends CI_Model
     {
 //        $this->db->limit($limit, $start);
         $this->db->select("*");
-        $this->db->from('supplier_mst');
-        $this->db->where('supplier_ID', $id);
+        $this->db->from('users');
+        $this->db->where('id', $id);
         $query = $this->db->get();
         return $query->result();
     }
@@ -118,8 +118,8 @@ class Supplier extends CI_Model
 
     function delete_supplier($id)
     {
-        $this->db->where('supplier_ID', $id);
-        $this->db->delete('supplier_mst');
+        $this->db->where('id', $id);
+        $this->db->delete('users');
     }
 
   
