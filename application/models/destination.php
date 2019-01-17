@@ -4,7 +4,7 @@ Class Destination extends CI_Model
 	
 	function show_destinations()
 	{
-		$query = $this->db->get('destinations');
+		$query = $this->db->get('country');
 	 	return $query->result();
 	}
 	function get_destination($id)

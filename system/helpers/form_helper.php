@@ -793,7 +793,7 @@ if ( ! function_exists('set_checkbox'))
 			}
 
 			return ' checked="checked"';
-        }
+		}
 
 		return $OBJ->set_checkbox($field, $value, $default);
 	}

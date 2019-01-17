@@ -13,25 +13,64 @@ class Supplier extends CI_Model
 
     }
 
+    function show_Supplier_Type($supplier_type)
+    {
+        if ($supplier_type==0) {
+            echo '<span class="label label-primary">'.lang('Homestay').'</span>';
+        }else if($supplier_type==1)
+        { 
+            echo '<span class="label label-success">'.lang('Guide').'</span>';
+    }else{
+            echo '<span class="label label-info">'.lang('Car').'</span>';
+    }
+}
+
+     function show_Supplier_Status($supplier_status)
+    {
+        if ($supplier_status==0) {
+           echo '<span class="label label-default">'.lang('Inactive').'</span>';
+        }else
+        { 
+          echo '<span class="label label-success">'.lang('Active').'</span>';
+    }
+}
+
     function getAllSuppler()
     {
         $query = $this->db->query();
     }
 
     //insert data
-    function insert_infomation($sup_id, $sup_name, $sup_fullname, $dup_type, $active, $sup_profile_id)
+    function insert_infomation( $supplier_User, $supplier_Pass, $supplier_Fullname, $supplier_Type, $supplier_Status)
     {
         //dang loi
-        $query = $this->db->query("INSERT INTO supplier_mst(sup_id,sup_name,sup_fullname,sup_type,active,sup_profile_id) 
-                    VALUES('$sup_id','$sup_name','$sup_fullname','$dup_type','$active','$sup_profile_id')");
+        $query = $this->db->query("INSERT INTO supplier_mst(supplier_User, supplier_Pass, supplier_Fullname, supplier_Type, supplier_Status) 
+                    VALUES('$supplier_User','$supplier_Pass','$supplier_Fullname','$supplier_Type','$supplier_Status')");
     }
 
+    function update_Supplier($supplier_User, $supplier_Pass, $supplier_Fullname, $supplier_Type, $supplier_Status, $id)
+    {
+           $query = $this->db->query("UPDATE supplier_mst SET supplier_User='$supplier_User', supplier_Pass='$supplier_Pass', supplier_Fullname='$supplier_Fullname', supplier_Type='$supplier_Type', supplier_Status='$supplier_Status' WHERE supplier_ID = '$id' ");
+          
+        }
+        //tim kiem tat ca
+    function Find_Supplier($supplier_search)
+    {
+           $query = $this->db->query("SELECT * FROM supplier_mst WHERE supplier_User LIKE '%$supplier_search%' OR supplier_Fullname LIKE '%$supplier_search%' OR supplier_Type LIKE '$supplier_search'  ");
+           return $query->result();
+    }
+        //tim kiem theo muc
+    function Find_Supplier_By_Item($supplier_u, $supplier_f, $supplier_t, $supplier_s)
+    {
+           $query = $this->db->query("SELECT * FROM supplier_mst WHERE supplier_User LIKE '%$supplier_u%' OR supplier_Fullname LIKE '%$supplier_f%' OR supplier_Type LIKE '$supplier_t' OR supplier_Status LIKE '$supplier_s'  ");
+           return $query->result();
+    }
     function show_all_suppliers($limit, $start)
     {
         $this->db->limit($limit, $start);
         $this->db->from('supplier_mst');
         $this->db->select("*");
-        $query = $this->db->get();
+        $query = $this->db->get();  
         return $query->result();
     }
 
@@ -42,9 +81,9 @@ class Supplier extends CI_Model
 //        $data = $query->result();
 //        echo "dung123...". $data;
 
-        $this->db->select("sup_id");
+        $this->db->select("supplier_ID");
         $this->db->from('supplier_mst');
-        $this->db->where('sup_id', $id);
+        $this->db->where('supplier_ID', $id);
         $query = $this->db->get();
         $data= $query->result();
 
@@ -57,10 +96,10 @@ class Supplier extends CI_Model
         }
     }
 
-    public function total_suppliers()
+     function total_suppliers()
     {
         $this->db->select('*');
-            $this->db->from('supplier_mst');
+        $this->db->from('supplier_mst');
         $query = $this->db->get();
         return $query->num_rows();
     }
@@ -70,7 +109,7 @@ class Supplier extends CI_Model
 //        $this->db->limit($limit, $start);
         $this->db->select("*");
         $this->db->from('supplier_mst');
-        $this->db->where('sup_id', $id);
+        $this->db->where('supplier_ID', $id);
         $query = $this->db->get();
         return $query->result();
     }
@@ -79,7 +118,10 @@ class Supplier extends CI_Model
 
     function delete_supplier($id)
     {
-        $this->db->where('sup_id', $id);
+        $this->db->where('supplier_ID', $id);
         $this->db->delete('supplier_mst');
     }
+
+  
 }
+?>

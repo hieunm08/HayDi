@@ -33,12 +33,21 @@
               </div>
               <div class="form-group">
                 <label for="company_street">Type</label>
-                <input type="text" class="form-control" id="company_street" name="type" value="<?php echo($supplier->supplier_Type) ?> ">
+                  <select class="form-control" id="sel1" name="type">  
+                    <option value="1">Guide</option>
+                    <option value=0>Homestay</option>
+                    <option value=2>Cars</option>
+                  </select>
+              <!--   <input type="text" class="form-control" id="company_street" name="type" value="<?php echo($supplier->supplier_Type) ?> "> -->
                 <?php echo form_error('company_street'); ?>
               </div>
                 <div class="form-group">
                 <label for="company_street">Status</label>
-                <input type="text" class="form-control" id="company_street" name="status" value="<?php echo($supplier->supplier_Status) ?> ">
+                <select class="form-control" id="sel1" name="status">  
+                    <option value="1">Active</option>
+                    <option value=0>Inactive</option>
+                  </select>
+               <!--  <input type="text" class="form-control" id="company_street" name="status" value="<?php echo($supplier->supplier_Status) ?> "> -->
                 <?php echo form_error('company_street'); ?>
               </div>
 

@@ -22,7 +22,7 @@
                 <div  class="form-group">
                   <label for="dateandtime"><?php echo lang('Departure time'); ?></label>
                   <div class="row">
-                          <div class="col-md-6  date" id='datepicker1'>
+                      <div class="col-md-6  date" id='datepicker1'>
                           <input type="text" class="form-control" name="from_start_date" data-date-format="DD-MM-YYYY" value="<?php echo set_value('from_start_date', date('d-m-Y', strtotime($tour->from_start_time))); ?>">
                           <span class="input-group-addon"><span class="icon-calendar"></span>
                           </span>

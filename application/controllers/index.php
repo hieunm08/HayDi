@@ -12,7 +12,7 @@ class Index extends CI_Controller {
 	{
 		$this->load->model('booking');
         $this->load->model('search');
-/*      	$data['cities'] = $this->booking->list_cities();*/
+      	//$data['cities'] = $this->booking->list_cities();
 	   	$data['title'] = 'Welcome';
 	   	$this->load->view('frontend/index', $data);
 	}

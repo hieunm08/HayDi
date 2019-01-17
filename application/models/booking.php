@@ -1,7 +1,7 @@
 <?php
 Class Booking extends CI_Model
 {
-/*	function show_booking_status($booking_status)
+	function show_booking_status($booking_status)
 	{
 		if ($booking_status==0) {
 			return "Holding";
@@ -9,9 +9,9 @@ Class Booking extends CI_Model
 		{ 
 			return "Paid";
 		}else return "Expired";
-	}*/
+	}
 
-	/*function show_bookings($limit, $start, $user_id = '')
+	function show_bookings($limit, $start, $user_id = '')
 	{
 
 		$this->db->limit($limit, $start);
@@ -22,96 +22,8 @@ Class Booking extends CI_Model
 			$this->db->where('created_by', $user_id);
 	 	$query = $this->db->get();
 	 	return $query->result();
-	}*/
-
-    function show_bookings($limit, $start)
-    {
-        $this->db->limit($limit, $start);
-        $this->db->from('booking');
-        $this->db->order_by('fromdate','desc');
-        $this->db->select("*");
-        $query = $this->db->get();
-        return $query->result();
-
-    }
-    function show_bookings_id($book_id)
-    {
-        $this->db->from('booking');
-        $this->db->select("*");
-        $this->db->where("book_id",$book_id);
-        $query = $this->db->get();
-        return $query->result();
-    }
-    function search_bookings_id($book_cd1,$customer1)
-    {
-
-        $query = $this->db->query("SELECT * FROM booking where book_id = '$book_cd1' OR  customer like '%$customer1%'");
-     /*   $this->db->from('booking');
-        $this->db->select("*");
-        $this->db->where("book_id",$book_id);
-        $query = $this->db->get();*/
-        return $query->result();
-    }
-
-
-    static function status($book_status){
-        if ($book_status == 0) {
-            echo '<span class="label label-default">'.lang('Holding').'</span>';
-        }else if ($book_status == 1) {
-            echo '<span class="label label-success">'.lang('Paid').'</span>';
-        }
-        else {   echo '<span class="label label-success">'.lang('Expired').'</span>';
-        }
-    }
-
-    static function service_status($service){
-        if ($service == 0) {
-            echo '<span class="label label-success">'.lang('Guide').'</span>';
-        }else if ($service == 1) {
-            echo '<span class="label label-success">'.lang('HomeStay').'</span>';
-        }
-        else {  echo '<span class="label label-success">'.lang('Car').'</span>';
-        }
-    }
-    static function payment_status($payment_status)
-    {
-        if ($payment_status == 0) {
-            echo '<span class="label label-success">' . lang('Paid') . '</span>';
-        } else {
-            echo '<span class="label label-default">' . lang('Not Paid') . '</span>';
-
-        }
-    }
-    function update_booking($customer, $phone, $trip_no, $route, $service, $fromdate,$todate,$price,$PIC,$detail_booking,$book_status,$payment_status,$book_id)
-    {
-        $query = $this->db->query("UPDATE booking SET customer='$customer', phone='$phone', trip_no='$trip_no', route='$route', service='$service', fromdate='$fromdate', todate='$todate',price='$price',PIC='$PIC',detail_booking='$detail_booking',book_status='$book_status',payment_status='$payment_status'  WHERE book_id = '$book_id'");
-
-    }
-
-/*    function search_bookingID($customer, $phone, $trip_no, $route, $route, $fromdate,$todate,$price,$PIC,$detail_booking,$book_status,$payment_status,$book_id){
-        $this->db->select("');
-        $this->db->from('booking');
-        $this->db->where('booking');
-*/
-
-
-
-    }
-
-    /*function get_amount( $book_id ){
-
-        $time_stamp = strtotime($this->db->query("SELECT fromdate FROM `booking` WHERE book_id,$book_id"));
-        $new = strtotime($this->db->query("SELECT todate FROM `booking` WHERE book_id,$book_id"));
-        $a= $time_stamp - $new;
-
-
-    }*/
-
-
-
-
-
-	/*function get_company_info()
+	}
+	function get_company_info()
 	{
 		$this->db->from('settings');
 	 	$query = $this->db->get();
@@ -122,16 +34,17 @@ Class Booking extends CI_Model
 		}
 	}
 
-	/*function show_booking_date($book_id){
-		$this->db->select('fromdate');
-		$this->db->where('book_id', $book_id);
+	function show_booking_date($tour_id){
+		$this->db->select('from_start_time');
+		$this->db->where('tour_id', $tour_id);
 
+	 	$query = $this->db->get('tours');
 	 	if ($query->num_rows() > 0)
 		{
 		   $row = $query->row();
-		   return $row->fromdate;
+		   return $row->from_start_time;
 		}
-	}*/
+	}
     function get_city_name($id){
 		$this->db->select('city');
 		$this->db->where('destination_id', $id);
@@ -142,7 +55,7 @@ Class Booking extends CI_Model
 		   return $row->city;
 		}
 	}
-	/*function get_username($id){
+	function get_username($id){
 		$this->db->select('username');
 		$this->db->where('id', $id);
 		$query = $this->db->get('users');
@@ -152,9 +65,9 @@ Class Booking extends CI_Model
 		   return $row->username;
 		}
 
-	}*/
+	}
 
-	/*function check_available_tours($from, $to, $returning, $depart_date='', $return_date=''){
+	function check_available_tours($from, $to, $returning, $depart_date='', $return_date=''){
 	$data = array();
 
 	$query_currency = $this->db->query("SELECT symbol,iso FROM currency JOIN settings ON settings.company_currency = currency.currency_id LIMIT 1");
@@ -205,9 +118,9 @@ Class Booking extends CI_Model
 		}
 
 		return $json = json_encode($data);
-	}*/
+	}
 
-	/*function get_booking($id)
+	function get_booking($id)
 	{
 		$this->db->from('bookings', 'tours');
 	 	$this->db->join('tours', 'tours.tour_id = bookings.tour_id');
@@ -220,8 +133,8 @@ Class Booking extends CI_Model
 		}
 
 	 	return $row;
-	}*/
-	/*function get_booking_returned($id)
+	}
+	function get_booking_returned($id)
 	{
 		$this->db->from('bookings', 'tours');
 	 	$this->db->join('tours', 'tours.tour_id = bookings.tour_back_id');
@@ -247,8 +160,17 @@ Class Booking extends CI_Model
 		$this->db->where('booking_id', $id);
 		$this->db->update('bookings', $crop_data);
 
-	}*/
+	}
 	
+	function create_booking($data)
+	{
+		$data['tour_id'] = element('choose_from', $data);
+		$data['tour_back_id']  = element('choose_back', $data);
+		$data['created_by'] = $this->session->userdata['user_id'];
+		$crop_data = elements(array('tour_id','tour_back_id','booked_seats','client_firstname','client_lastname','identification_nr','returning','created_by'), $data);
+		$add_booking = $this->db->insert_string('bookings', $crop_data);
+		$this->db->query($add_booking);
+	}
 
 	function delete_booking($id)
 	{
@@ -256,4 +178,24 @@ Class Booking extends CI_Model
      	$this->db->delete('bookings');
 	}
 
+	function list_cities(){
+		$query = $this->db->get('destinations');
+		if ($query->num_rows() > 0)
+		{
+		   return $query->result();
+		}
+	}
+
+	static function show_symbol($id){
+		$CI = get_instance();
+		$CI->db->select('symbol');
+		$CI->db->where('currency_id', $id);
+		$query = $CI->db->get('currency');
+		if ($query->num_rows() > 0)
+		{
+		   $row = $query->row();
+		   return $row->symbol;
+		}
+	}
+}
 ?>

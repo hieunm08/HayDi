@@ -91,7 +91,7 @@ Class Tour extends CI_Model
 
 	}
 	function list_cities(){
-		$query = $this->db->get('destinations');
+		$query = $this->db->get('country');
 		if ($query->num_rows() > 0)
 		{
 		   return $query->result();
