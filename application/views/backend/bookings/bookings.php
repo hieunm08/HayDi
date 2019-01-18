@@ -55,8 +55,9 @@
             <div class="table-responsive">
               <table class="table table-bordered table-striped">
                 <thead>
-                  <tr>
-                    <th><?php echo $this->session->userdata['user_id']?></th>
+                  <tr style="text-align: center;">
+<!--                     <th><?php echo $this->session->userdata['user_id']?> STT </th>
+ -->                <th>STT </th>
                     <th>ID Trip</th>
                     <th>Tên Khách Hàng</th>
                     <th>Ngày bắt đầu </th>
@@ -67,7 +68,7 @@
                     <th>Trạng thái</th>
                     <th>Ngày tạo</th>
                     <th> Ngày cập nhật</th>
-                      <th ><?php echo lang('Options');?></th>
+                      <th width="12%" ><?php echo lang('Options');?></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -109,7 +110,12 @@
                       </td>
                         <td style="text-align:center">
                         <div class="btn-group" role="group">
-                          <a href="<?php echo base_url('admin/bookings/list_booking_byID/'. $booking->id) ?>" target="_blank" class="btn btn-default btn-xs"><span class="icon-file-pdf" style="color:red"></span> Update</a>
+                          <?php if($booking->status == 3){?>
+                                <a href="<?php echo base_url('admin/bookings/nocancel_trips/'.$booking->id); ?>" class="btn btn-default btn-xs active"><span class="icon-plus" style="color:blue"></span>Hoàn Hủy</a>
+                            <?php }else{?>
+                                <a href="<?php echo base_url('admin/bookings/cancel_trips/'.$booking->id); ?>" class="btn btn-default btn-xs"><span class="icon-minus" style="color:red"></span> Hủy </a>
+                            <?php }?>
+                          <a href="<?php echo base_url('admin/bookings/list_booking_byID/'. $booking->id) ?>" target="_blank" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Update</a>
                         </div>
                       </td>
                     </tr>

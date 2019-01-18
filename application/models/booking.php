@@ -34,11 +34,12 @@ Class Booking extends CI_Model
         return $query->result();
 
     }
+
     function show_bookings_id($book_id)
     {
-        $this->db->from('booking');
+        $this->db->from('trips');
         $this->db->select("*");
-        $this->db->where("book_id",$book_id);
+        $this->db->where("id",$book_id);
         $query = $this->db->get();
         return $query->result();
     }
@@ -56,35 +57,42 @@ Class Booking extends CI_Model
 
     static function status_order($status){
         if ($status == 0) {
-            echo '<span class="label label-default">'.lang('Holding').'</span>';
+            echo '<span class="label label-success">'.lang('Mới').'</span>';
         }else if ($status == 1) {
-            echo '<span class="label label-success">'.lang('Paid').'</span>';
+            echo '<span class="label label-default">'.lang('Từ chối').'</span>';
         }
-        else {   echo '<span class="label label-success">'.lang('Expired').'</span>';
+    	else if ($status == 2) {
+            echo '<span class="label label-success">'.lang('Chấp nhận').'</span>';
+        }
+        else {   echo '<span class="label label-default">'.lang('Hủy bỏ').'</span>';
         }
     }
 
-    static function service_status($service){
-        if ($service == 0) {
-            echo '<span class="label label-success">'.lang('Guide').'</span>';
-        }else if ($service == 1) {
-            echo '<span class="label label-success">'.lang('HomeStay').'</span>';
-        }
-        else {  echo '<span class="label label-success">'.lang('Car').'</span>';
-        }
-    }
-    static function payment_status($payment_status)
-    {
-        if ($payment_status == 0) {
-            echo '<span class="label label-success">' . lang('Paid') . '</span>';
-        } else {
-            echo '<span class="label label-default">' . lang('Not Paid') . '</span>';
+    function cancel_trips($id)
+	{
 
-        }
-    }
-    function update_booking($customer, $phone, $trip_no, $route, $service, $fromdate,$todate,$price,$PIC,$detail_booking,$book_status,$payment_status,$book_id)
+		$this->db->set('status', "3");
+		$this->db->where('id', $id);
+     	$this->db->update('trips');
+/*		$query = $this->db->query("UPDATE trips set status='3' WHERE id='$id'") 
+*/	}
+
+function nocancel_trips($id)
+	{
+
+		$this->db->set('status', "0");
+		$this->db->where('id', $id);
+     	$this->db->update('trips');
+/*		$query = $this->db->query("UPDATE trips set status='3' WHERE id='$id'") 
+*/	}
+	/*function Uncancel_trips($id)
+	{
+		$query = $this->db->query("UPDATE trips set status='0' WHERE id='$id'") 
+	}
+*/
+    function update_booking($name, $time_start, $time_end, $days, $nights, $guider_id,$status,$created_at,$updated_at,$id)
     {
-        $query = $this->db->query("UPDATE booking SET customer='$customer', phone='$phone', trip_no='$trip_no', route='$route', service='$service', fromdate='$fromdate', todate='$todate',price='$price',PIC='$PIC',detail_booking='$detail_booking',book_status='$book_status',payment_status='$payment_status'  WHERE book_id = '$book_id'");
+        $query = $this->db->query("UPDATE trips SET name='$name', time_start='$time_start', time_end='$time_end', days='$days', nights='$nights', guider_id='$guider_id', status='$status',created_at='$created_at',updated_at='$updated_at'  WHERE id = '$id'");
 
     }
 

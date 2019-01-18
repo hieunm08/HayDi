@@ -91,16 +91,12 @@ class Bookings extends CI_Controller {
             $this->load->view('includes/template', $data);
         }
 
-        function test(){
-            echo(hieu);
-            echo(list_booking_byID);
-        }
-
-        function list_booking_byID($book_cd1)
+    
+        function list_booking_byID($book_id)
         {
             $this->load->library('pagination');
             $this->load->model('booking');
-            $data['bookings'] = $this->booking->show_bookings_id($book_cd1);
+            $data['bookings'] = $this->booking->show_bookings_id($book_id);
             $data['links'] = $this->pagination->create_links();
 
             $data['main_content'] = 'backend/bookings/update_booking';
@@ -120,29 +116,43 @@ class Bookings extends CI_Controller {
             $this->load->view('includes/template', $data);
         }
 
-        function updateSupplier()
+        function updatebooking()
         {
             //TODO chua hien thi len view con da them dc
-            $customer = $_GET['customer'];
-            $phone = $_GET['phone'];
-            $trip_no = $_GET['trip_no'];
-            $route = $_GET['route'];
-            $service = $_GET['route'];
-            $fromdate = $_GET['fromdate'];
-            $todate = $_GET['todate'];
-            $price = $_GET['price'];
-            $PIC = $_GET['PIC'];
-            $detail_booking = $_GET['detail_booking	'];
-            $book_status = $_GET['book_status'];
-            $payment_status = $_GET['payment_status'];
-            $book_id = $_GET['book_id'];
+            $name = $_GET['name'];
+            $time_start = $_GET['time_start'];
+            $time_end = $_GET['time_end'];
+            $days = $_GET['days'];
+            $nights = $_GET['nights'];
+            $guider_id = $_GET['guider_id'];
+            $status = $_GET['status'];
+            $created_at = $_GET['created_at'];
+            $updated_at = $_GET['updated_at'];
+            $id = $_GET['id'];
 
             $this->load->library('pagination');
             $this->load->model('booking');
 
-            $data['booking'] = $this->booking->update_booking($customer, $phone, $trip_no, $route, $service, $fromdate, $todate, $price, $PIC, $detail_booking, $book_status, $payment_status, $book_id);
+            $data['booking'] = $this->booking->update_booking($name, $time_start, $time_end, $days, $nights, $guider_id, $status, $created_at, $updated_at, $id);
             redirect('admin/booking', 'refresh');
+
+
         }
+
+        function cancel_trips($id){
+        $this->load->model('booking');
+        $this->session->set_flashdata('message', 'Đã Hủy Thành Công !!');
+        $this->booking->cancel_trips($id);
+        redirect('admin/bookings', 'refresh');
+    }
+
+     function nocancel_trips($id){
+        $this->load->model('booking');
+        $this->session->set_flashdata('message', 'Hoàn Hủy Thành Công !!');
+        $this->booking->nocancel_trips($id);
+        redirect('admin/bookings', 'refresh');
+    }
+    
 
         function ajax_check_tours()
         {

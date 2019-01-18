@@ -36,7 +36,9 @@ $lang['Ticket for'] = "Ticket for";
 $lang['was booked successfully'] = "was booked successfully";
 $lang['Print invoice'] = "Print invoice";
 $lang['Go back to search'] = "Go back to search";
-$lang['Holding'] = "Holding";
-$lang['Paid'] = "Paid";
-$lang['Expired'] = "Expired";
+$lang['Mới'] = "Mới";
+$lang['Từ chối'] = "Từ chối";
+$lang['Chấp nhận'] = "Chấp nhận";
+$lang['Hủy bỏ'] = "Hủy bỏ";
+
 ?>
