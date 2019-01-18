@@ -1,5 +1,6 @@
 <?php
 $lang['Supplier'] = "Supplier";
+$lang['Hướng Dẫn Viên'] = "Hướng Dẫn Viên";
 $lang['Username'] = "Username";
 $lang['Full name'] = "Full name";
 $lang['ID number'] = "ID number";

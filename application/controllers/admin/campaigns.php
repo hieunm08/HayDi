@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Suppliers extends CI_Controller
+class Campaigns extends CI_Controller
 {
     public $isCheck = false;
 
@@ -9,7 +9,7 @@ class Suppliers extends CI_Controller
         parent::__construct();
         $this->is_logged_in();
         $this->load->helper('language');
-        $this->lang->load('supplier', $this->session->userdata('language'));
+        $this->lang->load('campaigns', $this->session->userdata('language'));
     }
 
     function index()
@@ -41,18 +41,18 @@ class Suppliers extends CI_Controller
             }
         } else {
             $this->isCheck = false;
-            $this->list_suppliers();
+            $this->list_Campaigns();
         }
     }
     
-    function list_suppliers()
+    function list_Campaigns()
     {
         $this->load->library('pagination');
-        $this->load->model('supplier');
+        $this->load->model('campaign');
 
-        $config['base_url'] = base_url() . 'admin/suppliers/list_suppliers';
-        $config['total_rows'] = $this->supplier->total_suppliers();
-        $config['per_page'] = 10;
+        $config['base_url'] = base_url() . 'admin/campaigns/list_Campaigns';
+        $config['total_rows'] = $this->campaign->total_Campaign();
+        $config['per_page'] = 5;
         $config["uri_segment"] = 4;
         //pagination styling
         $config['num_tag_open'] = '<li>';
@@ -72,21 +72,13 @@ class Suppliers extends CI_Controller
 //        if ($this->isCheck) {
 //            $data['suppliers'] = $this->supplier->show_suppliers($config['per_page'], $page, $supplier_cd);
 //        } else {
-            $data['suppliers'] = $this->supplier->show_all_suppliers($config['per_page'], $page);
+            $data['campaigns'] = $this->campaign->get_Campaign_Pagination($config['per_page'], $page);
 //        }
 
         $data['links'] = $this->pagination->create_links();
-        $data['main_content'] = 'backend/suppliers/suppliers';
-        $data['title'] = 'Hướng Dẫn Viên';
+        $data['main_content'] = 'backend/campaigns/campaigns';
+        $data['title'] = 'campaigns';
         $this->load->view('includes/template', $data);
-    }
-    function block_Supplier(){
-        $this->load->model('supplier');
-        $id = $_GET['id'];
-        $status = $_GET['status'];
-        $this->session->set_flashdata('message', 'Suppliers successfully ');
-        $this->supplier->change_Supplier_Status($id, $status);
-        redirect('admin/suppliers', 'refresh');
     }
 
 

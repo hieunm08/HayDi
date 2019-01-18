@@ -1,6 +1,6 @@
 <?php
 
-class Supplier extends CI_Model
+class Campaign extends CI_Model
 {
 
     /**
@@ -25,22 +25,15 @@ class Supplier extends CI_Model
     }
 }
 
-     function show_Supplier_Status($supplier_status)
+     function show_Campaign_Status($campaign_status)
     {
-        if ($supplier_status==0) {
+        if ($campaign_status==0) {
            echo '<span class="label label-default">'.lang('Inactive').'</span>';
         }else
         { 
           echo '<span class="label label-success">'.lang('Active').'</span>';
     }
 }
-    function change_Supplier_Status($id, $status){
-        if ($status==0) {
-            $query = $this->db->query("UPDATE users SET status = '1' WHERE id = '$id' ");
-        }else {
-            $query = $this->db->query("UPDATE users SET status = '0' WHERE id = '$id' ");
-        }
-    }
 
     function getAllSuppler()
     {
@@ -72,10 +65,10 @@ class Supplier extends CI_Model
            $query = $this->db->query("SELECT * FROM supplier_mst WHERE supplier_User LIKE '%$supplier_u%' OR supplier_Fullname LIKE '%$supplier_f%' OR supplier_Type LIKE '$supplier_t' OR supplier_Status LIKE '$supplier_s'  ");
            return $query->result();
     }
-    function show_all_suppliers($limit, $start)
+    function get_Campaign_Pagination($limit, $start)
     {
         $this->db->limit($limit, $start);
-        $this->db->from('users');
+        $this->db->from('campaign');
         $this->db->select("*");
         $query = $this->db->get();  
         return $query->result();
@@ -103,10 +96,10 @@ class Supplier extends CI_Model
         }
     }
 
-     function total_suppliers()
+     function total_Campaign()
     {
         $this->db->select('*');
-        $this->db->from('users');
+        $this->db->from('campaign');
         $query = $this->db->get();
         return $query->num_rows();
     }
