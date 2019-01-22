@@ -1,10 +1,10 @@
 <?php
 
-class Campaign extends CI_Model
+class Payment extends CI_Model
 {
 
     /**
-     * SupplerModel constructor.
+     * PaymentModel constructor.
      */
 
     function getAll()
@@ -25,24 +25,21 @@ class Campaign extends CI_Model
     }
 }
 
-     function getCampaignStatus($campaign_status)
+     function getHostStatus($host_status)
     {
-        if ($campaign_status==0) {
-           echo '<span class="label label-default">'.lang('Inactive').'</span>';
+        if ($host_status="active") {
+           echo '<span class="label label-success">'.lang('Active').'</span>';
         }else
         { 
-          echo '<span class="label label-success">'.lang('Active').'</span>';
+          echo '<span class="label label-default">'.lang('Inactive').'</span>';
     }
 }
-    function changeCampaignStatus($id, $status){
-        if ($status==1) {
-            $this->db->set('status', "0");
-            $this->db->where('id', $id);
-            $this->db->update('campaign');
+    function changeHostStatus($id, $status){
+        if ($status="active") {
+             $query = $this->db->query("UPDATE host SET status = 'inactive' WHERE id = '$id' ");
+             echo "hoan thanh";
         }else {
-            $this->db->set('status', "1");
-            $this->db->where('id', $id);
-            $this->db->update('campaign');
+             $query = $this->db->query("UPDATE host SET status = 'active' WHERE id = '$id' ");
         }
     }
 
@@ -76,15 +73,14 @@ class Campaign extends CI_Model
            $query = $this->db->query("SELECT * FROM supplier_mst WHERE supplier_User LIKE '%$supplier_u%' OR supplier_Fullname LIKE '%$supplier_f%' OR supplier_Type LIKE '$supplier_t' OR supplier_Status LIKE '$supplier_s'  ");
            return $query->result();
     }
-    function get_Campaign_Pagination($limit, $start)
+    function getAllPayment($limit, $start)
     {
         $this->db->limit($limit, $start);
-        $this->db->from('campaign');
+        $this->db->from('user_bank');
         $this->db->select("*");
         $query = $this->db->get();  
         return $query->result();
     }
-
 
     function check_all_id($id)
     {
@@ -108,19 +104,18 @@ class Campaign extends CI_Model
         }
     }
 
-     function total_Campaign()
+     function totalPayment()
     {
         $this->db->select('*');
-        $this->db->from('campaign');
+        $this->db->from('user_bank');
         $query = $this->db->get();
         return $query->num_rows();
     }
 
-    function show_suppliers( $id)
+    function getPaymentById($id)
     {
-//        $this->db->limit($limit, $start);
         $this->db->select("*");
-        $this->db->from('users');
+        $this->db->from('user_bank');
         $this->db->where('id', $id);
         $query = $this->db->get();
         return $query->result();
@@ -128,11 +123,13 @@ class Campaign extends CI_Model
 
     //phuong thuc xoa
 
-    function deleteCampaign($id)
+    function deletePayment($id)
     {
         $this->db->where('id', $id);
-        $this->db->delete('campaign');
+        $this->db->delete('user_bank');
     }
+   
+  
 
   
 }

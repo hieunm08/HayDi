@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Campaigns extends CI_Controller
+class Hosts extends CI_Controller
 {
     public $isCheck = false;
 
@@ -9,7 +9,7 @@ class Campaigns extends CI_Controller
         parent::__construct();
         $this->is_logged_in();
         $this->load->helper('language');
-        $this->lang->load('campaigns', $this->session->userdata('language'));
+        $this->lang->load('supplier', $this->session->userdata('language'));
     }
 
     function index()
@@ -37,22 +37,22 @@ class Campaigns extends CI_Controller
              else {
                 $this->isCheck = false;
 //                $supplier_cd = $_POST['supplier_search'];
-                $this->list_suppliers();
+                $this->list_hosts();
             }
         } else {
             $this->isCheck = false;
-            $this->list_Campaigns();
+            $this->list_hosts();
         }
     }
     
-    function list_Campaigns()
+    function list_hosts()
     {
         $this->load->library('pagination');
-        $this->load->model('campaign');
+        $this->load->model('host');
 
-        $config['base_url'] = base_url() . 'admin/campaigns/list_Campaigns';
-        $config['total_rows'] = $this->campaign->total_Campaign();
-        $config['per_page'] = 5;
+        $config['base_url'] = base_url() . 'admin/hosts/list_hosts';
+        $config['total_rows'] = $this->host->total_hosts();
+        $config['per_page'] = 10;
         $config["uri_segment"] = 4;
         //pagination styling
         $config['num_tag_open'] = '<li>';
@@ -72,39 +72,34 @@ class Campaigns extends CI_Controller
 //        if ($this->isCheck) {
 //            $data['suppliers'] = $this->supplier->show_suppliers($config['per_page'], $page, $supplier_cd);
 //        } else {
-            $data['campaigns'] = $this->campaign->get_Campaign_Pagination($config['per_page'], $page);
+            $data['hosts'] = $this->host->show_all_host($config['per_page'], $page);
 //        }
 
         $data['links'] = $this->pagination->create_links();
-        $data['main_content'] = 'backend/campaigns/campaigns';
-        $data['title'] = 'campaigns';
+        $data['main_content'] = 'backend/hosts/hosts';
+        $data['title'] = 'Host';
         $this->load->view('includes/template', $data);
     }
-
-    function off_campaign(){
-        $this->load->model('campaign');
+    function block_host(){
+        $this->load->model('host');
         $id = $_GET['id'];
         $status = $_GET['status'];
         $this->session->set_flashdata('message', 'Successfully ');
-        $this->supplier->changeCampaignStatus($id, $status);
-        redirect('admin/campaigns', 'refresh');
+        $this->host->changeHostStatus($id, $status);
+        redirect('admin/hosts', 'refresh');
     }
 
-    function list_suppliers_by_id($supplier_cd)
+
+    function list_host_by_id($host_ID)
     {
         $this->load->library('pagination');
-        $this->load->model('supplier');
+        $this->load->model('host');
 
-        $data['suppliers'] = $this->supplier->show_suppliers($supplier_cd);
+        $data['hosts'] = $this->host->getHostById($host_ID);
 
         $data['links'] = $this->pagination->create_links();
-        $data['main_content'] = 'backend/suppliers/suppliers_info';
-        $data['title'] = 'suppliers';
-       /* if ($_POST['supplier_search'] != null) {
-            
-        }else{*/
-           // redirect('admin/suppliers', 'refresh');
-
+        $data['main_content'] = 'backend/hosts/host_info';
+        $data['title'] = 'Host';
             $this->load->view('includes/template', $data);
         }        
 
@@ -166,17 +161,36 @@ class Campaigns extends CI_Controller
      function updateSupplier(){
     
         //TODO chua hien thi len view con da them dc
-          $userName = $_GET['userName'];
-                $password = $_GET['password'];
-                $fullname = $_GET['fullname'];
+                $name = $_GET['name'];
+                $phone = $_GET['phone'];
+                if ($_GET['password']!="") {
+                      $password = $_GET['password'];
+                }
+                $email = $_GET['email'];
+                $sub_phone = $_GET['sub_phone'];
+                $address = $_GET['address'];
+                $country_code = $_GET['country_code'];
+                $level = $_GET['level'];
                 $type = $_GET['type'];
                 $status = $_GET['status'];
-                 $id = $_GET['id'];
+                $languages = $_GET['languages'];
+                $price = $_GET['price'];
+                $price_unit = $_GET['price_unit'];
+                $desc = $_GET['desc'];
+                $id = $_GET['id'];
         $this->load->library('pagination');
         $this->load->model('supplier');
+
+        if (isset($password)) {
+            $data['supplier'] = $this->supplier->update_Supplier( $name, $phone,  $password, $email,  $sub_phone,  $address,  $country_code, $level, $status, $languages,  $price,   $price_unit, $desc, $id);
+            redirect('admin/suppliers', 'refresh');
+        }else{
+            $data['supplier'] = $this->supplier->update_Supplier( $name, $phone, $email,  $sub_phone,  $address,  $country_code, $level, $status, $languages,  $price,   $price_unit, $desc, $id);
+            redirect('admin/suppliers', 'refresh');
+        }
        
         $data['supplier'] = $this->supplier->update_Supplier( $userName, $password, $fullname, $type, $status, $id);
-        redirect('admin/suppliers', 'refresh');
+       // redirect('admin/suppliers', 'refresh');
     }
     private function is_logged_in()
     {
@@ -186,12 +200,12 @@ class Campaigns extends CI_Controller
         }
     }
 
-    function delete_campaign($id)
+    function delete_host($id)
     {
-        $this->load->model('campaign');
-        $this->session->set_flashdata('message', 'Suppliers successfully deleted');
-        $this->supplier->deleteCampaign($id);
-        redirect('admin/campaigns', 'refresh');
+        $this->load->model('host');
+        $this->session->set_flashdata('message', 'Successfully deleted');
+        $this->host->deleteHost($id);
+        redirect('admin/hosts', 'refresh');
     }
 
     private function docFileExcel($file)

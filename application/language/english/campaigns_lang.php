@@ -1,1 +1,8 @@
-campaigns_lang.php
+
+<?php 
+
+$lang['Active'] = "Active";
+$lang['Inactive'] = "Inactive";
+
+
+ ?>

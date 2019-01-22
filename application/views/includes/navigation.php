@@ -29,8 +29,8 @@ $this->lang->load('navigation', $this->session->userdata('language'));
             </li>
 
 
-            <li <?php if ($page == "destinations"){ echo "class='active'";} ?>>
-              <a href="<?php echo base_url() ?>admin/destinations">
+            <li <?php if ($page == "hosts"){ echo "class='active'";} ?>>
+              <a href="<?php echo base_url() ?>admin/hosts">
                 <div class="nav-icon"><span class="icon-location"></span></div>
                 <div class="nav-title">Hosts</div>
               </a>
@@ -65,9 +65,9 @@ $this->lang->load('navigation', $this->session->userdata('language'));
 
 
 
-            <li <?php if ($page == "statistics"){ echo "class='active'";} ?>>
-              <a href="<?php echo base_url() ?>admin/statistics">
-                <div class="nav-icon"><span class="icon-stats"></span></div>
+            <li <?php if ($page == "payments"){ echo "class='active'";} ?>>
+              <a href="<?php echo base_url() ?>admin/payments">
+                <div class="nav-icon"><span class="icon-briefcase"></span></div>
                 <div class="nav-title">Payments</div>
               </a>
             </li>

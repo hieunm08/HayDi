@@ -166,17 +166,36 @@ class Suppliers extends CI_Controller
      function updateSupplier(){
     
         //TODO chua hien thi len view con da them dc
-          $userName = $_GET['userName'];
-                $password = $_GET['password'];
-                $fullname = $_GET['fullname'];
+                $name = $_GET['name'];
+                $phone = $_GET['phone'];
+                if ($_GET['password']!="") {
+                      $password = $_GET['password'];
+                }
+                $email = $_GET['email'];
+                $sub_phone = $_GET['sub_phone'];
+                $address = $_GET['address'];
+                $country_code = $_GET['country_code'];
+                $level = $_GET['level'];
                 $type = $_GET['type'];
                 $status = $_GET['status'];
-                 $id = $_GET['id'];
+                $languages = $_GET['languages'];
+                $price = $_GET['price'];
+                $price_unit = $_GET['price_unit'];
+                $desc = $_GET['desc'];
+                $id = $_GET['id'];
         $this->load->library('pagination');
         $this->load->model('supplier');
+
+        if (isset($password)) {
+            $data['supplier'] = $this->supplier->update_Supplier( $name, $phone,  $password, $email,  $sub_phone,  $address,  $country_code, $level, $status, $languages,  $price,   $price_unit, $desc, $id);
+            redirect('admin/suppliers', 'refresh');
+        }else{
+            $data['supplier'] = $this->supplier->update_Supplier( $name, $phone, $email,  $sub_phone,  $address,  $country_code, $level, $status, $languages,  $price,   $price_unit, $desc, $id);
+            redirect('admin/suppliers', 'refresh');
+        }
        
         $data['supplier'] = $this->supplier->update_Supplier( $userName, $password, $fullname, $type, $status, $id);
-        redirect('admin/suppliers', 'refresh');
+       // redirect('admin/suppliers', 'refresh');
     }
     private function is_logged_in()
     {

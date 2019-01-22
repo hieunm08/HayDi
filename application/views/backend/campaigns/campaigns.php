@@ -119,7 +119,7 @@
                         <td><?php echo $campaign->images ?></td>
                         <td><?php echo $campaign->link ?></td>
                         <td><?php echo $campaign->desc ?></td>
-                        <td><?php echo $this->campaign->show_Campaign_Status($campaign->status) ?></td>
+                        <td><?php echo $this->campaign->getCampaignStatus($campaign->status) ?></td>
                         <td><?php echo $campaign->updated_at ?></td>
                         <td><?php echo $campaign->type ?></td>
 
@@ -128,24 +128,17 @@
                          //hinh nhu no la cai danh sách thoi ông
                          uh còn cái model kia ô muốn lấy gì thì select cái đó nhé nãy tôi tiện nên tôi lấy * luôn còn ông muốn lấy trường nào thì lấy trg đó vs lại nó có oder by đó -->
 
-                        <td style="text-align:center">
-                            <div class="btn-group" role="group">
-                                <!--                                <a href="" onclick="return confirm('Are you sure you want to delete this booking ticket?')" class="btn btn-default btn-xs"><span class="icon-cancel-2" style="color:red"></span> -->
-                                <?php //echo lang('Delete')
-                                ?><!--</a>-->
-                                 <a href="<?php echo base_url('admin/campaigns/list_suppliers_by_id/' . $campaign->id); ?>"class="btn btn-info btn-xs">
-                                   <span class="icon-search">ON</span></a>
+                       <td style="text-align:center">
+                        <div class="btn-group" role="group">
+                            <?php if($campaign->status == 0){?>
+                                <a href="<?php echo base_url('admin/campaigns/off_campaign/'.$campaign->id); ?>" class="btn btn-default btn-xs "><span class="icon-plus" style="color:blue"></span> ON</a>
+                            <?php }else{?>
+                                <a href="<?php echo base_url('admin/campaigns/off_campaign/'.$campaign->id); ?>" class="btn btn-default  btn-xs"><span class="icon-minus" style="color:red"></span> OFF</a>
+                            <?php }?>
+                          <a href="<?php echo base_url('admin/campaigns/delete_campaign/'.$campaign->id); ?>" onclick="return confirm('Are you sure you want to delete this member?')" class="btn btn-default btn-xs"><span class="icon-cancel-2" style="color:red"></span> Delete</a>
 
-
-                                <a href="<?php echo base_url('admin/suppliers/delete_supplier/' . $campaign->id); ?>"
-                                   onclick="return confirm('Are you sure you want to delete this supplier?')"
-                                   class="btn btn-default btn-xs"><span
-                                            class="icon-cancel-2" 6s
-                                            style="color:red"></span>OFF</a>
-                               
-                            </div>
-                        </td>
-
+                        </div>
+                      </td>
                     </tr>
                     <?php $i++; endforeach; ?>
 

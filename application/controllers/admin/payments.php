@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Campaigns extends CI_Controller
+class Payments extends CI_Controller
 {
     public $isCheck = false;
 
@@ -9,7 +9,7 @@ class Campaigns extends CI_Controller
         parent::__construct();
         $this->is_logged_in();
         $this->load->helper('language');
-        $this->lang->load('campaigns', $this->session->userdata('language'));
+        $this->lang->load('supplier', $this->session->userdata('language'));
     }
 
     function index()
@@ -37,22 +37,22 @@ class Campaigns extends CI_Controller
              else {
                 $this->isCheck = false;
 //                $supplier_cd = $_POST['supplier_search'];
-                $this->list_suppliers();
+                $this->list_payments();
             }
         } else {
             $this->isCheck = false;
-            $this->list_Campaigns();
+            $this->list_payments();
         }
     }
     
-    function list_Campaigns()
+    function list_payments()
     {
         $this->load->library('pagination');
-        $this->load->model('campaign');
+        $this->load->model('payment');
 
-        $config['base_url'] = base_url() . 'admin/campaigns/list_Campaigns';
-        $config['total_rows'] = $this->campaign->total_Campaign();
-        $config['per_page'] = 5;
+        $config['base_url'] = base_url() . 'admin/payment/list_payments';
+        $config['total_rows'] = $this->payment->totalPayment();
+        $config['per_page'] = 10;
         $config["uri_segment"] = 4;
         //pagination styling
         $config['num_tag_open'] = '<li>';
@@ -68,37 +68,31 @@ class Campaigns extends CI_Controller
 
         $this->pagination->initialize($config);
         $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-
-//        if ($this->isCheck) {
-//            $data['suppliers'] = $this->supplier->show_suppliers($config['per_page'], $page, $supplier_cd);
-//        } else {
-            $data['campaigns'] = $this->campaign->get_Campaign_Pagination($config['per_page'], $page);
-//        }
-
+            $data['payments'] = $this->payment->getAllPayment($config['per_page'], $page);
         $data['links'] = $this->pagination->create_links();
-        $data['main_content'] = 'backend/campaigns/campaigns';
-        $data['title'] = 'campaigns';
+        $data['main_content'] = 'backend/payments/payments';
+        $data['title'] = 'Payment';
         $this->load->view('includes/template', $data);
     }
-
-    function off_campaign(){
-        $this->load->model('campaign');
+    function block_Supplier(){
+        $this->load->model('supplier');
         $id = $_GET['id'];
         $status = $_GET['status'];
-        $this->session->set_flashdata('message', 'Successfully ');
-        $this->supplier->changeCampaignStatus($id, $status);
-        redirect('admin/campaigns', 'refresh');
+        $this->session->set_flashdata('message', 'Suppliers successfully ');
+        $this->supplier->change_Supplier_Status($id, $status);
+        redirect('admin/suppliers', 'refresh');
     }
 
-    function list_suppliers_by_id($supplier_cd)
+
+    function list_payment_by_id($payment_ID)
     {
         $this->load->library('pagination');
-        $this->load->model('supplier');
+        $this->load->model('payment');
 
-        $data['suppliers'] = $this->supplier->show_suppliers($supplier_cd);
+        $data['payments'] = $this->payment->getPaymentById($payment_ID);
 
         $data['links'] = $this->pagination->create_links();
-        $data['main_content'] = 'backend/suppliers/suppliers_info';
+        $data['main_content'] = 'backend/payments/payment_info';
         $data['title'] = 'suppliers';
        /* if ($_POST['supplier_search'] != null) {
             
@@ -166,17 +160,36 @@ class Campaigns extends CI_Controller
      function updateSupplier(){
     
         //TODO chua hien thi len view con da them dc
-          $userName = $_GET['userName'];
-                $password = $_GET['password'];
-                $fullname = $_GET['fullname'];
+                $name = $_GET['name'];
+                $phone = $_GET['phone'];
+                if ($_GET['password']!="") {
+                      $password = $_GET['password'];
+                }
+                $email = $_GET['email'];
+                $sub_phone = $_GET['sub_phone'];
+                $address = $_GET['address'];
+                $country_code = $_GET['country_code'];
+                $level = $_GET['level'];
                 $type = $_GET['type'];
                 $status = $_GET['status'];
-                 $id = $_GET['id'];
+                $languages = $_GET['languages'];
+                $price = $_GET['price'];
+                $price_unit = $_GET['price_unit'];
+                $desc = $_GET['desc'];
+                $id = $_GET['id'];
         $this->load->library('pagination');
         $this->load->model('supplier');
+
+        if (isset($password)) {
+            $data['supplier'] = $this->supplier->update_Supplier( $name, $phone,  $password, $email,  $sub_phone,  $address,  $country_code, $level, $status, $languages,  $price,   $price_unit, $desc, $id);
+            redirect('admin/suppliers', 'refresh');
+        }else{
+            $data['supplier'] = $this->supplier->update_Supplier( $name, $phone, $email,  $sub_phone,  $address,  $country_code, $level, $status, $languages,  $price,   $price_unit, $desc, $id);
+            redirect('admin/suppliers', 'refresh');
+        }
        
         $data['supplier'] = $this->supplier->update_Supplier( $userName, $password, $fullname, $type, $status, $id);
-        redirect('admin/suppliers', 'refresh');
+       // redirect('admin/suppliers', 'refresh');
     }
     private function is_logged_in()
     {
@@ -186,12 +199,12 @@ class Campaigns extends CI_Controller
         }
     }
 
-    function delete_campaign($id)
+    function delete_payment($id)
     {
-        $this->load->model('campaign');
-        $this->session->set_flashdata('message', 'Suppliers successfully deleted');
-        $this->supplier->deleteCampaign($id);
-        redirect('admin/campaigns', 'refresh');
+        $this->load->model('payment');
+        $this->session->set_flashdata('message', 'Successfully deleted');
+        $this->supplier->deletePayment($id);
+        redirect('admin/payments', 'refresh');
     }
 
     private function docFileExcel($file)

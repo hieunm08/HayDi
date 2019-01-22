@@ -11,7 +11,7 @@
         <body>
             <div class="col-sm-10 col-md-11 main">
                 <div class="row" style="margin-right:0px;">
-                    <h1 class="page-header"><?php echo lang('Hướng Dẫn Viên');?></h1>
+                    <h1 class="page-header">Thanh Toán</h1>
                 </div>
                 <div class="row" style="margin-right:0px;margin-bottom: 10px;width: 500px">
                     <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
@@ -87,46 +87,30 @@
                                 <tr>
                                     <th>STT</th>
                                     <th><?php echo lang('ID number'); ?></th>
-                                    <th>Họ tên</th>
-                                    <th>SĐT</th>
-                                    <th>Nguồn</th>
-                                    <th>Email</th>
-                                    <th>Sub Phone</th>
-                                    <th>Địa chỉ</th>
-                                    <th>Mã quốc gia</th>
-                                    <th>Level</th>
-                                    <th>Trạng thái</th>
-                                    <th>Type</th>
-                                    <th>Giá</th>
-                                    <th>Đơn vị giá</th>
-                                    <th>Ngày đăng kí</th>
+                                    <th>Mã Trans</th>
+                                    <th>Tên Trans</th>
+                                    <th>Ngân hàng</th>
+                                    <th>Chi nhánh</th>
+                                    <th>Ngày tạo</th>
                                     <th>Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $this->load->model('supplier'); ?>
+                                <?php $this->load->model('payment'); ?>
                                 <?php
                                 if ($this->pagination->per_page > $this->pagination->total_rows) $i = 1;
                                 else $i = 1 + ($this->pagination->cur_page - 1) * $this->pagination->per_page;
-                                foreach ($suppliers as $supplier):
+                                foreach ($payments as $payment):
                                 ?>
                                 <tr>
                                     <td><?php echo $i ?></td>
-                                    <td><?php echo $supplier->id ?></td>
-                                    <td><?php echo $supplier->name ?></td>
-                                    <td><?php echo $supplier->phone ?></td>
+                                    <td><?php echo $payment->id ?></td>
+                                    <td><?php echo $payment->trans_id ?></td>
+                                    <td><?php echo $payment->trans_name ?></td>
                                     
-                                    <td><?php echo $supplier->source ?></td>
-                                    <td><?php echo $supplier->email ?></td>
-                                    <td><?php echo $supplier->sub_phone ?></td>
-                                    <td><?php echo $supplier->address ?></td>
-                                    <td><?php echo $supplier->country_code ?></td>
-                                    <td><?php echo $supplier->level ?></td>
-                                    <td><?php echo $this->supplier->show_Supplier_Status($supplier->status) ?></td>
-                                    <td><span class="label label-info"><?php echo $supplier->type ?></span></td>
-                                    <td><?php echo $supplier->price ?></td>
-                                    <td><?php echo $supplier->unit ?></td>
-                                    <td><span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $supplier->created_at))?>
+                                    <td><?php echo $payment->bank ?></td>
+                                    <td><?php echo $payment->branch ?></td>
+                                    <td><span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $payment->created_at))?>
                                 </td>
                                 
                                 <!--  // cái list_tickets là gì đấuy
@@ -137,22 +121,23 @@
                                         <!--                                <a href="" onclick="return confirm('Are you sure you want to delete this booking ticket?')" class="btn btn-default btn-xs"><span class="icon-cancel-2" style="color:red"></span> -->
                                         <?php //echo lang('Delete')
                                         ?><!--</a>-->
-                                        <a href="<?php echo base_url('admin/suppliers/list_suppliers_by_id/'.$supplier->id); ?>" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Update</a>
-                                            <?php if ($supplier->status==1) {
+                                        <a href="<?php echo base_url('admin/payments/list_payment_by_id/' . $payment->id ); ?>"class="btn btn-info btn-xs">
+                                            <span class="icon-search"><?php echo lang('View') ?></span></a>
+                                            <!-- <?php if ($supplier->status==1) {
                                             ?>
                                             <a href="<?php echo base_url("admin/suppliers/block_Supplier?id={$supplier->id}&status={$supplier->status}"); ?>"
                                                 onclick="return confirm('Are you sure you want to Block this supplier?')"
-                                            class="btn btn-default btn-xs"><span class="icon-minus" style="color:red"></span>
-                                        Block</a>
-                                        <?php }else{ ?>
-                                        <a href="<?php echo base_url("admin/suppliers/block_Supplier?id={$supplier->id}&status={$supplier->status}"); ?>"
+                                            class="btn btn-warning   btn-xs"></span>
+                                                                                    Block</a>
+                                                                                    <?php }else{ ?>
+                                                                                    <a href="<?php echo base_url("admin/suppliers/block_Supplier?id={$supplier->id}&status={$supplier->status}"); ?>"
                                             onclick="return confirm('Are you sure you want to Active this supplier?')"
-                                            class="btn btn-default btn-xs"><span class="icon-plus" style="color:blue"></span>
-                                        Active</a>
-                                        <?php } ?>
-                                        <a href="<?php echo base_url('admin/suppliers/delete_supplier/' .$supplier->id) ?>"
+                                            class="btn btn-success btn-xs">
+                                                                                    Active</a>
+                                                                                    <?php } ?> -->
+                                        <a href="<?php echo base_url('admin/payments/delete_payment/' .$payment->id) ?>"
                                             onclick="return confirm('Are you sure you want to delete this supplier?')"
-                                        class="btn btn-default btn-xs"><span class="icon-cancel-2" style="color:red"></span>
+                                        class="btn btn-danger   btn-xs"></span>
                                     Delete</a>
                                 </div>
                             </td>
