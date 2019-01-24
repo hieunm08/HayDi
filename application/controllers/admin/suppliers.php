@@ -9,6 +9,7 @@ class Suppliers extends CI_Controller
         parent::__construct();
         $this->is_logged_in();
         $this->load->helper('language');
+        $this->load->library('email');
         $this->lang->load('supplier', $this->session->userdata('language'));
     }
 
@@ -163,6 +164,14 @@ class Suppliers extends CI_Controller
         redirect('admin/suppliers', 'refresh');
     }
     //sua thogn tin
+     function edit_supplier(){
+        $id = $this->uri->segment(4);
+                $this->load->model('supplier');
+                $data = $this->input->post();
+                $this->supplier->saveSupplier($data, $id);
+                $this->session->set_flashdata('message', ' successfully edited');
+                redirect('admin/suppliers', 'refresh');
+        }
      function updateSupplier(){
     
         //TODO chua hien thi len view con da them dc

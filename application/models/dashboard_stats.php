@@ -12,10 +12,10 @@ Class Dashboard_stats extends CI_Model
 	}
 	function total_tickets_per_week()
 	{
-		$this->db->select('booking_id, COUNT(booking_id) as total');
-		$this->db->where('created_by', $this->session->userdata['user_id']);
-		$this->db->where("created_time <= NOW() AND created_time >= DATE_SUB(NOW(), INTERVAL 7 DAY)");
-		$query = $this->db->get('bookings');
+		$this->db->select('id, COUNT(id) as total');
+		$this->db->where('guider_id', $this->session->userdata['user_id']);
+		$this->db->where("time_start <= NOW() AND time_start >= DATE_SUB(NOW(), INTERVAL 7 DAY)");
+		$query = $this->db->get('trips');
 	 	
 	 	if ($query->num_rows() > 0)
 		{
@@ -25,10 +25,10 @@ Class Dashboard_stats extends CI_Model
 	}
 	function total_tickets_per_month()
 	{
-		$this->db->select('booking_id, COUNT(booking_id) as total');
-		$this->db->where('created_by',$this->session->userdata['user_id']);
-		$this->db->where("date_format(`created_time`, '%Y-%m')=date_format(now(), '%Y-%m')");
-		$query = $this->db->get('bookings');
+		$this->db->select('id, COUNT(id) as total');
+		$this->db->where('guider_id',$this->session->userdata['user_id']);
+		$this->db->where("date_format(`time_start`, '%Y-%m')=date_format(now(), '%Y-%m')");
+		$query = $this->db->get('trips');
 	 	
 	 	if ($query->num_rows() > 0)
 		{
@@ -38,9 +38,9 @@ Class Dashboard_stats extends CI_Model
 	}
 	function total_tickets()
 	{
-		$this->db->select('booking_id, COUNT(booking_id) as total');
-		$this->db->where('created_by',$this->session->userdata['user_id']);
-		$query = $this->db->get('bookings');
+		$this->db->select('id, COUNT(id) as total');
+		$this->db->where('guider_id',$this->session->userdata['user_id']);
+		$query = $this->db->get('trips');
 	 	
 	 	if ($query->num_rows() > 0)
 		{
@@ -51,7 +51,7 @@ Class Dashboard_stats extends CI_Model
 	function member_role($username){
 		$this->db->select('role');
 		$this->db->where('username',$username);
-		$query = $this->db->get('users');
+		$query = $this->db->get('users_admin');
 
 		if ($query->num_rows() > 0)
 		{

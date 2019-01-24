@@ -65,10 +65,11 @@
                                 </div>
                                 <div class="form-group" style="margin-left: 20px;">
                                     <!-- <label for="company_street">Username</label> -->
-                                    <select class="form-control" id="sel1" name="status">
-                                        <option value=""></option>
-                                        <option value="1">Active</option>
-                                        <option value="0">Inactive</option>
+                                    <select class="form-control" id="status" name="status">
+                                        <option value="-1"></option>
+                                        <?php foreach($suppliers as $supplier):?>
+                                        <option value="<?php echo $supplier->status ?>" ><?php $this->supplier->show_Supplier_Status($supplier->status) ?></option>
+                                        <?php endforeach; ?>    
                                     </select>
                                     <!--  <input type="text" class="form-control" name="status"
                                     placeholder=Status> -->
@@ -100,6 +101,7 @@
                                     <th>Giá</th>
                                     <th>Đơn vị giá</th>
                                     <th>Ngày đăng kí</th>
+                                    <th>Ngày cập nhật</th>
                                     <th>Chức năng</th>
                                 </tr>
                             </thead>
@@ -127,7 +129,9 @@
                                     <td><?php echo $supplier->price ?></td>
                                     <td><?php echo $supplier->unit ?></td>
                                     <td><span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $supplier->created_at))?>
-                                </td>
+                                    </td>
+                                    <td><span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $supplier->updated_at))?>
+                                    </td>
                                 
                                 <!--  // cái list_tickets là gì đấuy
                                 //hinh nhu no la cai danh sách thoi ông
@@ -138,10 +142,10 @@
                                         <?php //echo lang('Delete')
                                         ?><!--</a>-->
                                         <a href="<?php echo base_url('admin/suppliers/list_suppliers_by_id/'.$supplier->id); ?>" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Update</a>
-                                            <?php if ($supplier->status==1) {
-                                            ?>
-                                            <a href="<?php echo base_url("admin/suppliers/block_Supplier?id={$supplier->id}&status={$supplier->status}"); ?>"
-                                                onclick="return confirm('Are you sure you want to Block this supplier?')"
+                                        <?php if ($supplier->status==1) {
+                                        ?>
+                                        <a href="<?php echo base_url("admin/suppliers/block_Supplier?id={$supplier->id}&status={$supplier->status}"); ?>"
+                                            onclick="return confirm('Are you sure you want to Block this supplier?')"
                                             class="btn btn-default btn-xs"><span class="icon-minus" style="color:red"></span>
                                         Block</a>
                                         <?php }else{ ?>
@@ -152,54 +156,54 @@
                                         <?php } ?>
                                         <a href="<?php echo base_url('admin/suppliers/delete_supplier/' .$supplier->id) ?>"
                                             onclick="return confirm('Are you sure you want to delete this supplier?')"
-                                        class="btn btn-default btn-xs"><span class="icon-cancel-2" style="color:red"></span>
-                                    Delete</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <?php $i++; endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-        <ul class="pagination"><?php echo $links ?></ul>
+                                            class="btn btn-default btn-xs"><span class="icon-cancel-2" style="color:red"></span>
+                                        Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php $i++; endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            <ul class="pagination"><?php echo $links ?></ul>
+        </div>
     </div>
-</div>
-<div
-    "form-2" id="dialog-form" style="display: none; " title="Create Supplier">
-    <p class="validateTips">All form fields are required.</p>
-    <form name="myform" method="POST" action="../admin/suppliers" onsubmit="return validateForm()">
-        <fieldset>
-            <div class="form-group">
-                <label style="width: 300px" for="userName">Username</label>
-                <input type="text" name="userName" id="userName" value="" class="form-control">
-            </div>
-            <div class="form-group">
-                <label style="width: 300px" for="FullName">Password</label>
-                <input type="password" name="password" id="FullName" value="" class="form-control">
-            </div>
-            <div class="form-group">
-                <label style="width: 300px" for="SupplierType">Full name</label>
-                <input type="text" name="fullname" id="SupplierType" value=""
-                class="form-control">
-            </div>
-            <div class="form-group">
-                <label style="width: 300px" for="Type">Type</label>
-                <select class="form-control" id="sel1" name="type">
-                    <option value="1">Guide</option>
-                    <option value=0>Homestay</option>
-                    <option value=2>Cars</option>
-                </select>
-            </div>
-            <input type="hidden" name="status" id="sup_profile_id" value="1"
-            class="text ui-widget-content ui-corner-all">
-            <!--            <submit></submit>-->
-            <button style="width:100px; margin-top:20px" type="submit" class="btn btn-success" value="submit"><span
-            class="icon-checkmark"></span> <?php echo lang('Submit') ?></button>
-            <!-- Allow form submission with keyboard without duplicating the dialog button -->
-            <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-        </fieldset>
-    </form>
-</div>
+    <div
+        "form-2" id="dialog-form" style="display: none; " title="Create Supplier">
+        <p class="validateTips">All form fields are required.</p>
+        <form name="myform" method="POST" action="../admin/suppliers" onsubmit="return validateForm()">
+            <fieldset>
+                <div class="form-group">
+                    <label style="width: 300px" for="userName">Username</label>
+                    <input type="text" name="userName" id="userName" value="" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label style="width: 300px" for="FullName">Password</label>
+                    <input type="password" name="password" id="FullName" value="" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label style="width: 300px" for="SupplierType">Full name</label>
+                    <input type="text" name="fullname" id="SupplierType" value=""
+                    class="form-control">
+                </div>
+                <div class="form-group">
+                    <label style="width: 300px" for="Type">Type</label>
+                    <select class="form-control" id="sel1" name="type">
+                        <option value="1">Guide</option>
+                        <option value=0>Homestay</option>
+                        <option value=2>Cars</option>
+                    </select>
+                </div>
+                <input type="hidden" name="status" id="sup_profile_id" value="1"
+                class="text ui-widget-content ui-corner-all">
+                <!--            <submit></submit>-->
+                <button style="width:100px; margin-top:20px" type="submit" class="btn btn-success" value="submit"><span
+                class="icon-checkmark"></span> <?php echo lang('Submit') ?></button>
+                <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+            </fieldset>
+        </form>
+    </div>
 </body>
 <script>
 function validateForm() {

@@ -15,7 +15,7 @@
     foreach ($suppliers as $supplier):
     ?>
     <div class="col-sm-4 col-md-4">
-      <form method="GET" action="../updateSupplier" autocomplete="on">
+      <?php echo form_open('admin/suppliers/edit_supplier/'.$this->uri->segment(4)); ?>
         <div class="form-group">
           <label for="company_name">Mã HDV</label>
           <input disabled  type="text" class="form-control" id="company_name" name="id" value="<?php echo($supplier->id) ?>">
@@ -107,7 +107,7 @@
         </div>
         <div class="form-group">
           <label for="company_street">Đơn vị giá</label>
-          <input type="text" class="form-control" id="company_street" name="price_unit" value="<?php echo($supplier->unit) ?>" >
+          <input type="text" class="form-control" id="company_street" name="unit" value="<?php echo($supplier->unit) ?>" >
           <?php echo form_error('company_street'); ?>
         </div>
         <div class="form-group">

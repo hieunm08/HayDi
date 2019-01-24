@@ -263,5 +263,6 @@ function nocancel_trips($id)
 		$this->db->where('booking_id', $id);
      	$this->db->delete('bookings');
 	}
+	
 
 ?>
