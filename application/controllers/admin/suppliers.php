@@ -87,6 +87,8 @@ class Suppliers extends CI_Controller
         $status = $_GET['status'];
         $this->session->set_flashdata('message', 'Suppliers successfully ');
         $this->supplier->change_Supplier_Status($id, $status);
+        $this->load->library('../controllers/email.php');
+        $this->email->index();
         redirect('admin/suppliers', 'refresh');
     }
 
