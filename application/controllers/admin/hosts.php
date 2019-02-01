@@ -3,17 +3,22 @@
 class Hosts extends CI_Controller
 {
     public $isCheck = false;
+    var $API = "";
 
     function __construct()
     {
         parent::__construct();
+        $this->API="http://api.haydi.vn:3001/";
         $this->is_logged_in();
+        $this->load->library('curl');
         $this->load->helper('language');
         $this->lang->load('supplier', $this->session->userdata('language'));
     }
 
     function index()
     {
+
+        
         if (!empty($_POST)) {
 
             if (isset($_POST['uploadclick'])) {
@@ -47,12 +52,15 @@ class Hosts extends CI_Controller
     
     function list_hosts()
     {
+        $host = json_decode($this->curl->simple_get($this->API.'hosts?limit=10&lat=21.02867&lon=105.75589&distance=200000km'),true);
+        $data = $host['data'];//chuyen thanhh mang  data
+        $list = $data['list'];
         $this->load->library('pagination');
         $this->load->model('host');
 
         $config['base_url'] = base_url() . 'admin/hosts/list_hosts';
-        $config['total_rows'] = $this->host->total_hosts();
-        $config['per_page'] = 10;
+        $config['total_rows'] = $host['data']['total'];
+        $config['per_page'] = 8;
         $config["uri_segment"] = 4;
         //pagination styling
         $config['num_tag_open'] = '<li>';
@@ -72,7 +80,8 @@ class Hosts extends CI_Controller
 //        if ($this->isCheck) {
 //            $data['suppliers'] = $this->supplier->show_suppliers($config['per_page'], $page, $supplier_cd);
 //        } else {
-            $data['hosts'] = $this->host->show_all_host($config['per_page'], $page);
+            /*$data['hosts'] = $this->host->show_all_host($config['per_page'], $page);
+            $listHost = $data['list'];*/
 //        }
 
         $data['links'] = $this->pagination->create_links();
@@ -81,29 +90,77 @@ class Hosts extends CI_Controller
         $this->load->view('includes/template', $data);
     }
     function block_host(){
-        $this->load->model('host');
-        $id = $_GET['id'];
-        $status = $_GET['status'];
-        $this->session->set_flashdata('message', 'Successfully ');
-        $this->host->changeHostStatus($id, $status);
-        redirect('admin/hosts', 'refresh');
+       if(isset($_POST['submit'])){
+            $data = array(
+                'id'       =>  $this->input->post('id'),
+                'name'      =>  $this->input->post('name'),
+                'price'=>  $this->input->post('price'),
+                'address'      =>  $this->input->post('address'),
+                'unit'=>  $this->input->post('unit'),
+                'country'=>  $this->input->post('country'),
+                'country_code'=>  $this->input->post('country_code')
+
+            );
+            $update =  $this->curl->simple_put($this->API.'/kontak', $data, array(CURLOPT_BUFFERSIZE => 10)); 
+            if($update)
+            {
+                $this->session->set_flashdata('hasil','Update Data Berhasil');
+            }else
+            {
+               $this->session->set_flashdata('hasil','Update Data Gagal');
+            }
+            redirect('kontak');
+        }else{
+            $params = array('id'=>  $this->uri->segment(3));
+            $data['datakontak'] = json_decode($this->curl->simple_get($this->API.'/kontak',$params));
+            $this->load->view('kontak/edit',$data);
+        }
     }
 
 
-    function list_host_by_id($host_ID)
+    function host_detail($id)
     {
+        $data['hd']= json_decode($this->curl->simple_get($this->API.'hosts/'.$id));
         $this->load->library('pagination');
-        $this->load->model('host');
-
-        $data['hosts'] = $this->host->getHostById($host_ID);
+       
+        //echo(json_encode($data['host']));
+      
+       //die();
+      
 
         $data['links'] = $this->pagination->create_links();
         $data['main_content'] = 'backend/hosts/host_info';
         $data['title'] = 'Host';
-            $this->load->view('includes/template', $data);
+        $this->load->view('includes/template', $data);
         }        
 
         //theo tat ca
+    function edit_host(){
+       if(isset($_POST['edit'])){
+        $id = $_POST['id'];
+            $data = array(
+                'id'       =>  $this->input->post('id'),
+                'name'      =>  $this->input->post('name')       
+            );
+            $update =  $this->curl->simple_put($this->API.'backend/hosts/20',$data , array(CURLOPT_BUFFERSIZE => 10)); 
+           echo ($update);
+           die();
+            if($update)
+            {
+                $this->session->set_flashdata('hasil','Update Data Berhasil');
+                echo "thành công";
+            }else
+            {
+               $this->session->set_flashdata('hasil','Update Data Gagal');
+               echo "thất bại";
+            }
+             redirect('admin/hosts', 'refresh');
+        }else{
+            $params = array('id'=>  $this->uri->segment(3));
+            $data['datakontak'] = json_decode($this->curl->simple_get($this->API.'/kontak',$params));
+            $this->load->view('kontak/edit',$data);
+        }
+        }
     function list_suppliers_by_search($supplier_cd)
     {
         $this->load->library('pagination');
@@ -202,9 +259,19 @@ class Hosts extends CI_Controller
 
     function delete_host($id)
     {
-        $this->load->model('host');
-        $this->session->set_flashdata('message', 'Successfully deleted');
-        $this->host->deleteHost($id);
+        if(empty($id)){
+            redirect('kontak');
+        }else{
+            $delete =  $this->curl->simple_delete($this->API.'/kontak', array('id'=>$id), array(CURLOPT_BUFFERSIZE => 10)); 
+            if($delete)
+            {
+                $this->session->set_flashdata('hasil','Delete Data Berhasil');
+            }else
+            {
+               $this->session->set_flashdata('hasil','Delete Data Gagal');
+            }
+            redirect('kontak');
+        }
         redirect('admin/hosts', 'refresh');
     }
 

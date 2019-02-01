@@ -2,14 +2,17 @@
 
 class Suppliers extends CI_Controller
 {
+    var $API ="";
     public $isCheck = false;
 
     function __construct()
     {
         parent::__construct();
+        $this->API="http://api.haydi.vn:3001/hosts?limit=10&lat=21http://api.haydi.vn:3001/hosts?limit=10&lat=21.02867&lon=105.75589&distance=200000km.02867&lon=105.75589&distance=200000km";
         $this->is_logged_in();
         $this->load->helper('language');
         $this->load->library('email');
+        $this->load->library('curl');
         $this->lang->load('supplier', $this->session->userdata('language'));
     }
 

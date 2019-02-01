@@ -53,57 +53,53 @@
 					<tr>
 						<th>STT</th>
 						<th>ID</th>
-						<th>Tên</th>
-						<th>SĐT</th>
-						<th>Email</th>
-						<th>Địa chỉ</th>
-						<th>Mã quốc gia</th>
+						<th>Id</th>
+						<th>Họ tên</th>
 						<th>Giá</th>
-						<th>Giá trẻ em</th>
-						<th>Đơn vị</th>
-						<th>Tổng phòng</th>
-						<th>Loại</th>
-						<th>Trạng thái</th>
-						<th>Ngày đăng kí</th>
+						<th>Địa chỉ</th>
+						<th>Đơn vị giá</th>
+						<th>Quốc gia</th>
+						<th>Mã quốc gia</th>
+						<th>Ảnh</th>
 						<th>Chức năng</th>
 					</tr>
 				</thead>
 				<tbody>
-					<?php $i = 1; foreach($hosts as $host): ?>
+					<?php $i = 1; foreach($list as $host): ?>
 					<tr>
 						<td><?php echo $i ?></td>
-						<td><?php echo $host->id ?></td>
-						<td><?php echo $host->name ?></td>
-						<td><?php echo $host->phone ?></td>
+						<td><?php echo $host['id'] ?></td>
+						<td><?php echo $host['_id'] ?></td>
+						<td><?php echo $host['name'] ?></td>
 						
-						<td><?php echo $host->email ?></td>
-						<td><?php echo $host->address ?></td>
-						<td><?php echo $host->country_code ?></td>
-						<td><?php echo $host->price ?></td>
-						<td><?php echo $host->price_baby ?></td>
-						<td><?php echo $host->unit ?></td>
-						<td><?php echo $host->room_number ?></td>
-						<td><span class="label label-info"><?php echo $host->type ?></span></td>
+						<td><?php echo $host['price'] ?></td>
+						<td><?php echo $host['address'] ?></td>
+						<td><?php echo $host['unit'] ?></td>
+						<td><?php echo $host['country'] ?></td>
+						<td><?php echo $host['country_code'] ?></td>
+						<td><?php echo $host['image'] ?></td>
+
+						<!-- <td><span class="label label-info"><?php echo $host->type ?></span></td> 
 						<td><?php echo $this->host->getHostStatus($host->status) ?></td>
 						<td><span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $host->created_at))?>
-					</td>
+						</td> -->
 					<td style="text-align:center">
 						<div class="btn-group" role="group">
-							<a href="<?php echo base_url('admin/hosts/list_hosts_by_id/' . $host->id ); ?>"class="btn btn-info btn-xs">
+							<a href="<?php echo base_url('admin/hosts/host_detail/' . $host['id'] ); ?>"class="btn btn-info btn-xs">
 								<span class="icon-search"><?php echo lang('View') ?></span></a>
-								<?php if ($host->status="active") {
-								?>
+								<!-- <?php if ($host->status="active") {
+								?> 	
 								<a href="<?php echo base_url("admin/hosts/block_host?id={$host->id}&status={$host->status}"); ?>"
 									onclick="return confirm('Are you sure you want to Block this Host?')"
 								class="btn btn-warning   btn-xs"></span>
-							Block</a>
-							<?php }else{ ?>
-							<a href="<?php echo base_url("admin/hosts/block_host?id={$host->id}&status={$host->status}"); ?>"
+															Block</a>
+															<?php }else{ ?>
+															<a href="<?php echo base_url("admin/hosts/block_host?id={$host->id}&status={$host->status}"); ?>"
 								onclick="return confirm('Are you sure you want to Active this Host?')"
 								class="btn btn-success btn-xs">
-							Active</a>
+															Active</a> -->
 							<?php } ?>
-							<a href="<?php echo base_url('admin/hosts/delete_host/' .$host->id) ?>"
+							<a href="<?php echo base_url('admin/hosts/delete_host/' .$host['id']) ?>"
 								onclick="return confirm('Are you sure you want to delete this host?')"
 							class="btn btn-danger   btn-xs"></span>
 						Delete</a>
