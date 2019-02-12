@@ -36,32 +36,12 @@ $this->lang->load('navigation', $this->session->userdata('language'));
               </a>
             </li>
 
-
-           <!--  <li <?php if ($page == "tours"){ echo "class='active'";} ?>>
-              <a href="<?php echo base_url() ?>admin/tours">
-                <div class="nav-icon"><span class="icon-calendar"></span></div>
-                <div class="nav-title"><?php echo lang('Tours');?></div>
-              </a>
-            </li> -->
-            
-           <!--  <li <?php if ($page == "clients"){ echo "class='active'";} ?>>
-              <a href="<?php echo base_url() ?>admin/clients">
-                <div class="nav-icon"><span class="icon-user-2"></span></div>
-                <div class="nav-title"><?php echo lang('Clients');?></div>
-              </a>
-            </li> -->
-
-
-
-<!-- test... -->
                <li <?php if ($page == "bookings"){ echo "class='active'";} ?>>
               <a href="<?php echo base_url() ?>admin/suppliers">
                 <div class="nav-icon"><span class="icon-files"></i></span></div>
                 <div class="nav-title"><?php echo lang('Suppliers');?></div>
               </a>
             </li>
-
-            <!-- end... -->
 
 
 
@@ -77,6 +57,18 @@ $this->lang->load('navigation', $this->session->userdata('language'));
               <a href="<?php echo base_url() ?>admin/campaigns">
                 <div class="nav-icon"><span class="icon-stats"></span></div>
                 <div class="nav-title">Campaigns</div>
+              </a>
+            </li>
+            <li <?php if ($page == "statistics"){ echo "class='active'";} ?>>
+              <a href="<?php echo base_url() ?>admin/sponsors">
+                <div class="nav-icon"><span class="icon-stats"></span></div>
+                <div class="nav-title">Sponsors</div>
+              </a>
+            </li>
+              <li <?php if ($page == "statistics"){ echo "class='active'";} ?>>
+              <a href="<?php echo base_url() ?>admin/news">
+                <div class="nav-icon"><span class="icon-stats"></span></div>
+                <div class="nav-title">News</div>
               </a>
             </li>
             <li <?php if ($page == "settings"){ echo "class='active'";} ?>>
