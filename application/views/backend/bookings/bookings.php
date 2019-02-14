@@ -1,4 +1,25 @@
 
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>jQuery UI Dialog - Modal form</title>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="dialog_css.css">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/d3js/5.7.0/d3.min.js"></script>
+        <script type="text/javascript">
+        $(function(){
+          $("#time_start").datepicker();
+        });
+        $(function(){
+          $("#time_end").datepicker();
+        });
+        </script>
+        
+    </head>
+        <body>
         <div class="col-sm-10 col-md-11 main">
           <div class="row" >
             <div class="col-sm-10 col-md-10" style="padding-left:0px;">
@@ -13,8 +34,19 @@
              <div id="form-search1" >
               <form  class="form-inline" method="POST" action="../admin/bookings" style="float:left;" >
                   <div class="form-group" style="width: 500px:">
-                      <input type="text" class="form-control" id="booking_search" name="booking_search"
-                             placeholder="Từ khóa">
+                  <input style="margin:6px 6px 6px 0px; width: 10%;float: left" type="text" class="form-control"  id="name" name="name"
+                             placeholder="Tên khách ">
+                      <input style="margin:6px 6px 6px 0px;width: 20%;float: left" type="text" class="form-control" id="guider_id" name="guider_id"
+                             placeholder="ID Hướng dẫn viên">
+                      <input style="margin:6px 6px 6px 0px;width: 10%;float: left" type="text" class="form-control" id="time_start" name="time_start" placeholder="Ngày tạo">
+                       <input style="margin:6px 6px 6px 0px;width: 10%;float: left" type="text" class="form-control" id="time_end" name="time_end" placeholder="Ngày kết thúc">
+                      <input style="margin:6px 6px 6px 0px;width: 10%;float: left" type="text" class="form-control" id="days" name="days"
+                             placeholder="Số ngày ">
+                <select class="form-control" name="BookStatus" style="margin:6px 6px 6px 0px;width: 13%;float: left;placeholder="BookStatus">     <option>Chọn Trạng Thái</option>
+                    <option  value="0" >Mới</option>
+                    <option  value="1">Đã Thanh Toán </option>
+                    <option  value="2">Hủy</option>
+                </select>
                       <button style="margin-right:10px;" type="submit"
                               class="btn btn-primary"><?php echo lang('Search supplier'); ?>Tìm kiếm 
                       </button>
@@ -23,34 +55,6 @@
               </div>
           </div>
         </br>
-            <div class="row" >
-                <div id="form-search2" style="display: block">
-                <h4> Search Detail</h4>
-            <div class="form-2" style="float: left; padding-right: 40px;width: 100%; display: ">
-                      <input style="margin:6px 6px 6px 0px; width: 10%;float: left" type="text" class="form-control"  id="supplier_search" name="supplier_search"
-                             placeholder="Tên">
-                      <input style="margin:6px 6px 6px 0px;width: 20%;float: left" type="text" class="form-control" id="supplier_search" name="supplier_search"
-                             placeholder="ID Hướng dẫn viên">
-                      <input style="margin:6px 6px 6px 0px;width: 10%;float: left" type="text" class="form-control" id="supplier_search" name="supplier_search"
-                             placeholder="Ngày tạo">
-                <input style="margin:6px 6px 6px 0px;width: 10%;float: left" type="text" class="form-control" id="supplier_search" name="supplier_search"
-                             placeholder="Số ngày ">
-
-                <select class="form-control" name="BookStatus" style="margin:6px 6px 6px 0px;width: 13%;float: left;placeholder="BookStatus">
-                    <option  value="0" >Paid</option>
-                    <option  value="1">Holding</option>
-                    <option  value="2">Expired</option>
-                </select>
-
-                          <button style="margin-right:5px;margin-bottom: 5px; margin-top:5px;float: left" type="submit"
-                                  class="btn btn-primary"><?php echo lang('Search supplier'); ?>Tìm kiếm
-                          </button>
-                      </div>
-                </div>
-            </div>
-        </br>
-
-
                   <div class="row">
             <div class="table-responsive">
               <table class="table table-bordered table-striped">
@@ -58,16 +62,19 @@
                   <tr style="text-align: center;">
 <!--                     <th><?php echo $this->session->userdata['user_id']?> STT </th>
  -->                <th>STT </th>
-                    <th>ID Trip</th>
-                    <th>Tên Khách Hàng</th>
+                    <TH>Mã Order</TH>
                     <th>Ngày bắt đầu </th>
                     <th>Ngày kết thúc</th>
-                    <th>Số ngày</th>
-                    <th>Số đêm</th>
                     <th>Hướng dẫn viên</th>
+                    <th>Mã Trip </th>
+                    <th>Ghi Chú</th>
                     <th>Trạng thái</th>
                     <th>Ngày tạo</th>
-                    <th> Ngày cập nhật</th>
+                    <th>Ngày cập nhật</th>
+                    <th>Tổng Tiền</th>
+                    <th>Hủy Tiền</th>
+                    <th>Mã Sử Dụng</th>
+                    <th>Số tiền được hoàn</th>
                       <th width="12%" ><?php echo lang('Options');?></th>
                   </tr>
                 </thead>
@@ -82,7 +89,6 @@
                       <tr>
                       <td><?php echo $i?></td>
                       <td><?php echo $booking->id?></td>
-                      <td><?php echo $booking->name?></td>
                       <td>
                         <span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $booking->time_start))?>
                         <div class="pull-right"><span class="icon-clock" style="color:red;"></span> <?php echo date('H:i', strtotime( $booking->time_start)) ?></div>
@@ -93,12 +99,11 @@
                           <div class="pull-right"><span class="icon-clock" style="color:red;"></span> <?php echo date('H:i', strtotime( $booking->time_end)) ?></div>
 <!--                        --><?php /*} */?>
                       </td>
-                          <td><?php echo $booking->days ?></td>
-                          <td><?php echo $booking->nights ?></td>
-
+                          <td><?php echo $booking->item_type?></td>
+                          <td><?php echo $booking->trip_id?></td>
                           <!--                          <td><?php /*echo ($this->booking->get_amount($booking->from)) */?></td>
                           -->
-                          <td><?php echo $booking->guider_id ?></td>
+                          <td><?php echo $booking->note?></td>
                           <td><?php echo $this-> booking->status_order ($booking->status) ?> </td>
                           <td>
                         <span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $booking->created_at))?>
@@ -108,9 +113,13 @@
                         <span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $booking->updated_at))?>
                         <div class="pull-right"><span class="icon-clock" style="color:red;"></span> <?php echo date('H:i', strtotime( $booking->updated_at)) ?></div>
                       </td>
+                          <td><?php echo $booking->money?></td>
+                          <td><?php echo $booking->cancel_money?></td>
+                          <td><?php echo $booking->coupon_code?></td>
+                          <td><?php echo $booking->coupon_value?></td>
                         <td style="text-align:center">
                         <div class="btn-group" role="group">
-                          <?php if($booking->status == 3){?>
+                          <?php if($booking->status == 2){?>
                                 <a href="<?php echo base_url('admin/bookings/nocancel_trips/'.$booking->id); ?>" class="btn btn-default btn-xs active"><span class="icon-plus" style="color:blue"></span>Hoàn Hủy</a>
                             <?php }else{?>
                                 <a href="<?php echo base_url('admin/bookings/cancel_trips/'.$booking->id); ?>" class="btn btn-default btn-xs"><span class="icon-minus" style="color:red"></span> Hủy </a>

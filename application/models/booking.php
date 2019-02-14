@@ -27,8 +27,8 @@ Class Booking extends CI_Model
     function show_bookings($limit, $start)
     {
         $this->db->limit($limit, $start);
-        $this->db->from('trips');
-        $this->db->order_by('name','desc');
+        $this->db->from('orders');
+        $this->db->order_by('id','desc');
         $this->db->select("*");
         $query = $this->db->get();
         return $query->result();
@@ -37,7 +37,7 @@ Class Booking extends CI_Model
 
     function show_bookings_id($book_id)
     {
-        $this->db->from('trips');
+        $this->db->from('orders');
         $this->db->select("*");
         $this->db->where("id",$book_id);
         $query = $this->db->get();
@@ -59,21 +59,18 @@ Class Booking extends CI_Model
         if ($status == 0) {
             echo '<span class="label label-success">'.lang('Mới').'</span>';
         }else if ($status == 1) {
-            echo '<span class="label label-default">'.lang('Từ chối').'</span>';
+            echo '<span class="label label-default">'.lang('Đã thanh toán').'</span>';
         }
-    	else if ($status == 2) {
-            echo '<span class="label label-success">'.lang('Chấp nhận').'</span>';
-        }
-        else {   echo '<span class="label label-default">'.lang('Hủy bỏ').'</span>';
+        else {  echo '<span class="label label-default">'.lang('Hủy bỏ').'</span>';
         }
     }
 
     function cancel_trips($id)
 	{
 
-		$this->db->set('status', "3");
+		$this->db->set('status', "2");
 		$this->db->where('id', $id);
-     	$this->db->update('trips');
+     	$this->db->update('orders');
 /*		$query = $this->db->query("UPDATE trips set status='3' WHERE id='$id'") 
 */	}
 
@@ -82,17 +79,13 @@ function nocancel_trips($id)
 
 		$this->db->set('status', "0");
 		$this->db->where('id', $id);
-     	$this->db->update('trips');
-/*		$query = $this->db->query("UPDATE trips set status='3' WHERE id='$id'") 
-*/	}
-	/*function Uncancel_trips($id)
-	{
-		$query = $this->db->query("UPDATE trips set status='0' WHERE id='$id'") 
-	}
-*/
-    function update_booking($name, $time_start, $time_end, $days, $nights, $guider_id,$status,$created_at,$updated_at,$id)
+     	$this->db->update('orders');
+
+    function update_booking($item_type,$trip_id,$note,$status,$updated_at,$money,$cancel_money,$coupon_code,$coupon_value,$id)
     {
-        $query = $this->db->query("UPDATE trips SET name='$name', time_start='$time_start', time_end='$time_end', days='$days', nights='$nights', guider_id='$guider_id', status='$status',created_at='$created_at',updated_at='$updated_at'  WHERE id = '$id'");
+
+    /*	$updated_at = strtotime($time_start);*/
+		        $query = $this->db->query("UPDATE orders SET item_type='$item_type'trip_id='$trip_id', note='$note', status='$status',updated_at='$updated_at', money='$money',cancel_money='$cancel_money', coupon_code='$coupon_code', coupon_value='$coupon_value'  WHERE id = '$id'");
 
     }
 
@@ -264,5 +257,5 @@ function nocancel_trips($id)
      	$this->db->delete('bookings');
 	}
 	
-
+}
 ?>

@@ -8,6 +8,8 @@
         <link rel="stylesheet" href="dialog_css.css">
         <style>
         </style>
+        </head>
+        
         <body>
             <div class="col-sm-10 col-md-11 main">
                 <div class="row" style="margin-right:0px;">

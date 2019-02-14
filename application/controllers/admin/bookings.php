@@ -106,6 +106,7 @@ class Bookings extends CI_Controller {
 
         function search_booking_byID($book_cd,$customer1)
         {
+            
             $this->load->library('pagination');
             $this->load->model('booking');
             $data['bookings'] = $this->booking->search_bookings_id($book_cd,$customer1);
@@ -118,22 +119,19 @@ class Bookings extends CI_Controller {
 
         function updatebooking()
         {
-            //TODO chua hien thi len view con da them dc
-            $name = $_GET['name'];
-            $time_start = $_GET['time_start'];
-            $time_end = $_GET['time_end'];
-            $days = $_GET['days'];
-            $nights = $_GET['nights'];
-            $guider_id = $_GET['guider_id'];
+            $item_type = $_GET['item_type'];
+            $trip_id = $_GET['trip_id'];
+            $note = $_GET['note'];
             $status = $_GET['status'];
-            $created_at = $_GET['created_at'];
             $updated_at = $_GET['updated_at'];
+            $money = $_GET['money'];
+            $cancel_money = $_GET['cancel_money'];
+            $coupon_code = $_GET['coupon_code'];
+            $coupon_value = $_GET['coupon_value'];
             $id = $_GET['id'];
-
             $this->load->library('pagination');
             $this->load->model('booking');
-
-            $data['booking'] = $this->booking->update_booking($name, $time_start, $time_end, $days, $nights, $guider_id, $status, $created_at, $updated_at, $id);
+            $data['booking'] = $this->booking->update_booking( $item_type, $trip_id, $note, $status, $created_at, $updated_at,$money,$cancel_money,$coupon_code,$coupon_value,$id);
             redirect('admin/booking', 'refresh');
 
 
