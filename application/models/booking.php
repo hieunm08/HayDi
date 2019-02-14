@@ -80,12 +80,13 @@ function nocancel_trips($id)
 		$this->db->set('status', "0");
 		$this->db->where('id', $id);
      	$this->db->update('orders');
+     }
 
-    function update_booking($item_type,$trip_id,$note,$status,$updated_at,$money,$cancel_money,$coupon_code,$coupon_value,$id)
+    function update_booking($item_type,$note,$status,$updated_at,$money,$cancel_money,$coupon_code,$coupon_value,$id)
     {
 
-    /*	$updated_at = strtotime($time_start);*/
-		        $query = $this->db->query("UPDATE orders SET item_type='$item_type'trip_id='$trip_id', note='$note', status='$status',updated_at='$updated_at', money='$money',cancel_money='$cancel_money', coupon_code='$coupon_code', coupon_value='$coupon_value'  WHERE id = '$id'");
+    	$updated_at = date('Y-m-d H:i',strtotime($updated_at));
+		        $query = $this->db->query("UPDATE orders SET item_type='$item_type', note='$note', status='$status',updated_at='$updated_at', money='$money',cancel_money='$cancel_money', coupon_code='$coupon_code', coupon_value='$coupon_value'  WHERE id = '$id'");
 
     }
 
@@ -257,5 +258,5 @@ function nocancel_trips($id)
      	$this->db->delete('bookings');
 	}
 	
-}
+
 ?>

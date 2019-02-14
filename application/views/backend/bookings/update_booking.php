@@ -14,39 +14,6 @@
                  <input type="text" disabled class="form-control" name="id" value="<?php echo ( $booking->id ) ?>">
                  <?php echo form_error('customer'); ?>
              </div>
-            <!--  <div class="form-group">
-                 <label for="customer"> Tên Khách Hàng </label>
-                 <input type="text" class="form-control" name="name" value="<?php echo ( $booking->name ) ?>">
-                 <?php echo form_error('customer'); ?>
-             </div> -->
-             <!-- <div class="form-group">
-                 <label for=phonex"> Phone </label>
-                 <input type="text" class="form-control" name="phone" value="<?php echo( $booking->phone ) ?>">
-                 <?php echo form_error('phone'); ?>
-             </div>
-             <div class="form-group">
-                 <label for="passagain"> Trip No</label>
-                 <input type="text" class="form-control" name="trip_no" value="<?php echo( $booking->trip_no ) ?>">
-                 <?php echo form_error('passagain'); ?>
-             </div>
-             <div class="form-group">
-                 <label for="route">Route</label>
-                 <input type="text" class="form-control" name="route" value="<?php echo( $booking->route ) ?>">
-                 <?php echo form_error('firstname'); ?>
-             </div>
-             <div class="form-group">
-                 <label for="role"> Service </label>
-                 <label class="radio-inline">
-                     <input type="radio" name="service" value="0" <?php echo set_radio('service','0', $booking->service == '0') ?>> <?php echo lang('Guide')?>
-                 </label>
-                 <label class="radio-inline">
-                     <input type="radio" name="service" value="1" <?php echo set_radio('service', '1', $booking->service == '1'); ?>> <?php echo lang('HomeStay')?>
-                 </label>
-                 <label class="radio-inline">
-                     <input type="radio" name="service" value="2" <?php echo set_radio('service', '2', $booking->service == '2'); ?>> <?php echo lang('Car')?>
-                 </label>
-                 <?php echo form_error('role'); ?>
-             </div> -->
              <div  class="form-group">
                  <label for="dateandtime">Ngày bắt đầu </label>
                  <div class="row">
@@ -87,12 +54,12 @@
              </div>
              <div class="form-group">
                  <label for="customer"> Mã Trip</label>
-                 <input type="text"  disabled="" class="form-control" name="nights" value="<?php echo ( $booking->trip_id ) ?>">
+                 <input type="text"  disabled="" class="form-control" name="trip_id" value="<?php echo ( $booking->trip_id ) ?>">
                  <?php echo form_error('customer'); ?>
              </div>
              <div class="form-group">
                  <label for="customer"> Ghi Chú </label>
-                 <input type="textarea" class="form-control" name="guider_id" value="<?php echo ( $booking->note ) ?>">
+                 <input type="textarea" class="form-control" name="note" value="<?php echo ( $booking->note ) ?>">
                  <?php echo form_error('customer'); ?>
              </div>
              <div class="form-group">
@@ -105,7 +72,7 @@
                      <input type="radio" name="status" value="1" <?php echo set_radio('status', '1', $booking->status == '1'); ?>> <?php echo lang('Đã thanh toán')?>
                  </label>
                  <label class="radio-inline">
-                     <input type="radio" name="status" value="3" <?php echo set_radio('status', '2', $booking->status == '3'); ?>> <?php echo lang('Hủy bỏ')?>
+                     <input type="radio" name="status" value="2" <?php echo set_radio('status', '2', $booking->status == '2'); ?>> <?php echo lang('Hủy bỏ')?>
                  </label>
                  <?php echo form_error('role'); ?>
              </div>
@@ -150,7 +117,7 @@
                  <label for="dateandtime">Ngày cập nhật</label>
                  <div class="row">
                      <div class="col-md-6  date" id='datepicker_ncn'>
-                         <input type="text"  class="form-control" name="updated_at" data-date-format="DD-MM-YYYY" value="<?php echo set_value('from_start_date', date('d-m-Y', strtotime($booking->updated_at))); ?>">
+                         <input type="text" class="form-control" name="updated_at" data-date-format="DD-MM-YYYY" value="<?php echo set_value('from_start_date', date('d-m-Y', strtotime($booking->updated_at))); ?>">
                          <span class="input-group-addon"><span class="icon-calendar"></span>
                           </span>
                          <?php echo form_error('from_start_date'); ?>
@@ -164,7 +131,7 @@
                          });
                      </script>
                      <div class="col-md-6  date" id='timepicker_ncn'>
-                         <input type="text"     class="form-control" name="updated_at" data-date-format="HH:mm" value="<?php echo set_value('from_start_time', date('H:i', strtotime($booking->updated_at))); ?>">
+                         <input type="text"  class="form-control" name="updated_at" data-date-format="HH:mm" value="<?php echo set_value('from_start_time', date('H:i', strtotime($booking->updated_at))); ?>">
                          <span class="input-group-addon"><span class="icon-clock"></span>
                           </span>
                          <?php echo form_error('from_start_time'); ?>
@@ -184,22 +151,22 @@
                  </div>
                  <div class="form-group">
                  <label for="customer"> Tổng Tiền </label>
-                 <input type="textarea" class="form-control" name="guider_id" value="<?php echo ( $booking->money ) ?>">
+                 <input type="text" class="form-control" name="money" value="<?php echo ($booking->money) ?>">
                  <?php echo form_error('customer'); ?>
              </div>
              <div class="form-group">
                  <label for="customer"> Hủy Tiền </label>
-                 <input type="textarea" class="form-control" name="guider_id" value="<?php echo ( $booking->cancel_money  ) ?>">
+                 <input type="text" class="form-control" name="cancel_money" value="<?php echo ( $booking->cancel_money) ?>">
                  <?php echo form_error('customer'); ?>
              </div>
              <div class="form-group">
                  <label for="customer"> Mã Sử Dụng  </label>
-                 <input type="textarea" class="form-control" name="guider_id" value="<?php echo ( $booking->coupon_code) ?>">
+                 <input type="text" class="form-control" name="coupon_code" value="<?php echo ( $booking->coupon_code) ?>">
                  <?php echo form_error('customer'); ?>
              </div>
              <div class="form-group">
                  <label for="customer"> Số tiền được hoàn </label>
-                 <input type="textarea" class="form-control" name="guider_id" value="<?php echo ( $booking->coupon_value ) ?>">
+                 <input type="text" class="form-control" name="coupon_value" value="<?php echo ( $booking->coupon_value ) ?>">
                  <?php echo form_error('customer'); ?>
              </div>
              </div>

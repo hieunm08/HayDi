@@ -120,7 +120,6 @@ class Bookings extends CI_Controller {
         function updatebooking()
         {
             $item_type = $_GET['item_type'];
-            $trip_id = $_GET['trip_id'];
             $note = $_GET['note'];
             $status = $_GET['status'];
             $updated_at = $_GET['updated_at'];
@@ -131,8 +130,8 @@ class Bookings extends CI_Controller {
             $id = $_GET['id'];
             $this->load->library('pagination');
             $this->load->model('booking');
-            $data['booking'] = $this->booking->update_booking( $item_type, $trip_id, $note, $status, $created_at, $updated_at,$money,$cancel_money,$coupon_code,$coupon_value,$id);
-            redirect('admin/booking', 'refresh');
+            $data['booking'] = $this->booking->update_booking($item_type, $note, $status, $updated_at,$money,$cancel_money,$coupon_code,$coupon_value,$id);
+            redirect('admin/bookings', 'refresh');
 
 
         }
