@@ -71,6 +71,12 @@ $this->lang->load('navigation', $this->session->userdata('language'));
                 <div class="nav-title">News</div>
               </a>
             </li>
+            <li <?php if ($page == "statistics"){ echo "class='active'";} ?>>
+              <a href="<?php echo base_url() ?>admin/skills">
+                <div class="nav-icon"><span class="icon-stats"></span></div>
+                <div class="nav-title">Skills</div>
+              </a>
+            </li>
             <li <?php if ($page == "settings"){ echo "class='active'";} ?>>
               <a href="<?php echo base_url() ?>admin/settings">
                 <div class="nav-icon"><span class="icon-tools"></span></div>

@@ -11,7 +11,7 @@
         <body>
             <div class="col-sm-10 col-md-11 main">
                 <div class="row" style="margin-right:0px;">
-                    <h1 class="page-header">Tin tức</h1>
+                    <h1 class="page-header">Kỹ năng</h1>
                 </div>
                 <div class="row" style="margin-right:0px;margin-bottom: 10px;width: 500px">
                     <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
@@ -87,44 +87,29 @@
                                 <tr>
                                     <th>STT</th>
                                     <th><?php echo lang('ID number'); ?></th>
-                                    <th>Tiêu đề</th>
-                                    <th>Ảnh đại diện</th>
-                                    <th>Đường dẫn</th>
-                                    <th>Giới thiệu</th>
-                                    <th>Nội dung</th>
-                                    <th>mã thể loại</th>
-                                    <th>Ngày cập nhật</th>
-                                    <th>Trạng thái</th>
-                                    <th>Chức năng</th>
+                                    <th>Tên</th>  
+                                    <th>Icon</th>
+                         			<th>Mô tả</th>
+                         			<th>Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $this->load->model('payment'); ?>
                                 <?php
-                                if ($this->pagination->per_page > $this->pagination->total_rows) $i = 1;
+                                if ($this->pagination->per_page >= $this->pagination->total_rows) $i = 1;
                                 else $i = 1 + ($this->pagination->cur_page - 1) * $this->pagination->per_page;
-                                foreach ($news as $news):
+                                foreach ($skills as $skills):
                                 ?>
                                 <tr>
                                     <td><?php echo $i ?></td>
-                                    <td><?php echo $news->id ?></td>
-                                    <td ><?php echo $news->title ?></td>
-                                    <td><?php echo $news->thumb ?></td>
-                                    <td><?php echo $news->link ?></td>
-                                    <td><?php echo $news->intro ?></td>
-                                    <td style="min-width: 300px"><?php echo $news->content ?></td>
-                                    <td><?php echo $news->group_id ?></td>
-                                    <td><span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $news->updated_at))?>
-                                    <td><?php echo $news->status ?></td>
+                                    <td><?php echo $skills->id ?></td>
+                                    <td ><?php echo $skills->name ?></td>
+                                    <td><?php echo $skills->icon ?></td>
+                                    <td><?php echo $skills->desc ?></td>
                                     <td style="text-align:center">
                                         <div class="btn-group" role="group">
-                                           <a href="<?php echo base_url('admin/news/list_news_by_id/'.$news->id); ?>" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Update</a>
-                                            <?php if ($news->status==1) { ?>
-                                            <a href="<?php echo base_url("admin/news/block_news?id={$news->id}&status={$news->status}"); ?>" onclick="return confirm('Bạn có chắc chắn muốn HỦY quảng cáo này?')" class="btn btn-default btn-xs"><span class="icon-minus" style="color:red"></span> Hủy</a>
-                                            <?php }else{ ?>
-                                            <a href="<?php echo base_url("admin/news/block_news?id={$news->id}&status={$news->status}"); ?>" onclick="return confirm('Bạn có chắc chắn muốn KÍCH HOẠT quảng cáo này?')" class="btn btn-default btn-xs"><span class="icon-plus" style="color:blue"></span> Kích hoạt</a>
-                                            <?php } ?>
-                                            <a href="<?php echo base_url('admin/news/delete_news/' .$news->id); ?>" onclick="return confirm('Bạn có chắc chắn muốn XÓA quảng cáo này?')" class="btn btn-default btn-xs"><span class="icon-cancel-2" style="color:red"></span> Delete</a>
+                                            <a href="<?php echo base_url('admin/skills/list_skills_by_id/'.$skills->id); ?>" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Update</a>
+                                            <a href="<?php echo base_url('admin/skills/delete_skill/' .$skills->id); ?>" onclick="return confirm('Bạn có chắc chắn muốn XÓA quảng cáo này?')" class="btn btn-default btn-xs"><span class="icon-cancel-2" style="color:red"></span> Delete</a>
                                         </div>
                                     </td>
                             <?php $i++; endforeach; ?>

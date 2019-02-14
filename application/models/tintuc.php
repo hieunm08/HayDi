@@ -23,6 +23,14 @@ class Tintuc extends CI_Model
         $query = $this->db->get();  
         return $query->result();
     }
+    function getNewsById($id)
+    {
+        $this->db->select("*");
+        $this->db->from('news');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        return $query->result();
+    }
     function changeStatusNews($id, $status)
 	{
         if ($status==0) {

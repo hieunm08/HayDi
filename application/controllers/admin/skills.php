@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class News extends CI_Controller
+class Skills extends CI_Controller
 {
     public $isCheck = false;
     var $API = "";
@@ -40,24 +40,24 @@ class News extends CI_Controller
              else {
                 $this->isCheck = false;
 //                $supplier_cd = $_POST['supplier_search'];
-                $this->list_payments();
+                $this->list_skills();
             }
         } else {
             $this->isCheck = false;
-            $this->list_news();
+            $this->list_skills();
         }
     }
     
-    function list_news()
+    function list_skills()
         {
             $this->load->library('pagination');
-            $this->load->model('tintuc');
+            $this->load->model('skill');
 
-           
 
-            $config['base_url'] = base_url() . 'admin/news/list_news';
-            $config['total_rows'] = $this->tintuc->totalNews();
-            $config['per_page'] = 10;
+
+            $config['base_url'] = base_url() . 'admin/skills/list_skills';
+            $config['total_rows'] = $this->skill->totalSkill();
+            $config['per_page'] = 2;
             $config["uri_segment"] = 4;
             //pagination styling
             $config['num_tag_open'] = '<li>';
@@ -73,24 +73,52 @@ class News extends CI_Controller
 
             $this->pagination->initialize($config);
             $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-            $data['news'] = $this->tintuc->getAllNews($config['per_page'], $page);
+            $data['skills'] = $this->skill->getAllSkill($config['per_page'], $page);
             $data['links'] = $this->pagination->create_links();
-            $data['main_content'] = 'backend/news/news';
-            $data['title'] = 'News';
+            $data['main_content'] = 'backend/skills/skills';
+            $data['title'] = 'Skills';
             $this->load->view('includes/template', $data);
         }
-    function list_news_by_id($id)
+    function list_skills_by_id($id)
     {
         $this->load->library('pagination');
-        $this->load->model('tintuc');
+        $this->load->model('skill');
 
-        $data['news'] = $this->tintuc->getNewsById($id);
+        $data['skills'] = $this->skill->getSkillById($id);
 
         $data['links'] = $this->pagination->create_links();
-        $data['main_content'] = 'backend/news/news_info';
+        $data['main_content'] = 'backend/skills/skill_info';
         $data['title'] = 'Skills';
         $this->load->view('includes/template', $data);
     }  
+    function edit_skill()
+    {
+        /*$name = $_GET['name'];
+        $icon = $_GET['email'];
+        $desc = $_GET['sub_phone'];
+        $id = $_GET['id'];*/
+        $this->load->library('pagination');
+        $this->load->model('skill');
+        $id = $this->uri->segment(4);
+        $data = $this->input->post();
+       
+        $this->skill->updateSkill($data, $id);
+        redirect('admin/skills', 'refresh');
+    }
+    function updateSkill($data, $id)
+    {
+        $crop_data = elements(array('name','icon','desc'), $data);
+        $this->db->where('id', $id);
+        $this->db->update('skill', $crop_data);
+    }  
+    function delete_skill($id)
+    {
+        $this->load->model('skill');
+        $this->session->set_flashdata('message', 'Suppliers successfully deleted');
+        $this->skill->deleteSkill($id);
+        redirect('admin/skills', 'refresh');
+    }
+    
 
     private function is_logged_in()
     {
