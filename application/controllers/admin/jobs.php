@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Skills extends CI_Controller
+class Jobs extends CI_Controller
 {
     public $isCheck = false;
     var $API = "";
@@ -40,23 +40,23 @@ class Skills extends CI_Controller
              else {
                 $this->isCheck = false;
 //                $supplier_cd = $_POST['supplier_search'];
-                $this->list_skills();
+                $this->list_jobs();
             }
         } else {
             $this->isCheck = false;
-            $this->list_skills();
+            $this->list_jobs();
         }
     }
     
-    function list_skills()
+    function list_jobs()
         {
             $this->load->library('pagination');
-            $this->load->model('skill');
+            $this->load->model('job');
 
 
 
-            $config['base_url'] = base_url() . 'admin/skills/list_skills';
-            $config['total_rows'] = $this->skill->totalSkill();
+            $config['base_url'] = base_url() . 'admin/jobs/list_jobs';
+            $config['total_rows'] = $this->job->totalJob();
             $config['per_page'] = 2;
             $config["uri_segment"] = 4;
             //pagination styling
@@ -73,18 +73,18 @@ class Skills extends CI_Controller
 
             $this->pagination->initialize($config);
             $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-            $data['skills'] = $this->skill->getAllSkill($config['per_page'], $page);
+            $data['jobs'] = $this->job->getAllJob($config['per_page'], $page);
             $data['links'] = $this->pagination->create_links();
-            $data['main_content'] = 'backend/skills/skills';
-            $data['title'] = 'Skills';
+            $data['main_content'] = 'backend/jobs/jobs';
+            $data['title'] = 'Jobs';
             $this->load->view('includes/template', $data);
         }
-    function list_skills_by_id($id)
+    function list_jobs_by_id($id)
     {
         $this->load->library('pagination');
-        $this->load->model('skill');
+        $this->load->model('job');
 
-        $data['skills'] = $this->skill->getSkillById($id);
+        $data['jobs'] = $this->skill->getJobById($id);
 
         $data['links'] = $this->pagination->create_links();
         $data['main_content'] = 'backend/skills/skill_info';

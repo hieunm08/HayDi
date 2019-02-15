@@ -61,7 +61,7 @@ $this->lang->load('navigation', $this->session->userdata('language'));
             </li>
             <li <?php if ($page == "statistics"){ echo "class='active'";} ?>>
               <a href="<?php echo base_url() ?>admin/sponsors">
-                <div class="nav-icon"><span class="icon-stats"></span></div>
+                <div class="nav-icon"><span class="icon-cog"></span></div>
                 <div class="nav-title">Sponsors</div>
               </a>
             </li>
@@ -73,8 +73,20 @@ $this->lang->load('navigation', $this->session->userdata('language'));
             </li>
             <li <?php if ($page == "statistics"){ echo "class='active'";} ?>>
               <a href="<?php echo base_url() ?>admin/skills">
-                <div class="nav-icon"><span class="icon-stats"></span></div>
+                <div class="nav-icon"><span class="icon-fire"></span></div>
                 <div class="nav-title">Skills</div>
+              </a>
+            </li>
+            <li <?php if ($page == "statistics"){ echo "class='active'";} ?>>
+              <a href="<?php echo base_url() ?>admin/jobs">
+                <div class="nav-icon"><span class="icon-stats"></span></div>
+                <div class="nav-title">Jobs</div>
+              </a>
+            </li>
+            <li <?php if ($page == "statistics"){ echo "class='active'";} ?>>
+              <a href="<?php echo base_url() ?>admin/services">
+                <div class="nav-icon"><span class="icon-globe"></span></div>
+                <div class="nav-title">Service</div>
               </a>
             </li>
             <li <?php if ($page == "settings"){ echo "class='active'";} ?>>

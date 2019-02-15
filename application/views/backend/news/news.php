@@ -90,8 +90,7 @@
                                     <th>Tiêu đề</th>
                                     <th>Ảnh đại diện</th>
                                     <th>Đường dẫn</th>
-                                    <th>Giới thiệu</th>
-                                    <th>Nội dung</th>
+                                    <th style="min-width: 200px;">Giới thiệu</th>
                                     <th>mã thể loại</th>
                                     <th>Ngày cập nhật</th>
                                     <th>Trạng thái</th>
@@ -101,7 +100,7 @@
                             <tbody>
                                 <?php $this->load->model('payment'); ?>
                                 <?php
-                                if ($this->pagination->per_page > $this->pagination->total_rows) $i = 1;
+                                if ($this->pagination->per_page >= $this->pagination->total_rows) $i = 1;
                                 else $i = 1 + ($this->pagination->cur_page - 1) * $this->pagination->per_page;
                                 foreach ($news as $news):
                                 ?>
@@ -111,11 +110,10 @@
                                     <td ><?php echo $news->title ?></td>
                                     <td><?php echo $news->thumb ?></td>
                                     <td><?php echo $news->link ?></td>
-                                    <td><?php echo $news->intro ?></td>
-                                    <td style="min-width: 300px"><?php echo $news->content ?></td>
+                                    <td><?php echo $news->intro ?></td>   
                                     <td><?php echo $news->group_id ?></td>
                                     <td><span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $news->updated_at))?>
-                                    <td><?php echo $news->status ?></td>
+                                    <td><?php echo $this->tintuc->showNewsStatus($news->status) ?></td>
                                     <td style="text-align:center">
                                         <div class="btn-group" role="group">
                                            <a href="<?php echo base_url('admin/news/list_news_by_id/'.$news->id); ?>" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Update</a>

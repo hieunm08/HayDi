@@ -31,7 +31,13 @@ class Tintuc extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
-    function changeStatusNews($id, $status)
+    function updateNews($data, $id)
+    {
+        $crop_data = elements(array('title','thumb','link','intro','content','status','group_id','updated_at'), $data);
+        $this->db->where('id', $id);
+        $this->db->update('news', $crop_data);
+    }  
+    function changeNewsStatus($id, $status)
 	{
         if ($status==0) {
             $query = $this->db->query("UPDATE news SET status = '1' WHERE id = '$id' ");
@@ -39,6 +45,14 @@ class Tintuc extends CI_Model
             $query = $this->db->query("UPDATE news SET status = '0' WHERE id = '$id' ");
         }
 	}
+    function showNewsStatus($status)
+    {
+        if ($status==0) {
+        echo '<span class="label label-default">'.lang('Inactive').'</span>';
+        }else{
+        echo '<span class="label label-success">'.lang('Active').'</span>';
+    }
+}
 
   
 }

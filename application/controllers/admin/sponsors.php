@@ -83,14 +83,38 @@ class Sponsors extends CI_Controller
             $data['title'] = 'Sponsor';
             $this->load->view('includes/template', $data);
         }
-        function block_news(){
-            $this->load->model('tintuc');
-            $id = $_GET['id'];
-            $status = $_GET['status'];
-            $this->session->set_flashdata('message', 'Suppliers successfully ');
-            $this->sponsor->changeStatusNews($id, $status);
-            redirect('admin/news', 'refresh');
-        }
+    function block_sponsor(){
+        $this->load->model('sponsor');
+        $id = $_GET['id'];
+        $status = $_GET['status'];
+        $this->session->set_flashdata('message', 'Suppliers successfully ');
+        $this->sponsor->changeSponsorStatus($id, $status);
+        redirect('admin/sponsors', 'refresh');
+    }
+    function list_sponsors_by_id($id)
+    {
+        $this->load->library('pagination');
+        $this->load->model('sponsor');
+
+        $data['sponsors'] = $this->sponsor->getSponsorById($id);
+
+        $data['links'] = $this->pagination->create_links();
+        $data['main_content'] = 'backend/sponsors/sponsor_info';
+        $data['title'] = 'Sponsor';
+        $this->load->view('includes/template', $data);
+    } 
+    function edit_sponsor()
+    {
+        /*echo ($this->input->post('date_start'));
+        die;*/
+        $this->load->library('pagination');
+        $this->load->model('sponsor');
+        $id = $this->uri->segment(4);
+        $data = $this->input->post();
+       
+        $this->sponsor->updateSponsor($data, $id);
+        redirect('admin/sponsors', 'refresh');
+    } 
 
 
     private function is_logged_in()

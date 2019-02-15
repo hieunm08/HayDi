@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Skills extends CI_Controller
+class Services extends CI_Controller
 {
     public $isCheck = false;
     var $API = "";
@@ -40,23 +40,23 @@ class Skills extends CI_Controller
              else {
                 $this->isCheck = false;
 //                $supplier_cd = $_POST['supplier_search'];
-                $this->list_skills();
+                $this->list_service();
             }
         } else {
             $this->isCheck = false;
-            $this->list_skills();
+            $this->list_service();
         }
     }
     
-    function list_skills()
+    function list_service()
         {
             $this->load->library('pagination');
-            $this->load->model('skill');
+            $this->load->model('service');
 
 
 
-            $config['base_url'] = base_url() . 'admin/skills/list_skills';
-            $config['total_rows'] = $this->skill->totalSkill();
+            $config['base_url'] = base_url() . 'admin/services/list_service';
+            $config['total_rows'] = $this->service->totalService();
             $config['per_page'] = 2;
             $config["uri_segment"] = 4;
             //pagination styling
@@ -73,37 +73,34 @@ class Skills extends CI_Controller
 
             $this->pagination->initialize($config);
             $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-            $data['skills'] = $this->skill->getAllSkill($config['per_page'], $page);
+            $data['service'] = $this->service->getAllService($config['per_page'], $page);
             $data['links'] = $this->pagination->create_links();
-            $data['main_content'] = 'backend/skills/skills';
-            $data['title'] = 'Skills';
+            $data['main_content'] = 'backend/service/service';
+            $data['title'] = 'Service';
             $this->load->view('includes/template', $data);
         }
-    function list_skills_by_id($id)
+    function list_service_by_id($id)
     {
         $this->load->library('pagination');
-        $this->load->model('skill');
+        $this->load->model('service');
 
-        $data['skills'] = $this->skill->getSkillById($id);
+        $data['service'] = $this->service->getServiceById($id);
 
         $data['links'] = $this->pagination->create_links();
-        $data['main_content'] = 'backend/skills/skill_info';
-        $data['title'] = 'Skills';
+        $data['main_content'] = 'backend/service/service_info';
+        $data['title'] = 'Service';
         $this->load->view('includes/template', $data);
     }  
-    function edit_skill()
+    function edit_service()
     {
-        /*$name = $_GET['name'];
-        $icon = $_GET['email'];
-        $desc = $_GET['sub_phone'];
-        $id = $_GET['id'];*/
+       
         $this->load->library('pagination');
-        $this->load->model('skill');
+        $this->load->model('service');
         $id = $this->uri->segment(4);
         $data = $this->input->post();
        
-        $this->skill->updateSkill($data, $id);
-        redirect('admin/skills', 'refresh');
+        $this->service->updateService($data, $id);
+        redirect('admin/services', 'refresh');
     }
    
     function delete_skill($id)

@@ -11,7 +11,7 @@
         <body>
             <div class="col-sm-10 col-md-11 main">
                 <div class="row" style="margin-right:0px;">
-                    <h1 class="page-header">Quảng cáo</h1>
+                    <h1 class="page-header">Kỹ năng</h1>
                 </div>
                 <div class="row" style="margin-right:0px;margin-bottom: 10px;width: 500px">
                     <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
@@ -87,38 +87,29 @@
                                 <tr>
                                     <th>STT</th>
                                     <th><?php echo lang('ID number'); ?></th>
-                                    <th>Loại</th>
-                                    <th>Thời gian bắt đầu</th>
-                                    <th>Thời gian kết thúc</th>
-                                    <th>Số tiền quảng cáo</th>
-                                    <th>Trạng thái</th>
-                                    <th>Chức năng</th>
+                                    <th>Tên</th>  
+                                    <th>Icon</th>
+                         			<th>Mô tả</th>
+                         			<th>Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $this->load->model('payment'); ?>
+                                <?php $this->load->model('service'); ?>
                                 <?php
                                 if ($this->pagination->per_page >= $this->pagination->total_rows) $i = 1;
                                 else $i = 1 + ($this->pagination->cur_page - 1) * $this->pagination->per_page;
-                                foreach ($sponsors as $sponsor):
+                                foreach ($service as $service):
                                 ?>
                                 <tr>
                                     <td><?php echo $i ?></td>
-                                    <td><?php echo $sponsor->sponsor_id ?></td>
-                                    <td><?php echo $sponsor->type ?></td>
-                                    <td><span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $sponsor->time_start))?>
-                                    <td><span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $sponsor->time_end))?>
-                                    <td><?php echo $sponsor->sponsor_money ?></td>
-                                    <td><?php echo $this->sponsor->showSponsorStatus($sponsor->status) ?></td>
+                                    <td><?php echo $service->id ?></td>
+                                    <td ><?php echo $service->name ?></td>
+                                    <td><?php echo $service->icon ?></td>
+                                    <td><?php echo $service->desc ?></td>
                                     <td style="text-align:center">
                                         <div class="btn-group" role="group">
-                                            <a href="<?php echo base_url('admin/sponsors/list_sponsors_by_id/'.$sponsor->sponsor_id); ?>" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Update</a>
-                                            <?php if ($sponsor->status==1) { ?>
-                                            <a href="<?php echo base_url("admin/sponsors/block_sponsor?id={$sponsor->id}&status={$sponsor->status}"); ?>" onclick="return confirm('Bạn có chắc chắn muốn HỦY quảng cáo này?')" class="btn btn-default btn-xs"><span class="icon-minus" style="color:red"></span> Hủy</a>
-                                            <?php }else{ ?>
-                                            <a href="<?php echo base_url("admin/sponsors/block_sponsor?id={$sponsor->id}&status={$sponsor->status}"); ?>" onclick="return confirm('Bạn có chắc chắn muốn KÍCH HOẠT quảng cáo này?')" class="btn btn-default btn-xs"><span class="icon-plus" style="color:blue"></span> Kích hoạt</a>
-                                            <?php } ?>
-                                            <a href="<?php echo base_url('admin/sponsors/delete_sponsor/' .$sponsor->id); ?>" onclick="return confirm('Bạn có chắc chắn muốn XÓA quảng cáo này?')" class="btn btn-default btn-xs"><span class="icon-cancel-2" style="color:red"></span> Delete</a>
+                                            <a href="<?php echo base_url('admin/services/list_service_by_id/'.$service->id); ?>" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Update</a>
+                                            <a href="<?php echo base_url('admin/services/delete_service/' .$service->id); ?>" onclick="return confirm('Bạn có chắc chắn muốn XÓA quảng cáo này?')" class="btn btn-default btn-xs"><span class="icon-cancel-2" style="color:red"></span> Delete</a>
                                         </div>
                                     </td>
                             <?php $i++; endforeach; ?>

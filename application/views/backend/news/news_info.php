@@ -12,21 +12,21 @@
 			<div class="form-group">
 				<label for="customer"> Mã </label>
 				<input type="text" disabled class="form-control" name="id" value="<?php echo ( $news->id ) ?>">
-				<?php echo form_error('customer'); ?>
+				<?php echo form_error('customer'); ?>	
 			</div>
 			<div class="form-group">
 				<label for="item_type"> Tiêu đề</label>
-				<input type="text" class="form-control" name="name" value="<?php echo ( $news->title ) ?>">
+				<input type="text" class="form-control" name="title" value="<?php echo ( $news->title ) ?>">
 				<?php echo form_error('customer'); ?>
 			</div>
 			<div class="form-group">
 				<label for="customer">Ảnh đại diện</label>
-				<input type="text"   class="form-control" name="icon" value="<?php echo ( $news->thumb ) ?>">
+				<input type="text"   class="form-control" name="thumb" value="<?php echo ( $news->thumb ) ?>">
 				<?php echo form_error('customer'); ?>
 			</div>
 			<div class="form-group">
 				<label for="customer"> Đường dẫn </label>
-				<input type="textarea" class="form-control" name="desc" value="<?php echo ( $news->link ) ?>">
+				<input type="textarea" class="form-control" name="link" value="<?php echo ( $news->link ) ?>">
 				<?php echo form_error('customer'); ?>
 			</div>
 			<div class="form-group">
@@ -59,7 +59,7 @@
 				</div>
 				<div class="form-group">
 					<label for="customer">Mã nhóm</label>
-					<input type="textarea" class="form-control" name="desc" value="<?php echo ( $news->group_id ) ?>">
+					<input type="textarea" class="form-control" name="group_id" value="<?php echo ( $news->group_id ) ?>">
 					<?php echo form_error('customer'); ?>
 				</div>
 				<div  class="form-group">
@@ -99,7 +99,6 @@
 				</script>
 			</div>
 		</div>
-		
 		
 		
 		<input type="hidden" name="id" value=" <?php echo ($news->id) ?>">

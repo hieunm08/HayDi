@@ -57,7 +57,7 @@ class News extends CI_Controller
 
             $config['base_url'] = base_url() . 'admin/news/list_news';
             $config['total_rows'] = $this->tintuc->totalNews();
-            $config['per_page'] = 10;
+            $config['per_page'] = 3;
             $config["uri_segment"] = 4;
             //pagination styling
             $config['num_tag_open'] = '<li>';
@@ -90,7 +90,34 @@ class News extends CI_Controller
         $data['main_content'] = 'backend/news/news_info';
         $data['title'] = 'Skills';
         $this->load->view('includes/template', $data);
-    }  
+    } 
+    function edit_news()
+    {
+       
+        $data['title']=$this->input->post('title');
+        $data['thumb']=$this->input->post('thumb');
+        $data['link']=$this->input->post('link');
+        $data['intro']=$this->input->post('intro');
+        $data['content']=$this->input->post('content');
+        $data['status']=$this->input->post('status');
+        $data['group_id']=$this->input->post('group_id');
+        $data['updated_at']=mdate('%Y-%m-%d %H:%i:%s', now());
+        $data['id']=$this->input->post('id');
+        $this->load->library('pagination');
+        $this->load->model('tintuc');
+        $id = $this->uri->segment(4);
+       
+        $this->tintuc->updateNews($data, $id);
+        redirect('admin/news', 'refresh');
+    }
+    function block_news(){
+        $this->load->model('tintuc');
+        $id = $_GET['id'];
+        $status = $_GET['status'];
+        $this->session->set_flashdata('message', 'Suppliers successfully ');
+        $this->tintuc->changeNewsStatus($id, $status);
+        redirect('admin/news', 'refresh');
+    }
 
     private function is_logged_in()
     {

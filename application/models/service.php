@@ -1,46 +1,46 @@
 <?php
 
-class Skill extends CI_Model
+class Service extends CI_Model
 {
 
     /**
-     * SkillModel constructor.
+     * ServiceModel constructor.
      */
 
-  	function totalSkill()
+  	function totalService()
     {
         $this->db->select('*');
-        $this->db->from('skill');
+        $this->db->from('service');
         $query = $this->db->get();
         return $query->num_rows();
     }
     //phân trang
-    function getAllSkill($limit, $start)
+    function getAllService($limit, $start)
     {
         $this->db->limit($limit, $start);
-        $this->db->from('skill');
+        $this->db->from('service');
         $this->db->select("*");
         $query = $this->db->get();  
         return $query->result();
     }
-    function getSkillById($id)
+    function getServiceById($id)
     {
         $this->db->select("*");
-        $this->db->from('skill');
+        $this->db->from('service');
         $this->db->where('id', $id);
         $query = $this->db->get();
         return $query->result();
     }
-    function updateSkill($data, $id)
+    function updateService($data, $id)
     {
         $crop_data = elements(array('name','icon','desc'), $data);
         $this->db->where('id', $id);
-        $this->db->update('skill', $crop_data);
+        $this->db->update('service', $crop_data);
     }
-    function deleteSkill($id)
+    function deleteService($id)
     {
         $this->db->where('id', $id);
-        $this->db->delete('skill');
+        $this->db->delete('service');
     }
   
 }
