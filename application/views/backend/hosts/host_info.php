@@ -109,21 +109,6 @@
           <input type="text" class="form-control" id="company_street" name="price_baby" value="<?php echo($host->price_baby) ?>" >
           <?php echo form_error('company_street'); ?>
         </div>
-        
-        <div class="form-group">
-          <label for="company_street">Đơn vị</label>
-          <input type="text" class="form-control" id="company_street" name="unit" value="<?php echo($host->unit) ?>" >
-          <?php echo form_error('company_street'); ?>
-        </div>
-        <div class="form-group">
-          <label for="company_street">Kiểu tính</label>
-          <input type="text" class="form-control" id="company_street" name="unit_per_type" value="<?php echo($host->unit_per_type) ?>" >
-          <?php echo form_error('company_street'); ?>
-        </div>
-        <div class="form-group">
-          <label for="company_street">price type</label>
-          <input disabled type="text" class="form-control" id="company_street" name="price_type" value="<?php echo($host->price_type) ?>" >
-        </div>
        	<div class="form-group">
           <label for="company_street">Ngày tạo</label>
           <input disabled type="text" class="form-control" id="company_street" name="created_at" value="<?php echo date('d/m/Y',strtotime( $host->created_at)) ?>" >

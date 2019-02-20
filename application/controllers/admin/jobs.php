@@ -36,8 +36,10 @@ class Jobs extends CI_Controller
                 $supplier_cd = $_POST['supplier_search'];
 //                $this->list_suppliers($supplier_cd);
                 $this->list_suppliers_by_search($supplier_cd);
-            }
-             else {
+            }elseif (isset($_POST['add'])) {
+                $data['main_content'] = 'backend/jobs/add_job';
+                $this->load->view('includes/template', $data);
+             }else {
                 $this->isCheck = false;
 //                $supplier_cd = $_POST['supplier_search'];
                 $this->list_jobs();
@@ -84,29 +86,35 @@ class Jobs extends CI_Controller
         $this->load->library('pagination');
         $this->load->model('job');
 
-        $data['jobs'] = $this->skill->getJobById($id);
+        $data['jobs'] = $this->job->getJobById($id);
 
         $data['links'] = $this->pagination->create_links();
-        $data['main_content'] = 'backend/skills/skill_info';
-        $data['title'] = 'Skills';
+        $data['main_content'] = 'backend/jobs/job_info';
+        $data['title'] = 'Jobs';
         $this->load->view('includes/template', $data);
     }  
-    function edit_skill()
+    function edit_job()
     {
-        /*$name = $_GET['name'];
-        $icon = $_GET['email'];
-        $desc = $_GET['sub_phone'];
-        $id = $_GET['id'];*/
         $this->load->library('pagination');
-        $this->load->model('skill');
+        $this->load->model('job');
         $id = $this->uri->segment(4);
         $data = $this->input->post();
        
-        $this->skill->updateSkill($data, $id);
-        redirect('admin/skills', 'refresh');
+        $this->job->updateJob($data, $id);
+        redirect('admin/jobs', 'refresh');
     }
+    function add_job()
+    {
+        $this->load->library('pagination');
+        $this->load->model('job');
+        $data = $this->input->post();
+       
+        $this->job->createJob($data);
+        redirect('admin/jobs', 'refresh');
+    }
+
    
-    function delete_skill($id)
+    function delete_job($id)
     {
         $this->load->model('skill');
         $this->session->set_flashdata('message', 'Suppliers successfully deleted');

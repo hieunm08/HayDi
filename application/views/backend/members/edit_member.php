@@ -14,12 +14,12 @@
                   <?php echo form_error('username'); ?>
                 </div>
                 <div class="form-group">
-                  <label for="password"><?php echo lang('Password')?></label>
+                  <label for="password">Mật khẩu</label>
                   <input type="password" class="form-control" name="password">
                   <?php echo form_error('password'); ?>
                 </div>
                 <div class="form-group">
-                  <label for="passagain"><?php echo lang('Repeat Password')?></label>
+                  <label for="passagain">Xác nhận mật khẩu</label>
                   <input type="password" class="form-control" name="passagain" >
                   <?php echo form_error('passagain'); ?>
                 </div>
@@ -40,14 +40,19 @@
                 </div>
                 <div class="form-group">
                   <label for="role"><?php echo lang('Role')?>: </label>
+                  <?php if($user->role == '1') {?>
                   <label class="radio-inline">
-                    <input type="radio" name="role" value="0" <?php echo set_radio('role', '0', $user->role == '0'); ?>> <?php echo lang('Administrator')?>
+                    <input type="radio" name="role" value="0" <?php echo set_radio('role','0', $user->role == '0'); ?>>Quản trị
                   </label>
                   <label class="radio-inline">
-                    <input type="radio" name="role" value="1" <?php echo set_radio('role', '1', $user->role == '1'); ?>> <?php echo lang('Employee')?>
+                    <input type="radio" checked name="role" value="1" <?php echo set_radio('role', '1', $user->role == '1'); ?>>Nhân viên
+                    <?php }else{ ?>
+                  <label class="radio-inline">
+                    <input type="radio" checked name="role" value="0" <?php echo set_radio('role','0', $user->role == '0'); ?>>Quản trị
                   </label>
                   <label class="radio-inline">
-                    <input type="radio" name="role" value="2" <?php echo set_radio('role', '2', $user->role == '2'); ?>> <?php echo lang('Reseller')?>
+                    <input type="radio"  name="role" value="1" <?php echo set_radio('role', '1', $user->role == '1'); ?>>Nhân viên
+                    <?php } ?>
                   </label>
                   <?php echo form_error('role'); ?>
                 </div>

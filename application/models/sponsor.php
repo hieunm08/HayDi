@@ -39,6 +39,14 @@ class Sponsor extends CI_Model
         $this->db->where('sponsor_id', $id);
         $this->db->update('sponsor', $crop_data);
     }
+    function createSponsor($data)
+    {
+        $data['time_start'] = date('Y-m-d', strtotime(element('date_start', $data))). ' ' .(element('time_start', $data));
+        $data['time_end'] = date('Y-m-d', strtotime(element('time_end', $data))). ' ' .(element('time_end', $data));
+        $crop_data = elements(array('type','sponsor_id','time_start','time_end','sponsor_money','status'), $data);
+        $add_sponsor = $this->db->insert_string('sponsor', $crop_data);
+        $this->db->query($add_sponsor);
+    }
     function showSponsorStatus($status)
     {
         if ($status==0) {

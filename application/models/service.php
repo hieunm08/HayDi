@@ -37,6 +37,12 @@ class Service extends CI_Model
         $this->db->where('id', $id);
         $this->db->update('service', $crop_data);
     }
+    function createService($data)
+    {
+        $crop_data = elements(array('name','icon','desc'), $data);
+        $add_service = $this->db->insert_string('service', $crop_data);
+        $this->db->query($add_service);
+    }
     function deleteService($id)
     {
         $this->db->where('id', $id);

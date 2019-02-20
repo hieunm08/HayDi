@@ -15,5 +15,7 @@ $lang['Administrator'] = "Administrator";
 $lang['Employee'] = "Employee";
 $lang['Reseller'] = "Reseller";
 $lang['Edit Member'] = "Edit Member";
+$lang['Active'] = "Active";
+$lang['Block'] = "Block";
 
 ?>

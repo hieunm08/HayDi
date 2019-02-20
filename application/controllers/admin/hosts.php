@@ -138,13 +138,8 @@ class Hosts extends CI_Controller
     function edit_host(){
        if(isset($_POST['edit'])){
         $id = $_POST['id'];
-            $data = array(
-                'id'       =>  $this->input->post('id'),
-                'name'      =>  $this->input->post('name')       
-            );
-            $update =  $this->curl->simple_put($this->API.'backend/hosts/20',$data , array(CURLOPT_BUFFERSIZE => 10)); 
-           echo ($update);
-           die();
+            $data = $this->input->post();
+            $update =  $this->curl->simple_put($this->API.'backend/hosts/'.$id,$data , array(CURLOPT_BUFFERSIZE => 10)); 
             if($update)
             {
                 $this->session->set_flashdata('hasil','Update Data Berhasil');

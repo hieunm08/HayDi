@@ -33,8 +33,10 @@ class Campaigns extends CI_Controller
                 $supplier_cd = $_POST['supplier_search'];
 //                $this->list_suppliers($supplier_cd);
                 $this->list_suppliers_by_search($supplier_cd);
-            }
-             else {
+            }elseif (isset($_POST['add'])) {
+                $data['main_content'] = 'backend/campaigns/add_campaign';
+                $this->load->view('includes/template', $data);
+             }else {
                 $this->isCheck = false;
 //                $supplier_cd = $_POST['supplier_search'];
                 $this->list_suppliers();
@@ -86,81 +88,62 @@ class Campaigns extends CI_Controller
         $id = $_GET['id'];
         $status = $_GET['status'];
         $this->session->set_flashdata('message', 'Successfully ');
-        $this->supplier->changeCampaignStatus($id, $status);
+        $this->campaign->changeCampaignStatus($id, $status);
         redirect('admin/campaigns', 'refresh');
     }
 
-    function list_suppliers_by_id($supplier_cd)
+    function list_campaign_by_id($id)
     {
         $this->load->library('pagination');
-        $this->load->model('supplier');
+        $this->load->model('campaign');
 
-        $data['suppliers'] = $this->supplier->show_suppliers($supplier_cd);
+        $data['campaigns'] = $this->campaign->showCampaign($id);
 
         $data['links'] = $this->pagination->create_links();
-        $data['main_content'] = 'backend/suppliers/suppliers_info';
-        $data['title'] = 'suppliers';
-       /* if ($_POST['supplier_search'] != null) {
-            
-        }else{*/
-           // redirect('admin/suppliers', 'refresh');
-
+        $data['main_content'] = 'backend/campaigns/campaign_info';
+        $data['title'] = 'Campaigns';
             $this->load->view('includes/template', $data);
         }        
 
-        //theo tat ca
-    function list_suppliers_by_search($supplier_cd)
-    {
-        $this->load->library('pagination');
-        $this->load->model('supplier');
-
-        $data['suppliers'] = $this->supplier->Find_Supplier($supplier_cd);
-
-        $data['links'] = $this->pagination->create_links();
-        $data['main_content'] = 'backend/suppliers/suppliers';
-        $data['title'] = 'suppliers';
-       /* if ($_POST['supplier_search'] != null) {
-            
-        }else{*/
-           // redirect('admin/suppliers', 'refresh');
-
-            $this->load->view('includes/template', $data);
-        }        
     
-    //theo tung item
- function list_suppliers_by_item()
+    
+    function edit_campaign()
     {
-        $this->isCheck = true;
+       
+        $data['name']=$this->input->post('name');
+        $data['images']=$this->input->post('images');
+        $data['link']=$this->input->post('link');
+        $data['desc']=$this->input->post('desc');
+        $data['status']=$this->input->post('status');
+        $data['is_sponsor']=$this->input->post('is_sponsor');
+        $data['updated_at']=mdate('%Y-%m-%d %H:%i:%s', now());
+        $data['type']=$this->input->post('type');
+        $data['id']=$this->input->post('id');
         $this->load->library('pagination');
-        $this->load->model('supplier');
-
-        $username = $_GET['username'];
-        $fullname = $_GET['fullname'];
-        $type = $_GET['type'];
-        $status = $_GET['status'];
-
-        $data['suppliers'] = $this->supplier->Find_Supplier_By_Item($username, $fullname, $type,  $status);
-
-        $data['links'] = $this->pagination->create_links();
-        $data['main_content'] = 'backend/suppliers/suppliers';
-        $data['title'] = 'suppliers';
-       /* if ($_POST['supplier_search'] != null) {
-            
-        }else{*/
-           // redirect('admin/suppliers', 'refresh');
-
-            $this->load->view('includes/template', $data);
-        }        
+        $this->load->model('campaign');
+        $id = $this->uri->segment(4);
+       
+        $this->campaign->updateCampaign($data, $id);
+        redirect('admin/campaigns', 'refresh');
+    }
 
     //them thong tin
-    function addSupplier($userName, $password, $fullname, $type, $status)
+    function add_campaign()
     {
-        //TODO chua hien thi len view con da them dc
+        $data['name']=$this->input->post('name');
+        $data['images']=$this->input->post('images');
+        $data['link']=$this->input->post('link');
+        $data['desc']=$this->input->post('desc');
+        $data['status']=$this->input->post('status');
+        $data['is_sponsor']=$this->input->post('is_sponsor');
+        $data['updated_at']=mdate('%Y-%m-%d %H:%i:%s', now());
+        $data['type']=$this->input->post('type');
         $this->load->library('pagination');
-        $this->load->model('supplier');
-
-        $data['supplier'] = $this->supplier->insert_infomation( $userName, $password, $fullname, (int)$type, $status);
-        redirect('admin/suppliers', 'refresh');
+        $this->load->model('campaign');
+      
+       
+        $this->campaign->createCampaign($data);
+        redirect('admin/campaigns', 'refresh');
     }
     //sua thogn tin
      function updateSupplier(){
@@ -190,7 +173,7 @@ class Campaigns extends CI_Controller
     {
         $this->load->model('campaign');
         $this->session->set_flashdata('message', 'Suppliers successfully deleted');
-        $this->supplier->deleteCampaign($id);
+        $this->campaign->deleteCampaign($id);
         redirect('admin/campaigns', 'refresh');
     }
 

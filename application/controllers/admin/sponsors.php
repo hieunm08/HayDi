@@ -12,6 +12,7 @@ class Sponsors extends CI_Controller
         $this->API="http://api.haydi.vn:3001/";
         $this->load->library('curl');
         $this->load->helper('language');
+         $this->load->library('form_validation');
         $this->lang->load('supplier', $this->session->userdata('language'));
     }
 
@@ -36,8 +37,10 @@ class Sponsors extends CI_Controller
                 $supplier_cd = $_POST['supplier_search'];
 //                $this->list_suppliers($supplier_cd);
                 $this->list_suppliers_by_search($supplier_cd);
-            }
-             else {
+            }elseif (isset($_POST['add'])) {
+                $data['main_content'] = 'backend/sponsors/add_sponsor';
+                $this->load->view('includes/template', $data);
+             }else {
                 $this->isCheck = false;
 //                $supplier_cd = $_POST['supplier_search'];
                 $this->list_payments();
@@ -115,7 +118,33 @@ class Sponsors extends CI_Controller
         $this->sponsor->updateSponsor($data, $id);
         redirect('admin/sponsors', 'refresh');
     } 
+    function add_sponsor()
+    {
+        $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+        $this->form_validation->set_rules('sponsor_id', 'Mã', 'trim|required|callback__citynull_check');
+        $this->form_validation->set_rules('type', 'Loại', 'trim|required|callback__citynull_check');
+        $this->form_validation->set_rules('date_start', 'Thời gian bắt đầu', 'trim|required');
+        $this->form_validation->set_rules('time_start', 'Thời gian bắt đầu', 'trim|required');
+        $this->form_validation->set_rules('date_end', 'Thời gian kết thúc', 'string|trim|required');
+        $this->form_validation->set_rules('time_end', 'Thời gian kết thúc', 'trim|required');
+        $this->form_validation->set_rules('sponsor_money', 'Số tiền quảng cáo', 'trim|required');
 
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->load->model('sponsor');
+
+            $data['main_content'] = 'backend/sponsors/add_sponsor';
+            $data['title'] = 'Sponsor';
+            $this->load->view('includes/template', $data);
+        }else{
+            $this->load->library('pagination');
+            $this->load->model('sponsor');
+            $data = $this->input->post();
+           
+            $this->sponsor->createSponsor($data);
+            redirect('admin/sponsors', 'refresh');
+        }
+    }
 
     private function is_logged_in()
     {

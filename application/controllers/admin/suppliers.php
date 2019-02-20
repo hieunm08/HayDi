@@ -8,7 +8,7 @@ class Suppliers extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->API="http://api.haydi.vn:3001/hosts?limit=10&lat=21http://api.haydi.vn:3001/hosts?limit=10&lat=21.02867&lon=105.75589&distance=200000km.02867&lon=105.75589&distance=200000km";
+        $this->API="http://api.haydi.vn:3001/";
         $this->is_logged_in();
         $this->load->helper('language');
         $this->load->library('email');
@@ -37,8 +37,11 @@ class Suppliers extends CI_Controller
                 $supplier_cd = $_POST['supplier_search'];
 //                $this->list_suppliers($supplier_cd);
                 $this->list_suppliers_by_search($supplier_cd);
-            }
-             else {
+            } elseif ($_POST['add'] != null) {
+                $data['links'] = $this->pagination->create_links();
+                $data['main_content'] = 'backend/skills/add_skill';
+                $this->load->view('includes/template', $data);
+             }else {
                 $this->isCheck = false;
 //                $supplier_cd = $_POST['supplier_search'];
                 $this->list_suppliers();
@@ -51,8 +54,11 @@ class Suppliers extends CI_Controller
     
     function list_suppliers()
     {
+        $supplier = json_decode($this->curl->simple_get($this->API.'guiders?limit=10&lat=21.02867&lon=105.75589&distance=200000km'),true);
+        $data = $host['data'];//chuyen thanhh mang  data
+        $list = $data['list'];
         $this->load->library('pagination');
-        $this->load->model('supplier');
+        $this->load->model('host');
 
         $config['base_url'] = base_url() . 'admin/suppliers/list_suppliers';
         $config['total_rows'] = $this->supplier->total_suppliers();

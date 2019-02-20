@@ -36,8 +36,10 @@ class Skills extends CI_Controller
                 $supplier_cd = $_POST['supplier_search'];
 //                $this->list_suppliers($supplier_cd);
                 $this->list_suppliers_by_search($supplier_cd);
-            }
-             else {
+            }elseif (isset($_POST['add'])) {
+                $data['main_content'] = 'backend/skills/add_skill';
+                $this->load->view('includes/template', $data);
+             }else {
                 $this->isCheck = false;
 //                $supplier_cd = $_POST['supplier_search'];
                 $this->list_skills();
@@ -93,16 +95,21 @@ class Skills extends CI_Controller
     }  
     function edit_skill()
     {
-        /*$name = $_GET['name'];
-        $icon = $_GET['email'];
-        $desc = $_GET['sub_phone'];
-        $id = $_GET['id'];*/
         $this->load->library('pagination');
         $this->load->model('skill');
         $id = $this->uri->segment(4);
         $data = $this->input->post();
        
         $this->skill->updateSkill($data, $id);
+        redirect('admin/skills', 'refresh');
+    }
+    function add_skill()
+    {
+        $this->load->library('pagination');
+        $this->load->model('skill');
+        $data = $this->input->post();
+       
+        $this->skill->createSkill($data);
         redirect('admin/skills', 'refresh');
     }
    

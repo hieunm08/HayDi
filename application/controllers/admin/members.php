@@ -119,7 +119,7 @@ class Members extends CI_Controller {
 		$id = $this->uri->segment(4);
 		$this->db->where('username', $this->input->post('username'));
 		$this->db->where('id !=', $id);
-		$user = $this->db->get('users');
+		$user = $this->db->get('users_admin');
 
 		if ($user->num_rows() > 0)
 		{

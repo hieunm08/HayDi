@@ -36,8 +36,10 @@ class Services extends CI_Controller
                 $supplier_cd = $_POST['supplier_search'];
 //                $this->list_suppliers($supplier_cd);
                 $this->list_suppliers_by_search($supplier_cd);
-            }
-             else {
+            }elseif (isset($_POST['add'])) {
+                $data['main_content'] = 'backend/service/add_service';
+                $this->load->view('includes/template', $data);
+             }else {
                 $this->isCheck = false;
 //                $supplier_cd = $_POST['supplier_search'];
                 $this->list_service();
@@ -100,6 +102,15 @@ class Services extends CI_Controller
         $data = $this->input->post();
        
         $this->service->updateService($data, $id);
+        redirect('admin/services', 'refresh');
+    }
+    function add_service()
+    {
+        $this->load->library('pagination');
+        $this->load->model('service');
+        $data = $this->input->post();
+       
+        $this->service->createService($data);
         redirect('admin/services', 'refresh');
     }
    

@@ -10,12 +10,12 @@
     </style>
 <body>
 <div class="col-sm-10 col-md-11 main">
-    <div class="row" style="margin-right:0px;">
-        <hr>
-    </div>
+     <div class="row" style="margin-right:0px;">
+                    <h1 class="page-header">Chiến dịch</h1>
+                </div>
     <div class="row" style="margin-right:0px;margin-bottom: 10px;width: 500px">
         <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
-            <form class="form-inline" method="POST" action="../admin/suppliers" style="float:left">
+            <form class="form-inline" method="POST" action="../admin/campaigns" style="float:left">
                 <div class="form-group">
                     <input type="text" class="form-control"  name="supplier_search"
                            placeholder="<?php echo lang('Supplier cd') ?>">
@@ -23,7 +23,7 @@
                             class="btn btn-primary"><?php echo lang('Search supplier'); ?>Search
                     </button>
 
-                    <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px;" type="button" id="btnadd"
+                    <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px;" name="add" type="submit" id="btnadd"
                             class="btn btn-advance"> Add
                     </button>
                 </div>
@@ -120,20 +120,18 @@
                         <td><?php echo $campaign->link ?></td>
                         <td><?php echo $campaign->desc ?></td>
                         <td><?php echo $this->campaign->getCampaignStatus($campaign->status) ?></td>
-                        <td><?php echo $campaign->updated_at ?></td>
+                         <td><span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $campaign->updated_at))?>
                         <td><?php echo $campaign->type ?></td>
 
                     
-                        <!--  // cái list_tickets là gì đấuy
-                         //hinh nhu no la cai danh sách thoi ông
-                         uh còn cái model kia ô muốn lấy gì thì select cái đó nhé nãy tôi tiện nên tôi lấy * luôn còn ông muốn lấy trường nào thì lấy trg đó vs lại nó có oder by đó -->
-
+                       
                        <td style="text-align:center">
                         <div class="btn-group" role="group">
+                            <a href="<?php echo base_url('admin/campaigns/list_campaign_by_id/'.$campaign->id); ?>" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Update</a>
                             <?php if($campaign->status == 0){?>
-                                <a href="<?php echo base_url('admin/campaigns/off_campaign/'.$campaign->id); ?>" class="btn btn-default btn-xs "><span class="icon-plus" style="color:blue"></span> ON</a>
+                                <a href="<?php echo base_url("admin/campaigns/off_campaign?id={$campaign->id}&status={$campaign->status}"); ?>" class="btn btn-default btn-xs "><span class="icon-plus" style="color:blue"></span> ON</a>
                             <?php }else{?>
-                                <a href="<?php echo base_url('admin/campaigns/off_campaign/'.$campaign->id); ?>" class="btn btn-default  btn-xs"><span class="icon-minus" style="color:red"></span> OFF</a>
+                                <a href="<?php echo base_url("admin/campaigns/off_campaign?id={$campaign->id}&status={$campaign->status}") ?>" class="btn btn-default  btn-xs"><span class="icon-minus" style="color:red"></span> OFF</a>
                             <?php }?>
                           <a href="<?php echo base_url('admin/campaigns/delete_campaign/'.$campaign->id); ?>" onclick="return confirm('Are you sure you want to delete this member?')" class="btn btn-default btn-xs"><span class="icon-cancel-2" style="color:red"></span> Delete</a>
 
@@ -149,89 +147,5 @@
     </div>
 </div>
 
-<div
-"form-2" id="dialog-form" style="display: none; " title="Create Supplier">
-<p class="validateTips">All form fields are required.</p>
-
-<form name="myform" method="POST" action="../admin/suppliers" onsubmit="return validateForm()">
-    <fieldset>
-
-        <div class="form-group">
-        <label style="width: 300px" for="userName">Username</label>
-        <input type="text" name="userName" id="userName" value="" class="form-control">
-        </div>
-
-        <div class="form-group">
-        <label style="width: 300px" for="FullName">Password</label>
-        <input type="password" name="password" id="FullName" value="" class="form-control">
-        </div>
-
-        <div class="form-group">
-        <label style="width: 300px" for="SupplierType">Full name</label>
-        <input type="text" name="fullname" id="SupplierType" value=""
-               class="form-control">
-        </div>
-
-        <div class="form-group">
-        <label style="width: 300px" for="Type">Type</label>
-        <select class="form-control" id="sel1" name="type">  
-            <option value="1">Guide</option>
-            <option value=0>Homestay</option>
-            <option value=2>Cars</option>
-        </select>
-        </div>
-
-        <input type="hidden" name="status" id="sup_profile_id" value="1"
-               class="text ui-widget-content ui-corner-all">
-        <!--            <submit></submit>-->
-
-        <button style="width:100px; margin-top:20px" type="submit" class="btn btn-success" value="submit"><span
-                    class="icon-checkmark"></span> <?php echo lang('Submit') ?></button>
-        <!-- Allow form submission with keyboard without duplicating the dialog button -->
-        <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-    </fieldset>
-</form>
-
-
-</div>
 
 </body>
-<script>
-
-
-    function validateForm() {
-        // Bước 1: Lấy giá trị của username và password
-
-        var userName = document.myform.username.value;
-        var FullName = document.myform.FullName.value;
-        var SupplierType = document.myform.SupplierType.value;
-        var active = document.myform.active.value;
-        var sup_profile_id = document.myform.sup_profile_id.value;
-
-        // Bước 2: Kiểm tra dữ liệu hợp lệ hay không
-        if (userName == '') {
-            alert('Bạn chưa nhập tên đăng nhập');
-        } else if (FullName == '') {
-            alert('Bạn chưa nhập tên');
-        } else if (SupplierType == '' || !isNaN(SupplierType)) {
-            alert("nhap khong hop le!");
-        } else if (active == '') {
-            alert("bạn chưa nhập dữ liệu");
-        } else if (sup_profile_id == '') {
-            alert("bạn chưa nhập dữ liệu");
-        }
-        return false;
-
-    }
-    $(document).ready(function () {
-        $("#btnadd").click(function () {
-
-            $('#dialog-form').dialog();
-
-            //TODO daon nay chu ok chua check dc
-            validateForm();
-        })
-    });
-
-
-</script>

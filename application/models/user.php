@@ -6,7 +6,7 @@ Class User extends CI_Model
 	   $this->db->where('username', $this->input->post('username'));
 	   $this->db->where('password', MD5($this->input->post('password')));
 	   $this->db->where('blocked', "0");
-	  // $this -> db -> limit(1);
+	
 
 	   $query = $this->db->get('users_admin');
 
@@ -16,6 +16,24 @@ Class User extends CI_Model
 	   }
 
 	 }
+	function showStatus($status){
+		if ($status==0) {
+           echo '<span class="label label-default">'.lang('Block').'</span>';
+        }else
+        { 
+          echo '<span class="label label-success">'.lang('Active').'</span>';
+    }
+	} 
+
+ 	function showRole($role)
+	{
+		if ($role==0) {
+			return "Quản trị";
+		}else{
+			return "Nhân viên";
+		}
+		
+	}
 	function show_users($limit, $start)
 	{
 		$this->db->limit($limit, $start);
@@ -61,7 +79,7 @@ Class User extends CI_Model
 	{
 		$this->db->set('blocked', "1");
 		$this->db->where('id', $id);
-     	$this->db->update('users');
+     	$this->db->update('users_admin');
 	}
 	function unblock_member($id)
 	{

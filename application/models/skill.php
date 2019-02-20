@@ -37,6 +37,12 @@ class Skill extends CI_Model
         $this->db->where('id', $id);
         $this->db->update('skill', $crop_data);
     }
+    function createSkill($data)
+    {
+        $crop_data = elements(array('name','icon','desc'), $data);
+        $add_skill = $this->db->insert_string('skill', $crop_data);
+        $this->db->query($add_skill);
+    }
     function deleteSkill($id)
     {
         $this->db->where('id', $id);

@@ -51,31 +51,7 @@ class Campaign extends CI_Model
         $query = $this->db->query();
     }
 
-    //insert data
-    function insert_infomation( $supplier_User, $supplier_Pass, $supplier_Fullname, $supplier_Type, $supplier_Status)
-    {
-        //dang loi
-        $query = $this->db->query("INSERT INTO supplier_mst(supplier_User, supplier_Pass, supplier_Fullname, supplier_Type, supplier_Status) 
-                    VALUES('$supplier_User','$supplier_Pass','$supplier_Fullname','$supplier_Type','$supplier_Status')");
-    }
-
-    function update_Supplier($supplier_User, $supplier_Pass, $supplier_Fullname, $supplier_Type, $supplier_Status, $id)
-    {
-           $query = $this->db->query("UPDATE supplier_mst SET supplier_User='$supplier_User', supplier_Pass='$supplier_Pass', supplier_Fullname='$supplier_Fullname', supplier_Type='$supplier_Type', supplier_Status='$supplier_Status' WHERE supplier_ID = '$id' ");
-          
-        }
-        //tim kiem tat ca
-    function Find_Supplier($supplier_search)
-    {
-           $query = $this->db->query("SELECT * FROM supplier_mst WHERE supplier_User LIKE '%$supplier_search%' OR supplier_Fullname LIKE '%$supplier_search%' OR supplier_Type LIKE '$supplier_search'  ");
-           return $query->result();
-    }
-        //tim kiem theo muc
-    function Find_Supplier_By_Item($supplier_u, $supplier_f, $supplier_t, $supplier_s)
-    {
-           $query = $this->db->query("SELECT * FROM supplier_mst WHERE supplier_User LIKE '%$supplier_u%' OR supplier_Fullname LIKE '%$supplier_f%' OR supplier_Type LIKE '$supplier_t' OR supplier_Status LIKE '$supplier_s'  ");
-           return $query->result();
-    }
+   
     function get_Campaign_Pagination($limit, $start)
     {
         $this->db->limit($limit, $start);
@@ -86,28 +62,7 @@ class Campaign extends CI_Model
     }
 
 
-    function check_all_id($id)
-    {
-//        $data = null;
-//        $query = $this->db->query("SELECT sup_id FROM supplier_mst WHERE `sup_id`='$id'");
-//        $data = $query->result();
-//        echo "dung123...". $data;
-
-        $this->db->select("supplier_ID");
-        $this->db->from('supplier_mst');
-        $this->db->where('supplier_ID', $id);
-        $query = $this->db->get();
-        $data= $query->result();
-
-        if ($data!=null){
-//            echo "co id nay..";
-            return true;
-        }else{
-//            echo "khong co id nay ...";
-            return false;
-        }
-    }
-
+   
      function total_Campaign()
     {
         $this->db->select('*');
@@ -116,17 +71,26 @@ class Campaign extends CI_Model
         return $query->num_rows();
     }
 
-    function show_suppliers( $id)
+    function showCampaign($id)
     {
-//        $this->db->limit($limit, $start);
         $this->db->select("*");
-        $this->db->from('users');
+        $this->db->from('campaign');
         $this->db->where('id', $id);
         $query = $this->db->get();
         return $query->result();
     }
-
-    //phuong thuc xoa
+    function updateCampaign($data, $id)
+    {
+        $crop_data = elements(array('name','images','link','desc','status','is_sponsor','updated_at', 'type'), $data);
+        $this->db->where('id', $id);
+        $this->db->update('campaign', $crop_data);
+    }  
+   function createCampaign($data)
+    {
+        $crop_data = elements(array('name','images','link','desc','status','is_sponsor','updated_at', 'type'), $data);
+        $add_campaign = $this->db->insert_string('campaign', $crop_data);
+        $this->db->query($add_campaign);
+    }
 
     function deleteCampaign($id)
     {

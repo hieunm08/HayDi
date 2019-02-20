@@ -33,9 +33,15 @@ class Job extends CI_Model
     }
     function updateJob($data, $id)
     {
-        $crop_data = elements(array('name','icon','desc'), $data);
+        $crop_data = elements(array('name'), $data);
         $this->db->where('id', $id);
         $this->db->update('jobs', $crop_data);
+    }
+    function createJob($data)
+    {
+        $crop_data = elements(array('name'), $data);
+        $add_job = $this->db->insert_string('jobs', $crop_data);
+        $this->db->query($add_job);
     }
     function deleteJob($id)
     {

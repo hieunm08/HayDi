@@ -11,18 +11,18 @@
         <body>
             <div class="col-sm-10 col-md-11 main">
                 <div class="row" style="margin-right:0px;">
-                    <h1 class="page-header">Kỹ năng</h1>
+                    <h1 class="page-header">Dịch vụ</h1>
                 </div>
                 <div class="row" style="margin-right:0px;margin-bottom: 10px;width: 500px">
                     <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
-                        <form class="form-inline" method="POST" action="../admin/suppliers" style="float:left">
+                        <form class="form-inline" method="POST" action="../admin/services" style="float:left">
                             <div class="form-group">
                                 <input type="text" class="form-control"  name="supplier_search"
                                 placeholder="<?php echo lang('Supplier cd') ?>">
                                 <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px;" type="submit"
                                 class="btn btn-primary"><?php echo lang('Search supplier'); ?>Search
                                 </button>
-                                <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px;" type="button" id="btnadd"
+                                <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px;" name="add" type="submit" id="btnadd"
                                 class="btn btn-advance"> Add
                                 </button>
                             </div>
