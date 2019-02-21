@@ -18,13 +18,13 @@
                  <label for="dateandtime">Ngày bắt đầu </label>
                  <div class="row">
                      <div class="col-md-6  date" id='datepicker_nbd'>
-                         <input type="text" disabled=""class="form-control" name="time_start" data-date-format="DD-MM-YYYY" value="<?php echo set_value('time_start', date('d-m-Y', strtotime($booking->time_start))); ?>">
+                         <input type="text" disabled=""class="form-control" name="time_start" data-date-format="DD-MM-YYYY" value="<?php echo set_value('start_day', date('d-m-Y', strtotime($booking->start_day))); ?>">
                          <span class="input-group-addon"><span class="icon-calendar"></span>
                           </span>
                      </div>
                      
                      <div class="col-md-6  date" id='timepicker_nbd'>
-                         <input type="text" disabled="" class="form-control" name="time_start" data-date-format="HH:mm" value="<?php echo set_value('time_start', date('H:i', strtotime($booking->time_start))); ?>">
+                         <input type="text" disabled="" class="form-control" name="time_start" data-date-format="HH:mm" value="<?php echo set_value('time_start', date('H:i', strtotime($booking->start_day))); ?>">
                          <span class="input-group-addon" ><span class="icon-clock"></span>
                           </span>
                          <?php echo form_error('time_start'); ?>
@@ -35,12 +35,12 @@
                  <label for="dateandtime">Ngày kết thúc</label>
                  <div class="row">
                      <div class="col-md-6  date" id='datepicker_nkt'>
-                         <input type="text" disabled=""class="form-control" name="time_end" data-date-format="DD-MM-YYYY" value="<?php echo set_value('from_start_date', date('d-m-Y', strtotime($booking->time_end))); ?>">
+                         <input type="text" disabled=""class="form-control" name="time_end" data-date-format="DD-MM-YYYY" value="<?php echo set_value('from_start_date', date('d-m-Y', strtotime($booking->end_day))); ?>">
                          <span class="input-group-addon"><span class="icon-calendar"></span>
                           </span>
                      </div>
                      <div class="col-md-6  date" id='timepicker_nkt'>
-                         <input type="text" disabled="" class="form-control" name="time_end" data-date-format="HH:mm" value="<?php echo set_value('from_start_time', date('H:i', strtotime($booking->time_end))); ?>">
+                         <input type="text" disabled="" class="form-control" name="time_end" data-date-format="HH:mm" value="<?php echo set_value('from_start_time', date('H:i', strtotime($booking->end_day))); ?>">
                          <span class="input-group-addon"><span class="icon-clock"></span>
                           </span>
                          <?php echo form_error('from_start_time'); ?>
@@ -49,12 +49,69 @@
              </div>
              <div class="form-group">
                  <label for="item_type"> Hướng Dẫn Viên</label>
-                 <input type="text" class="form-control" name="item_type" value="<?php echo ( $booking->item_type ) ?>">
+                 <input type="text" class="form-control" name="item_type" value="<?php echo ( $booking->guider_id ) ?>">
                  <?php echo form_error('customer'); ?>
              </div>
              <div class="form-group">
                  <label for="customer"> Mã Trip</label>
                  <input type="text"  disabled="" class="form-control" name="trip_id" value="<?php echo ( $booking->trip_id ) ?>">
+                 <?php echo form_error('customer'); ?>
+             </div>
+             <div class="form-group">
+                 <label for="customer">Giờ</label>
+                 <input type="text"  disabled="" class="form-control" name="trip_id" value="<?php echo ( $booking->trip_id ) ?>">
+                 <?php echo form_error('customer'); ?>
+             </div>
+             <div  class="form-group">
+                 <label for="dateandtime">Thời gian bắt đầu</label>
+                 <div class="row">
+                     <div class="col-md-6   date" id='datepicker_ngaytao'>
+                         <input type="text" disabled="" class="form-control" name="created_at" data-date-format="DD-MM-YYYY" value="<?php echo set_value('from_start_date', date('d-m-Y', strtotime($booking->time_start))); ?>">
+                         <span class="input-group-addon"><span class="icon-calendar"></span>
+                          </span>
+                         <?php echo form_error('from_start_date'); ?>
+                     </div>
+                     <script type="text/javascript">
+                         $(function () {
+                             $('#datepicker_ngaytao').datetimepicker({
+                                 pickTime: false,
+                                 useCurrent: false
+                             });
+                         });
+                     </script>
+                     <div class="col-md-6  date" id='timepicker_ngaytao'>
+                         <input type="text" disabled="" class="form-control" name="created_at" data-date-format="HH:mm" value="<?php echo set_value('from_start_time', date('H:i', strtotime($booking->time_start))); ?>">
+                         <span class="input-group-addon"><span class="icon-clock"></span>
+                          </span>
+                         <?php echo form_error('from_start_time'); ?>
+                     </div>
+                     <script type="text/javascript">
+                         $(function () {
+                             $('#timepicker_ngaytao').datetimepicker({
+                                 pickDate: false,
+                                 useCurrent: false,
+                                 icons: {
+                                     up: "icon-arrow-up",
+                                     down: "icon-arrow-down"
+                                 }
+                             });
+                         });
+                     </script>
+                 </div>
+             </div>
+             <div class="form-group">
+                 <label for="customer"> Vị Trí</label>
+                 <input type="text"  disabled="" class="form-control" name="note" value="<?php echo ( $booking->local_meet) ?>">
+                 <?php echo form_error('customer'); ?>
+             </div>
+             <div class="form-group">
+                 <label for="customer"> Lat</label>
+                 <input type="text"  disabled="" class="form-control" name="note" value="<?php echo ( $booking->lat) ?>">
+                 <?php echo form_error('customer'); ?>
+             </div>
+             <div class="form-group">
+                 <label for="customer"> Lon</label>
+                 <input type="text"  disabled="" class="form-control" name="note" value="<?php echo ( $booking->lon) ?>">
                  <?php echo form_error('customer'); ?>
              </div>
              <div class="form-group">
@@ -74,101 +131,32 @@
                  <label class="radio-inline">
                      <input type="radio" name="status" value="2" <?php echo set_radio('status', '2', $booking->status == '2'); ?>> <?php echo lang('Hủy bỏ')?>
                  </label>
+                  <label class="radio-inline">
+                     <input type="radio" name="status" value="3" <?php echo set_radio('status', '3', $booking->status == '3'); ?>> <?php echo lang('Xác nhận')?>
+                 </label>
+                  <label class="radio-inline">
+                     <input type="radio" name="status" value="4" <?php echo set_radio('status', '4', $booking->status == '4'); ?>> <?php echo lang('Hoàn thành')?>
+                 </label>
                  <?php echo form_error('role'); ?>
              </div>
-             <div  class="form-group">
-                 <label for="dateandtime">Ngày khởi tạo</label>
-                 <div class="row">
-                     <div class="col-md-6   date" id='datepicker_ngaytao'>
-                         <input type="text" disabled="" class="form-control" name="created_at" data-date-format="DD-MM-YYYY" value="<?php echo set_value('from_start_date', date('d-m-Y', strtotime($booking->created_at))); ?>">
-                         <span class="input-group-addon"><span class="icon-calendar"></span>
-                          </span>
-                         <?php echo form_error('from_start_date'); ?>
-                     </div>
-                     <script type="text/javascript">
-                         $(function () {
-                             $('#datepicker_ngaytao').datetimepicker({
-                                 pickTime: false,
-                                 useCurrent: false
-                             });
-                         });
-                     </script>
-                     <div class="col-md-6  date" id='timepicker_ngaytao'>
-                         <input type="text" disabled="" class="form-control" name="created_at" data-date-format="HH:mm" value="<?php echo set_value('from_start_time', date('H:i', strtotime($booking->created_at))); ?>">
-                         <span class="input-group-addon"><span class="icon-clock"></span>
-                          </span>
-                         <?php echo form_error('from_start_time'); ?>
-                     </div>
-                     <script type="text/javascript">
-                         $(function () {
-                             $('#timepicker_ngaytao').datetimepicker({
-                                 pickDate: false,
-                                 useCurrent: false,
-                                 icons: {
-                                     up: "icon-arrow-up",
-                                     down: "icon-arrow-down"
-                                 }
-                             });
-                         });
-                     </script>
-                 </div>
-             </div>
-             <div  class="form-group">
-                 <label for="dateandtime">Ngày cập nhật</label>
-                 <div class="row">
-                     <div class="col-md-6  date" id='datepicker_ncn'>
-                         <input type="text" class="form-control" name="updated_at" data-date-format="DD-MM-YYYY" value="<?php echo set_value('from_start_date', date('d-m-Y', strtotime($booking->updated_at))); ?>">
-                         <span class="input-group-addon"><span class="icon-calendar"></span>
-                          </span>
-                         <?php echo form_error('from_start_date'); ?>
-                     </div>
-                     <script type="text/javascript">
-                         $(function () {
-                             $('#datepicker_ncn').datetimepicker({
-                                 pickTime: false,
-                                 useCurrent: false
-                             });
-                         });
-                     </script>
-                     <div class="col-md-6  date" id='timepicker_ncn'>
-                         <input type="text"  class="form-control" name="updated_at" data-date-format="HH:mm" value="<?php echo set_value('from_start_time', date('H:i', strtotime($booking->updated_at))); ?>">
-                         <span class="input-group-addon"><span class="icon-clock"></span>
-                          </span>
-                         <?php echo form_error('from_start_time'); ?>
-                     </div>
-                     <script type="text/javascript">
-                         $(function () {
-                             $('#timepicker_ncn').datetimepicker({
-                                 pickDate: false,
-                                 useCurrent: false,
-                                 icons: {
-                                     up: "icon-arrow-up",
-                                     down: "icon-arrow-down"
-                                 }
-                             });
-                         });
-                     </script>
-                 </div>
+
                  <div class="form-group">
                  <label for="customer"> Tổng Tiền </label>
                  <input type="text" class="form-control" name="money" value="<?php echo ($booking->money) ?>">
                  <?php echo form_error('customer'); ?>
              </div>
-             <div class="form-group">
-                 <label for="customer"> Hủy Tiền </label>
-                 <input type="text" class="form-control" name="cancel_money" value="<?php echo ( $booking->cancel_money) ?>">
-                 <?php echo form_error('customer'); ?>
-             </div>
-             <div class="form-group">
-                 <label for="customer"> Mã Sử Dụng  </label>
-                 <input type="text" class="form-control" name="coupon_code" value="<?php echo ( $booking->coupon_code) ?>">
-                 <?php echo form_error('customer'); ?>
-             </div>
-             <div class="form-group">
-                 <label for="customer"> Số tiền được hoàn </label>
-                 <input type="text" class="form-control" name="coupon_value" value="<?php echo ( $booking->coupon_value ) ?>">
-                 <?php echo form_error('customer'); ?>
-             </div>
+            <div class="form-group">
+                 <label for="role"> Trạng Thái </label>
+                 <br>
+                 <label class="radio-inline">
+                     <input type="radio" name="paid_type" value="0" <?php echo set_radio('status','0', $booking->paid_type == '0'); ?>> <?php echo lang('Tiền mặt')?>
+                 </label>
+                 <label class="radio-inline">
+                     <input type="radio" name="paid_type" value="1" <?php echo set_radio('status', '1', $booking->paid_type == '1'); ?>> <?php echo lang('Online')?>
+                 </label>
+                 <label class="radio-inline">
+                     <input type="radio" name="paid_type" value="2" <?php echo set_radio('status', '2', $booking->paid_type == '2'); ?>> <?php echo lang('Chuyển khoản')?>
+                 </label>
              </div>
              
              <input type="hidden" name="id" value=" <?php echo ($booking->id) ?>">

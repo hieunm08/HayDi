@@ -27,7 +27,7 @@ Class Booking extends CI_Model
     function show_bookings($limit, $start)
     {
         $this->db->limit($limit, $start);
-        $this->db->from('orders');
+        $this->db->from('guider_orders');
         $this->db->order_by('id','desc');
         $this->db->select("*");
         $query = $this->db->get();
@@ -37,16 +37,14 @@ Class Booking extends CI_Model
 
     function show_bookings_id($book_id)
     {
-        $this->db->from('orders');
+        $this->db->from('guider_orders');
         $this->db->select("*");
         $this->db->where("id",$book_id);
         $query = $this->db->get();
         return $query->result();
     }
-    function search_bookings_id($book_cd1,$customer1)
-    {
-
-        $query = $this->db->query("SELECT * FROM booking where book_id = '$book_cd1' OR  customer like '%$customer1%'");
+    function search_bookings_id($item_type,$time_start,$time_end,$status,$money){
+        $query = $this->db->query("SELECT * FROM guider_orders where item_type = '$item_type' OR  time_start = '$time_start' OR  time_end = '$time_end' OR status = '$status' OR  money ='$money'");
      /*   $this->db->from('booking');
         $this->db->select("*");
         $this->db->where("book_id",$book_id);
@@ -58,10 +56,27 @@ Class Booking extends CI_Model
     static function status_order($status){
         if ($status == 0) {
             echo '<span class="label label-success">'.lang('Mới').'</span>';
-        }else if ($status == 1) {
+        } else if ($status == 1) {
             echo '<span class="label label-default">'.lang('Đã thanh toán').'</span>';
         }
-        else {  echo '<span class="label label-default">'.lang('Hủy bỏ').'</span>';
+         else if ($status == 2) {
+            echo '<span class="label label-default">'.lang('Hủy bỏ').'</span>';
+        }
+         else if ($status == 3) {
+            echo '<span class="label label-default">'.lang('Xác nhận').'</span>';
+        }
+        else {  echo '<span class="label label-default">'.lang('Hoàn thành').'</span>';
+        }
+    }
+
+static function paid_type($paid_type){
+        if ($paid_type == 0) {
+            echo '<span class="label label-success">'.lang('Tiền mặt').'</span>';
+        } else if ($paid_type == 1) {
+            echo '<span class="label label-success">'.lang('Online').'</span>';
+        }
+ 
+        else {  echo '<span class="label label-success">'.lang('Chuyển khoản').'</span>';
         }
     }
 
@@ -70,7 +85,7 @@ Class Booking extends CI_Model
 
 		$this->db->set('status', "2");
 		$this->db->where('id', $id);
-     	$this->db->update('orders');
+     	$this->db->update('guider_orders');
 /*		$query = $this->db->query("UPDATE trips set status='3' WHERE id='$id'") 
 */	}
 
@@ -79,14 +94,14 @@ function nocancel_trips($id)
 
 		$this->db->set('status', "0");
 		$this->db->where('id', $id);
-     	$this->db->update('orders');
+     	$this->db->update('guider_orders');
      }
 
     function update_booking($item_type,$note,$status,$updated_at,$money,$cancel_money,$coupon_code,$coupon_value,$id)
     {
 
     	$updated_at = date('Y-m-d H:i',strtotime($updated_at));
-		        $query = $this->db->query("UPDATE orders SET item_type='$item_type', note='$note', status='$status',updated_at='$updated_at', money='$money',cancel_money='$cancel_money', coupon_code='$coupon_code', coupon_value='$coupon_value'  WHERE id = '$id'");
+		        $query = $this->db->query("UPDATE guider_orders SET item_type='$item_type', note='$note', status='$status',updated_at='$updated_at', money='$money',cancel_money='$cancel_money', coupon_code='$coupon_code', coupon_value='$coupon_value'  WHERE id = '$id'");
 
     }
 

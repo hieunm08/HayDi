@@ -12,13 +12,21 @@ class Bookings extends CI_Controller {
 	function index()
     {
         if (!empty($_POST)) {
-            if ($_POST['booking_search'] != null) {
+            if (($_POST['item_type'] != null)) {
                 $this->isCheck = true;
-                $customer1 =$_POST['booking_search'];
-                $book_cd1 = $_POST['booking_search'];
+            $item_type = $_POST['item_type'];
+            $time_start = $_POST['time_start'];
+            $fdate= strtotime($time_start);
+            $tdate= date("d/m/Y",$fdate);
+            $time_end = $_POST['time_end'];
+              $fdate= strtotime($time_end);
+            $tdate= date("d/m/Y",$fdate);
+            $status = $_POST['status'];
+            $money = $_POST['money'];
 /*                $phone = $_POST['booking_search'];*/
 //                $this->list_suppliers($supplier_cd);
-                $this->search_booking_byID($book_cd1,$customer1);
+                $this->search_booking_byID($item_type,$time_start, $time_end,$status,$money);
+
             } else {
                 $this->isCheck = false;
 //                $supplier_cd = $_POST['supplier_search'];
@@ -104,17 +112,15 @@ class Bookings extends CI_Controller {
             $this->load->view('includes/template', $data);
         }
 
-        function search_booking_byID($book_cd,$customer1)
+        function search_booking_byID($item_type,$time_start, $time_end,$status,$money)
         {
-            
             $this->load->library('pagination');
             $this->load->model('booking');
-            $data['bookings'] = $this->booking->search_bookings_id($book_cd,$customer1);
+            $data['bookings'] = $this->booking->search_bookings_id($item_type,$time_start, $time_end,$status,$money);
             $data['links'] = $this->pagination->create_links();
-
             $data['main_content'] = 'backend/bookings/bookings';
-            /*        $data['title'] = 'Bookings';*/
-            $this->load->view('includes/template', $data);
+                    $data['title'] = 'Bookings';
+            $this->load->view('admin/bookings', $data);
         }
 
         function updatebooking()

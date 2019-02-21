@@ -38,7 +38,11 @@ $lang['Print invoice'] = "Print invoice";
 $lang['Go back to search'] = "Go back to search";
 $lang['Mới'] = "Mới";
 $lang['Từ chối'] = "Từ chối";
-$lang['Chấp nhận'] = "Chấp nhận";
+$lang['Đã thanh toán'] = "Đã thanh toán";
 $lang['Hủy bỏ'] = "Hủy bỏ";
-
+$lang['Xác nhận'] = "Xác nhận";
+$lang['Hoàn thành'] = "Hoàn thành";
+$lang['Tiền mặt'] = "Tiền mặt";
+$lang['Online'] = "Online";
+$lang['Chuyển khoản'] = "Chuyển khoản";
 ?>
