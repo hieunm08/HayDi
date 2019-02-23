@@ -11,18 +11,23 @@
         <body>
             <div class="col-sm-10 col-md-11 main">
                 <div class="row" style="margin-right:0px;">
-                    <h1 class="page-header">Tin tức</h1>
+                    <div class="col-sm-10 col-md-10" style="padding-left:0px;">
+                        <h1 class="page-header">News</h1>
+                    </div>
+                    <div class="col-sm-2 col-md-2">
+                       <a href="<?php echo base_url('admin/news/add_news'); ?>"><button type="button" class="btn btn-primary top_button"><span class="icon-plus-2"></span> Add News</button></a>
+                    </div>
                 </div>
                 <div class="row" style="margin-right:0px;margin-bottom: 10px;width: 500px">
                     <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
-                        <form class="form-inline" method="POST" action="../admin/suppliers" style="float:left">
+                        <form class="form-inline" method="POST" action="../admin/news" style="float:left">
                             <div class="form-group">
                                 <input type="text" class="form-control"  name="supplier_search"
                                 placeholder="<?php echo lang('Supplier cd') ?>">
                                 <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px;" type="submit"
                                 class="btn btn-primary"><?php echo lang('Search supplier'); ?>Search
                                 </button>
-                                <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px;" type="button" id="btnadd"
+                                <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px;"name="add" type="submit" id="btnadd"
                                 class="btn btn-advance"> Add
                                 </button>
                             </div>
@@ -91,7 +96,7 @@
                                     <th>Ảnh đại diện</th>
                                     <th>Đường dẫn</th>
                                     <th style="min-width: 200px;">Giới thiệu</th>
-                                    <th>mã thể loại</th>
+                                    <th>Loại tin</th>
                                     <th>Ngày cập nhật</th>
                                     <th>Trạng thái</th>
                                     <th>Chức năng</th>
@@ -104,14 +109,17 @@
                                 else $i = 1 + ($this->pagination->cur_page - 1) * $this->pagination->per_page;
                                 foreach ($news as $news):
                                 ?>
+                                <?php  $news_group = $this->tintuc->getNewsGroupById($news->group_id) ?>
                                 <tr>
                                     <td><?php echo $i ?></td>
                                     <td><?php echo $news->id ?></td>
-                                    <td ><?php echo $news->title ?></td>
+                                    <td><?php echo $news->title ?></td>
                                     <td><?php echo $news->thumb ?></td>
                                     <td><?php echo $news->link ?></td>
-                                    <td><?php echo $news->intro ?></td>   
-                                    <td><?php echo $news->group_id ?></td>
+                                    <td><?php echo $news->intro ?></td> 
+                                    <?php foreach ($news_group as $news_group ): ?>
+                                         <td><?php echo $news_group->name ?></td>
+                                    <?php endforeach ?>
                                     <td><span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $news->updated_at))?>
                                     <td><?php echo $this->tintuc->showNewsStatus($news->status) ?></td>
                                     <td style="text-align:center">

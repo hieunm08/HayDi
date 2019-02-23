@@ -3,16 +3,14 @@
 class Skills extends CI_Controller
 {
     public $isCheck = false;
-    var $API = "";
 
     function __construct()
     {
         parent::__construct();
         $this->is_logged_in();
-        $this->API="http://api.haydi.vn:3001/";
         $this->load->library('curl');
         $this->load->helper('language');
-        $this->lang->load('supplier', $this->session->userdata('language'));
+        $this->lang->load('vi', 'vietnamese');
     }
 
     function index()
@@ -105,12 +103,28 @@ class Skills extends CI_Controller
     }
     function add_skill()
     {
-        $this->load->library('pagination');
-        $this->load->model('skill');
-        $data = $this->input->post();
+        //$this->form_validation->set_message('required', $this->lang->line('required'));
+ 
+
+        $this->form_validation->set_rules('name', 'lang:username', 'string|trim|required');
+        $this->form_validation->set_rules('icon', 'Icon', 'trim|required');
+        $this->form_validation->set_rules('desc', 'Mô tả', 'string|trim|required');
        
-        $this->skill->createSkill($data);
-        redirect('admin/skills', 'refresh');
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->load->model('skill');
+
+            $data['main_content'] = 'backend/skills/add_skill';
+            $data['title'] = 'skill';
+            $this->load->view('includes/template', $data);
+        }else{
+            $this->load->library('pagination');
+            $this->load->model('skill');
+            $data = $this->input->post();
+           
+            $this->skill->createSkill($data);
+            redirect('admin/skills', 'refresh');
+        }
     }
    
     function delete_skill($id)

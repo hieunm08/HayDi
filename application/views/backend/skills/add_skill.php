@@ -9,19 +9,19 @@
              <?php $this-> load->model('skill'); ?>
     <?php echo form_open('admin/skills/add_skill') ?>
              <div class="form-group">
-                 <label for="item_type"> Tên</label>
+                 <label for="item_type">Tên User</label>
                  <input type="text" class="form-control" name="name" value="">
-                 <?php echo form_error('customer'); ?>
+                 <?php echo form_error('name'); ?>
              </div>
              <div class="form-group">
                  <label for="customer">Icon</label>
                  <input type="text"   class="form-control" name="icon" value="">
-                 <?php echo form_error('customer'); ?>
+                 <?php echo form_error('icon'); ?>
              </div>
              <div class="form-group">
-                 <label for="customer"> Ghi Chú </label>
+                 <label for="customer">Mô tả </label>
                  <input type="textarea" class="form-control" name="desc" value="">
-                 <?php echo form_error('customer'); ?>
+                 <?php echo form_error('desc'); ?>
              </div>
             
     

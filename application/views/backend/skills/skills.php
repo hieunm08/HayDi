@@ -11,7 +11,12 @@
         <body>
             <div class="col-sm-10 col-md-11 main">
                 <div class="row" style="margin-right:0px;">
-                    <h1 class="page-header">Kỹ năng</h1>
+                    <div class="col-sm-10 col-md-10" style="padding-left:0px;">
+                        <h1 class="page-header">Skills</h1>
+                    </div>
+                    <div class="col-sm-2 col-md-2">
+                       <a href="<?php echo base_url('admin/skills/add_skill'); ?>"><button type="button" class="btn btn-primary top_button"><span class="icon-plus-2"></span> Add Skill</button></a>
+                    </div>
                 </div>
                 <div class="row" style="margin-right:0px;margin-bottom: 10px;width: 500px">
                     <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
