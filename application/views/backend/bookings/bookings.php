@@ -33,15 +33,16 @@
              <div id="form-search1" >
               <form  class="form-inline" method="POST" action="../admin/bookings" style="float:left;" >
                   <div class="form-group" style="width: 500px:">
-                  <input style="margin:6px 6px 6px 0px; width: 20%;float: left" type="text" class="form-control"  id="item_type" name="item_type" placeholder=" Tên Hướng Dẫn Viên">
-                      <input style="margin:6px 6px 6px 0px;width: 12%;float: left" type="text" class="form-control" id="time_start" name="time_start" placeholder="Ngày tạo">
-                       <input style="margin:6px 6px 6px 0px;width: 12%;float: left" type="text" class="form-control" id="time_end" name="time_end" placeholder="Ngày kết thúc">
-                <select class="form-control" name="status" style="margin:6px 6px 6px 0px;width: 15%;float: left;placeholder="BookStatus">     <option>Chọn Trạng Thái</option>
-                    <option  value="0" >Mới</option>
+                  <input style="margin:6px 6px 6px 0px; width: 20%;float: left" type="text" class="form-control"  id="item_type" name="guider_id" placeholder=" Tên Hướng Dẫn Viên">
+                      <input style="margin:6px 6px 6px 0px;width: 12%;float: left" type="text" class="form-control" id="time_start"   data-date-format="DD-MM-YYYY"  name="start_day" placeholder="Ngày tạo">
+                       <input style="margin:6px 6px 6px 0px;width: 12%;float: left" type="text" class="form-control" id="time_end"  data-date-format="DD-MM-YYYY" name="end_day" placeholder="Ngày kết thúc">
+                <select class="form-control" name="status" style="margin:6px 6px 6px 0px;width: 15%;float: left;placeholder="BookStatus">
+                    <option>Chọn Trạng Thái</option>
+                    <option  value="0">Mới</option>
                     <option  value="1">Đã Thanh Toán </option>
                     <option  value="2">Hủy</option>
-                    <option  value="3">Hủy</option>
-
+                    <option  value="3">Xác nhận</option>
+                    <option  value="4">Hoàn thành</option>
                 </select>
                       <input style="margin:6px 6px 6px 0px;width: 10%;float: left" type="text" class="form-control"  name="money"
       placeholder="Tổng tiền ">

@@ -43,8 +43,8 @@ Class Booking extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
-    function search_bookings_id($item_type,$time_start,$time_end,$status,$money){
-        $query = $this->db->query("SELECT * FROM guider_orders where item_type = '$item_type' OR  time_start = '$time_start' OR  time_end = '$time_end' OR status = '$status' OR  money ='$money'");
+    function search_bookings_id($guider_id,$start_day,$end_day,$status,$money){
+        $query = $this->db->query("SELECT * FROM guider_orders where guider_id = '$guider_id' OR  start_day = '$start_day' OR  end_day = '$end_day' OR status = '$status' OR  money ='$money'");
      /*   $this->db->from('booking');
         $this->db->select("*");
         $this->db->where("book_id",$book_id);
@@ -97,11 +97,15 @@ function nocancel_trips($id)
      	$this->db->update('guider_orders');
      }
 
-    function update_booking($item_type,$note,$status,$updated_at,$money,$cancel_money,$coupon_code,$coupon_value,$id)
+    function update_booking($data,$id)
     {
+    	  $data['start_day'] = date('Y-m-d', strtotime(element('start_day', $data))). ' ' .(element('start_day', $data));
+        $data['end_day'] = date('Y-m-d', strtotime(element('end_day', $data))). ' ' .(element('end_day', $data));
 
-    	$updated_at = date('Y-m-d H:i',strtotime($updated_at));
-		        $query = $this->db->query("UPDATE guider_orders SET item_type='$item_type', note='$note', status='$status',updated_at='$updated_at', money='$money',cancel_money='$cancel_money', coupon_code='$coupon_code', coupon_value='$coupon_value'  WHERE id = '$id'");
+    	$crop_data = elements(array('start_day','end_day','guider_id','hours','note','status','money','paid_type'), $data);
+          $this->db->where('id',$id);
+$this->db->update('guider_orders',$crop_data);
+		       
 
     }
 

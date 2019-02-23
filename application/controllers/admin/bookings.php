@@ -12,20 +12,20 @@ class Bookings extends CI_Controller {
 	function index()
     {
         if (!empty($_POST)) {
-            if (($_POST['item_type'] != null)) {
+            if (($_POST['guider_id'] != null) || ($_POST['start_day'] != null) || ($_POST['end_day'] != null) || ($_POST['status'] != null) || ($_POST['money'] != null)) {
                 $this->isCheck = true;
-            $item_type = $_POST['item_type'];
-            $time_start = $_POST['time_start'];
-            $fdate= strtotime($time_start);
-            $tdate= date("d/m/Y",$fdate);
-            $time_end = $_POST['time_end'];
-              $fdate= strtotime($time_end);
-            $tdate= date("d/m/Y",$fdate);
+            $guider_id = $_POST['guider_id'];
+            $start_day = $_POST['start_day'];
+            $fdate= strtotime($start_day);
+            $tdate= date("Y/m/d",$fdate);
+            $end_day = $_POST['end_day'];   
+              $fdate= strtotime($end_day);
+            $tdate= date("Y/m/d",$fdate);
             $status = $_POST['status'];
             $money = $_POST['money'];
 /*                $phone = $_POST['booking_search'];*/
-//                $this->list_suppliers($supplier_cd);
-                $this->search_booking_byID($item_type,$time_start, $time_end,$status,$money);
+/*               $this->list_booking_byID($book_id);
+*/                $this->search_booking_byID($guider_id,$start_day, $end_day,$status,$money);
 
             } else {
                 $this->isCheck = false;
@@ -106,37 +106,38 @@ class Bookings extends CI_Controller {
             $this->load->model('booking');
             $data['bookings'] = $this->booking->show_bookings_id($book_id);
             $data['links'] = $this->pagination->create_links();
-
             $data['main_content'] = 'backend/bookings/update_booking';
             $data['title'] = 'Bookings';
-            $this->load->view('includes/template', $data);
+            $this->load->view('includes/template',$data);
         }
 
-        function search_booking_byID($item_type,$time_start, $time_end,$status,$money)
+        function search_booking_byID($guider_id,$start_day, $end_day,$status,$money)
         {
             $this->load->library('pagination');
             $this->load->model('booking');
-            $data['bookings'] = $this->booking->search_bookings_id($item_type,$time_start, $time_end,$status,$money);
+            $data['bookings'] = $this->booking->search_bookings_id($guider_id,$start_day, $end_day,$status,$money);
             $data['links'] = $this->pagination->create_links();
             $data['main_content'] = 'backend/bookings/bookings';
-                    $data['title'] = 'Bookings';
-            $this->load->view('admin/bookings', $data);
+             $data['title'] = 'Bookings';
+             $this->load->view('includes/template', $data);
         }
 
         function updatebooking()
         {
-            $item_type = $_GET['item_type'];
-            $note = $_GET['note'];
-            $status = $_GET['status'];
-            $updated_at = $_GET['updated_at'];
-            $money = $_GET['money'];
-            $cancel_money = $_GET['cancel_money'];
-            $coupon_code = $_GET['coupon_code'];
-            $coupon_value = $_GET['coupon_value'];
-            $id = $_GET['id'];
+/*            $data['start_day'] = date('Y-m-d G:i:s');
+*/            $data['start_day'] = $this->input->post('start_day');
+            $data['end_day'] = $this->input->post('end_day');
+            $data['guider_id'] = $this->input->post('guider_id');
+            $data['hours'] = $this->input->post('hours');
+            $data['note'] = $this->input->post('note');
+            $data['status'] = $this->input->post('status');
+            $data['money'] = $this->input->post('money');
+            $data['paid_type'] = $this->input->post('paid_type');
+            $data['id'] = $this->input->post('id');
             $this->load->library('pagination');
             $this->load->model('booking');
-            $data['booking'] = $this->booking->update_booking($item_type, $note, $status, $updated_at,$money,$cancel_money,$coupon_code,$coupon_value,$id);
+            $id = $this->uri->segment(4);
+            $this->booking->update_booking($data,$id);
             redirect('admin/bookings', 'refresh');
 
 
