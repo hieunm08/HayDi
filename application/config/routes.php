@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "index";
+$route['default_controller'] = "login";
 $route['booking/(:any)'] = "booking/$1";
 
 $route['admin'] = "login";

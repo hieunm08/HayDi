@@ -23,7 +23,7 @@
 			<?php $att = array('class' => 'form-signin');?>
 			
 			<?php echo form_open('login/validate_credentials', $att); ?>
-				<h1 class="form-signin-heading text-muted">Truly Hagiang</h1>
+				<h1 class="form-signin-heading text-muted">HayDi </h1>
 				<input type="text" class="form-control" name="username" placeholder="Username" required="" autofocus="">
 				<input type="password" class="form-control" name="password" placeholder="Password" required="">
 				<p style="color: #FFF;"><?php echo $error ?></p>
