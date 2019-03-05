@@ -99,6 +99,42 @@ class Bookings extends CI_Controller {
             $this->load->view('includes/template', $data);
         }
 
+        function list_booking_host()
+        {
+            $this->load->library('pagination');
+            $this->load->model('booking');
+
+            //dùng api
+           /* $sponsor = json_decode($this->curl->simple_get($this->API.'sponsors?type=host'));
+            $ojb=$sponsor->data;
+            $data['arr']= $ojb->list;
+          */
+
+            $config['base_url'] = base_url() . 'admin/sponsor/list_sponsors';
+            $config['total_rows'] = $this->booking->totalBookingHost();
+            $config['per_page'] = 2;
+            $config["uri_segment"] = 4;
+            //pagination styling
+            $config['num_tag_open'] = '<li>';
+            $config['num_tag_close'] = '</li>';
+            $config['cur_tag_open'] = '<li class="active"><a href"#">';
+            $config['cur_tag_close'] = '</a></li>';
+            $config['next_tag_open'] = '<li>';
+            $config['next_tag_close'] = '</li>';
+            $config['prev_tag_open'] = '<li>';
+            $config['prev_tag_close'] = '</li>';
+            $config['prev_link'] = '&laquo;';
+            $config['next_link'] = '&raquo;';
+
+            $this->pagination->initialize($config);
+            $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+            $data['bookings'] = $this->booking->getAllBookingHost($config['per_page'], $page);
+            $data['links'] = $this->pagination->create_links();
+            $data['main_content'] = 'backend/bookings/bookings_host';
+            $data['title'] = 'Host booking';
+            $this->load->view('includes/template', $data);
+        }
+
     
         function list_booking_byID($book_id)
         {
@@ -110,7 +146,40 @@ class Bookings extends CI_Controller {
             $data['title'] = 'Bookings';
             $this->load->view('includes/template',$data);
         }
+    function change_status()
+    {
+        $this->load->model('booking');
+        $id = $_GET['id'];
+        $status = $_GET['status'];
+        $this->session->set_flashdata('message', 'Suppliers successfully ');
+        $this->sponsor->changeBookingStatus($id, $status);
+        redirect('admin/bookings/list_booking_host', 'refresh');
+    }
 
+    function list_host_booking_by_id($id)
+    {
+        $this->load->library('pagination');
+        $this->load->model('booking');
+
+        $data['orders'] = $this->booking->getHostOrderById($id);
+
+        $data['links'] = $this->pagination->create_links();
+        $data['main_content'] = 'backend/bookings/host_booking_info';
+        $data['title'] = 'Sponsor';
+        $this->load->view('includes/template', $data);
+    } 
+    function edit_host_booking()
+    {
+        $data['status']=$this->input->post('status');
+        $data['updated_at']=mdate('%Y-%m-%d %H:%i:%s', now());
+        $data['id']=$this->input->post('id');
+        $this->load->library('pagination');
+        $this->load->model('booking');
+        $id = $this->uri->segment(4);
+       
+        $this->booking->updateHostBooking($data, $id);
+        redirect('admin/bookings/list_booking_host', 'refresh');
+    }
         function search_booking_byID($guider_id,$start_day, $end_day,$status,$money)
         {
             $this->load->library('pagination');

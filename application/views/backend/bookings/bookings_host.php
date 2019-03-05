@@ -22,7 +22,7 @@
         <div class="col-sm-10 col-md-11 main">
           <div class="row" >
             <div class="col-sm-10 col-md-10" style="padding-left:0px;">
-                <h1 class="page-header">Đơn hàng hướng dẫn viên</h1>
+                <h1 class="page-header">Đơn hàng Host</h1>
             </div>
               <button style="margin-right:10px; background:red" id="btn1"
                       class="btn btn-primary">Search Advance
@@ -61,22 +61,22 @@
                   <tr style="text-align: center;">
 <!--                     <th><?php echo $this->session->userdata['user_id']?> STT </th>
  -->                <th>STT </th>
-                    <th>Mã Order</th>
+                    <th>Mã đơn hàng</th>
+                    <th>Mã người dùng</th>
                     <th>Mã Trip </th>
-                    <th>Hướng dẫn viên</th>
+                    <th>Host</th>
                     <th>Ngày bắt đầu </th>
                     <th>Ngày kết thúc</th>
-                    <th>Giờ</th>
-                    <th>Thời gian bắt đầu</th>
-                    <th>Vị trị </th>
-                    <th>Lat</th>
-                    <th>Lon</th>
-                    <th>Ghi Chú</th>
-                    <th>Trạng thái</th>
-                    <th>Phương thức thanh toán</th>
-                    <th>Tổng Tiền</th>                                     
+                    <th>Người lớn</th>
+                    <th>Trẻ em</th>
+                    <th>Loại</th>
+                    <th>Tổng tiền</th>
+                    <th>Trạng thái thanh toán</th>
+                    <th>Phương thức thanh toán</th>  
+                 	<th>Trạng thái đơn hàng</th>  
+                    <th>Ngày tạo</th>                               
                     <th>Ngày cập nhật</th>
-                      <th width="12%" ><?php echo lang('Options');?></th>
+                      <th width="12%" >Chức năng</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -88,51 +88,37 @@
                     foreach($bookings as $booking):
                   ?>
                       <tr>
-                      <td><?php echo $i?></td>
-                      <td><?php echo $booking->id?></td>
-                      <td><?php echo $booking->guider_id?></td>
-                         <td><?php echo $booking->trip_id?></td>
-                          <!--                          <td><?php /*echo ($this->booking->get_amount($booking->from)) */?></td>
-                          -->
+	                  	<td><?php echo $i?></td>
+	                  	<td><?php echo $booking->id?></td>
+	                  	<td><?php echo $booking->user_id?></td>
+                 		<td><?php echo $booking->trip_id?></td>
+                 		<td><?php echo $booking->host_id?></td>
                         <td>
                         <span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $booking->start_day))?>
                         <div class="pull-right"><span class="icon-clock" style="color:red;"></span> <?php echo date('H:i', strtotime( $booking->start_day)) ?></div>
-                      </td>
-                      <td>
-<!--                        --><?php /*if($booking->returning == '2') { //1 = one way; 2 = returning ticket */?>
-                            <span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $booking->end_day))?>
-                          <div class="pull-right"><span class="icon-clock" style="color:red;"></span> <?php echo date('H:i', strtotime( $booking->end_day)) ?></div>
-<!--                        --><?php /*} */?>
-                      </td>  
-                         <td><?php echo $booking->hours?></td>
-                          <!-- <td>
-                        <span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $booking->time_start))?>
-                        <div class="pull-right"><span class="icon-clock" style="color:red;"></span> <?php echo date('H:i', strtotime( $booking->time_start)) ?></div>
-                      </td> -->
-                <td><?php echo $booking->time_start?></td>
-
-                    <td><?php echo $booking->local_meet?></td>
-                      <td><?php echo $booking->lat?></td>
-                      <td><?php echo $booking->lon?></td>
-                      <td><?php echo $booking->note?></td>
-                      <td><?php echo $this-> booking->status_order ($booking->status) ?> </td>
-                       <td><?php echo $this-> booking->paid_type ($booking->paid_type) ?></td>
-                        <td><?php echo $booking->money?></td>
-                        <td>
+                      	</td>
+                      	<td>
+	                        <span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $booking->end_day))?>
+                          	<div class="pull-right"><span class="icon-clock" style="color:red;"></span> <?php echo date('H:i', strtotime( $booking->end_day)) ?></div>
+                      	</td>  
+                     	<td><?php echo $booking->person_number?></td>
+                     	<td><?php echo $booking->baby_number?></td>
+                     	<td><?php echo $booking->host_type?></td>
+                     	<td><?php echo $booking->total_money?></td>
+                        <td><?php echo $this-> booking->status_order ($booking->payment_status) ?> </td>
+                       	<td><?php echo $this-> booking->paid_type ($booking->payment_type) ?></td>
+                       	<td><?php echo $booking->status?></td>
+             			<td>
                         <span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $booking->created_at))?>
-                        <div class="pull-right"><span class="icon-clock" style="color:red;"></span> <?php echo date('H:i', strtotime( $booking->created_at)) ?></div>
-                      </td>
-
-                        <td style="text-align:center">
-                        <div class="btn-group" role="group">
-                          <?php if($booking->status == 2){?>
-                                <a href="<?php echo base_url('admin/bookings/nocancel_trips/'.$booking->id); ?>" class="btn btn-default btn-xs active"><span class="icon-plus" style="color:blue"></span>Hoàn Hủy</a>
-                            <?php }else{?>
-                                <a href="<?php echo base_url('admin/bookings/cancel_trips/'.$booking->id); ?>" class="btn btn-default btn-xs"><span class="icon-minus" style="color:red"></span> Hủy </a>
-                            <?php }?>
-                          <a href="<?php echo base_url('admin/bookings/list_booking_byID/'. $booking->id) ?>" target="_blank" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Update</a>
-                        </div>
-                      </td>
+                      	</td>
+                      	<td>
+                        <span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $booking->updated_at))?>
+                      	</td>
+                      	<td style="text-align:center">
+                                        <div class="btn-group" role="group">
+                                            <a href="<?php echo base_url('admin/bookings/list_host_booking_by_id/'.$booking->id); ?>" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Update</a>
+                                        </div>
+                                    </td> 
                     </tr>
                   <?php $i++; endforeach; ?>
 

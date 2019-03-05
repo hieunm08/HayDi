@@ -1,28 +1,14 @@
 <?php
 Class Booking extends CI_Model
 {
-/*	function show_booking_status($booking_status)
-	{
-		if ($booking_status==0) {
-			return "Holding";
-		}elseif ($booking_status==1)
-		{ 
-			return "Paid";
-		}else return "Expired";
-	}*/
 
-	/*function show_bookings($limit, $start, $user_id = '')
-	{
-
-		$this->db->limit($limit, $start);
-		$this->db->order_by('created_time','desc');
-		$this->db->from('bookings', 'tours');
-	 	$this->db->join('tours', 'tours.tour_id = bookings.tour_id');
-		if($user_id != '')
-			$this->db->where('created_by', $user_id);
-	 	$query = $this->db->get();
-	 	return $query->result();
-	}*/
+	function totalBookingHost()
+    {
+        $this->db->select('*');
+        $this->db->from('order_host');
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
 
     function show_bookings($limit, $start)
     {
@@ -34,6 +20,35 @@ Class Booking extends CI_Model
         return $query->result();
 
     }
+    function changeBookingStatus($id, $status)
+	{
+            $query = $this->db->query("UPDATE order_host SET status = '$status' WHERE id = '$id' ");
+	}
+
+    function getAllBookingHost($limit, $start)
+    {
+        $this->db->limit($limit, $start);
+        $this->db->from('order_host');
+        $this->db->order_by('id','desc');
+        $this->db->select("*");
+        $query = $this->db->get();
+        return $query->result();
+
+    }
+    function getHostOrderById($id)
+    {
+        $this->db->select("*");
+        $this->db->from('order_host');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+ 	function updateHostBooking($data, $id)
+    {
+        $crop_data = elements(array('status','updated_at'), $data);
+        $this->db->where('id', $id);
+        $this->db->update('order_host', $crop_data);
+    }  
 
     function show_bookings_id($book_id)
     {
@@ -54,7 +69,7 @@ Class Booking extends CI_Model
 
 
     static function status_order($status){
-        if ($status == 0) {
+        if ($status == "new") {
             echo '<span class="label label-success">'.lang('Mới').'</span>';
         } else if ($status == 1) {
             echo '<span class="label label-default">'.lang('Đã thanh toán').'</span>';
