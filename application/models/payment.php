@@ -73,10 +73,20 @@ class Payment extends CI_Model
            $query = $this->db->query("SELECT * FROM supplier_mst WHERE supplier_User LIKE '%$supplier_u%' OR supplier_Fullname LIKE '%$supplier_f%' OR supplier_Type LIKE '$supplier_t' OR supplier_Status LIKE '$supplier_s'  ");
            return $query->result();
     }
-    function getAllPayment($limit, $start)
+    function getAllPaymentIn($limit, $start)
     {
         $this->db->limit($limit, $start);
-        $this->db->from('user_bank');
+        $this->db->from('payment_log');
+        $this->db->where('type', 'in');
+        $this->db->select("*");
+        $query = $this->db->get();  
+        return $query->result();
+    }
+    function getAllPaymentOut($limit, $start)
+    {
+        $this->db->limit($limit, $start);
+        $this->db->from('payment_log');
+        $this->db->where('type', 'out');
         $this->db->select("*");
         $query = $this->db->get();  
         return $query->result();
@@ -104,10 +114,19 @@ class Payment extends CI_Model
         }
     }
 
-     function totalPayment()
+    function totalPaymentIn()
     {
         $this->db->select('*');
-        $this->db->from('user_bank');
+        $this->db->from('payment_log');
+        $this->db->where('type', 'in');
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+    function totalPaymentOut()
+    {
+        $this->db->select('*');
+        $this->db->from('payment_log');
+        $this->db->where('type', 'out');
         $query = $this->db->get();
         return $query->num_rows();
     }

@@ -45,4 +45,6 @@ $lang['Hoàn thành'] = "Hoàn thành";
 $lang['Tiền mặt'] = "Tiền mặt";
 $lang['Online'] = "Online";
 $lang['Chuyển khoản'] = "Chuyển khoản";
+$lang['Chưa thanh toán'] = "Chưa thanh toán";
+$lang['Chưa thanh toán'] = "Chưa thanh toán";
 ?>

@@ -11,7 +11,7 @@
         <body>
             <div class="col-sm-10 col-md-11 main">
                 <div class="row" style="margin-right:0px;">
-                    <h1 class="page-header">Thu nhập</h1>
+                    <h1 class="page-header">Thanh toán</h1>
                 </div>
                 <div class="row" style="margin-right:0px;margin-bottom: 10px;width: 500px">
                     <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
@@ -86,10 +86,13 @@
                             <thead>
                                 <tr>
                                     <th>STT</th>
+                                    <th>Mã giao dịch</th>
                                     <th>Mã người dùng</th>
-                                    <th>Loại thu nhập</th>
-                                    <th>Tổng tiền</th>
+                                    <th>Yêu cầu từ</th>
                                     <th>Số dư khả dụng</th>
+                                    <th>Số tiền rút</th>
+                                    <th>Số dư còn lại</th>
+                                    <th>Trạng thái</th>
                                     <th>Chức năng</th>
                                 </tr>
                             </thead>
@@ -98,13 +101,16 @@
                                 <?php
                                 if ($this->pagination->per_page > $this->pagination->total_rows) $i = 1;
                                 else $i = 1 + ($this->pagination->cur_page - 1) * $this->pagination->per_page;
-                                foreach ($payment_in as $payment_in):
+                                foreach ($payment_out as $payment_out):
                                 ?>
                                 <tr>
                                     <td><?php echo $i ?></td>
-                                    <td><?php echo $payment_in->user_id ?></td>
-                                    <td><?php echo $payment_in->order_type ?></td>
-                                    <td><?php echo $payment_in->final_money ?></td>
+                                    <td><?php echo $payment_out->id ?></td>
+                                    <td><?php echo $payment_out->user_id ?></td>
+                                    <td><?php echo $payment_out->order_type ?></td>
+                                    <td><?php echo $payment_out->order_type ?></td>
+                                    <td><?php echo $payment_out->order_type ?></td>
+                                    <td><?php echo $payment_out->order_type ?></td>
     
                                 <td style="text-align:center">
                                    
@@ -216,57 +222,3 @@
     </form>
 </div>
 </body>
-<script>
-function validateForm() {
-// Bước 1: Lấy giá trị của username và password
-var userName = document.myform.username.value;
-var FullName = document.myform.FullName.value;
-var SupplierType = document.myform.SupplierType.value;
-var active = document.myform.active.value;
-var sup_profile_id = document.myform.sup_profile_id.value;
-// Bước 2: Kiểm tra dữ liệu hợp lệ hay không
-if (userName == '') {
-alert('Bạn chưa nhập tên đăng nhập');
-} else if (FullName == '') {
-alert('Bạn chưa nhập tên');
-} else if (SupplierType == '' || !isNaN(SupplierType)) {
-alert("nhap khong hop le!");
-} else if (active == '') {
-alert("bạn chưa nhập dữ liệu");
-} else if (sup_profile_id == '') {
-alert("bạn chưa nhập dữ liệu");
-}
-return false;
-}
-$(document).ready(function () {
-$("#btnadd").click(function () {
-$('#dialog-form').dialog();
-//TODO daon nay chu ok chua check dc
-validateForm();
-})
-});
-var availableTags = [
-"ActionScript",
-"AppleScript",
-"Asp",
-"BASIC",
-"C",
-"C++",
-"Clojure",
-"COBOL",
-"ColdFusion",
-"Erlang",
-"Fortran",
-"Groovy",
-"Haskell",
-"Java",
-"JavaScript",
-"Lisp",
-"Perl",
-"PHP",
-"Python",
-"Ruby",
-"Scala",
-"Scheme"
-];
-</script>

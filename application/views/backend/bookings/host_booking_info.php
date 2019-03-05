@@ -95,7 +95,7 @@
 			<label for="sel1">Trạng thái:</label>
 			<select class="form-control" id="sel1" name="status">
 				<option value="new">New</option>
-				<option value="cancle">Cancle</option>
+				<option value="cancel">Cancel</option>
 				<option value="reject">Reject</option>
 				<option value="accept">Accept</option>
 			</select>

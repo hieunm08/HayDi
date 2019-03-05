@@ -37,21 +37,21 @@ class Payments extends CI_Controller
              else {
                 $this->isCheck = false;
 //                $supplier_cd = $_POST['supplier_search'];
-                $this->list_payments();
+                $this->list_payment_in();
             }
         } else {
             $this->isCheck = false;
-            $this->list_payments();
+            $this->list_payment_in();
         }
     }
     
-    function list_payments()
+    function list_payment_in()
     {
         $this->load->library('pagination');
         $this->load->model('payment');
 
-        $config['base_url'] = base_url() . 'admin/payment/list_payments';
-        $config['total_rows'] = $this->payment->totalPayment();
+        $config['base_url'] = base_url() . 'admin/payments/list_payment_in';
+        $config['total_rows'] = $this->payment->totalPaymentIn();
         $config['per_page'] = 10;
         $config["uri_segment"] = 4;
         //pagination styling
@@ -68,9 +68,38 @@ class Payments extends CI_Controller
 
         $this->pagination->initialize($config);
         $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-            $data['payments'] = $this->payment->getAllPayment($config['per_page'], $page);
+            $data['payment_in'] = $this->payment->getAllPaymentIn($config['per_page'], $page);
         $data['links'] = $this->pagination->create_links();
         $data['main_content'] = 'backend/payments/payments';
+        $data['title'] = 'Payment';
+        $this->load->view('includes/template', $data);
+    }
+     function list_payment_out()
+    {
+        $this->load->library('pagination');
+        $this->load->model('payment');
+
+        $config['base_url'] = base_url() . 'admin/payments/list_payment_out';
+        $config['total_rows'] = $this->payment->totalPaymentOut();
+        $config['per_page'] = 10;
+        $config["uri_segment"] = 4;
+        //pagination styling
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><a href"#">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+        $config['prev_tag_open'] = '<li>';
+        $config['prev_tag_close'] = '</li>';
+        $config['prev_link'] = '&laquo;';
+        $config['next_link'] = '&raquo;';
+
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+            $data['payment_out'] = $this->payment->getAllPaymentOut($config['per_page'], $page);
+        $data['links'] = $this->pagination->create_links();
+        $data['main_content'] = 'backend/payments/payment_out';
         $data['title'] = 'Payment';
         $this->load->view('includes/template', $data);
     }

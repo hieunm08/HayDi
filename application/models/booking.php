@@ -68,19 +68,26 @@ Class Booking extends CI_Model
     }
 
 
-    static function status_order($status){
+    static function status_payment($status){
+        if ($status == "paid") {
+            echo '<span class="label label-success">'.lang('Đã thanh toán').'</span>';
+        }else 
+    	{  
+    		echo '<span class="label label-default">'.lang('Chưa thanh toán').'</span>';
+        }
+    }
+    function status_order($status){
         if ($status == "new") {
             echo '<span class="label label-success">'.lang('Mới').'</span>';
-        } else if ($status == 1) {
-            echo '<span class="label label-default">'.lang('Đã thanh toán').'</span>';
-        }
-         else if ($status == 2) {
-            echo '<span class="label label-default">'.lang('Hủy bỏ').'</span>';
-        }
-         else if ($status == 3) {
-            echo '<span class="label label-default">'.lang('Xác nhận').'</span>';
-        }
-        else {  echo '<span class="label label-default">'.lang('Hoàn thành').'</span>';
+        }else if($status == "cancel") 
+        {
+        	echo '<span class="label label-default">'.lang('Hủy bỏ').'</span>';
+        }else if($status == "reject") 
+        {
+        	echo '<span class="label label-default">'.lang('Từ chối').'</span>';
+        }else
+    	{  
+    		echo '<span class="label label-success">'.lang('Xác nhận').'</span>';
         }
     }
 

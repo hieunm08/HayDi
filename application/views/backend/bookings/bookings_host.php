@@ -105,9 +105,9 @@
                      	<td><?php echo $booking->baby_number?></td>
                      	<td><?php echo $booking->host_type?></td>
                      	<td><?php echo $booking->total_money?></td>
-                        <td><?php echo $this-> booking->status_order ($booking->payment_status) ?> </td>
-                       	<td><?php echo $this-> booking->paid_type ($booking->payment_type) ?></td>
-                       	<td><?php echo $booking->status?></td>
+                        <td><?php echo $this->booking->status_payment($booking->payment_status) ?> </td>
+                       	<td><?php echo $this->booking->paid_type ($booking->payment_type) ?></td>
+                       	<td><?php echo $this->booking->status_order($booking->status)?></td>
              			<td>
                         <span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $booking->created_at))?>
                       	</td>

@@ -7,21 +7,17 @@ $this->lang->load('navigation', $this->session->userdata('language'));
 <?php if ($this->session->userdata['role'] == 0) { //ADMINISTATOR ?>
  <div class="col-sm-2 col-md-1 sidebar">
           <ul class="nav nav-sidebar">
-
             <li>
-
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo" class="collapsed" aria-expanded="false"><i class="fa fa-fw fa-arrows-v"></i> Đơn hàng <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo" class="collapse" aria-expanded="false" style="height: 0px;">
-                            <li>
-                                <a href="<?php echo base_url() ?>admin/bookings">Đơn hàng HDV</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo base_url() ?>admin/bookings/list_booking_host">Đơn hàng host</a>
-                            </li>
-                        </ul>
-                    </li>
-
-
+              <a href="javascript:;" data-toggle="collapse" data-target="#order" class="collapsed" aria-expanded="false"><i class="fa fa-fw fa-arrows-v"></i> Đơn hàng <i class="fa fa-fw fa-caret-down"></i></a>
+              <ul id="order" class="collapse" aria-expanded="false" style="height: 0px;">
+                <li>
+                  <a href="<?php echo base_url() ?>admin/bookings">Đơn hàng HDV</a>
+                </li>
+                <li>
+                  <a href="<?php echo base_url() ?>admin/bookings/list_booking_host">Đơn hàng host</a>
+                </li>
+              </ul>
+            </li>
             <li <?php if ($page == "members"){ echo "class='active'";} ?>>
               <a href="<?php echo base_url() ?>admin/members">
                 <div class="nav-icon"><span class="icon-user-3"></span></div>
@@ -46,11 +42,16 @@ $this->lang->load('navigation', $this->session->userdata('language'));
 
 
 
-            <li <?php if ($page == "payments"){ echo "class='active'";} ?>>
-              <a href="<?php echo base_url() ?>admin/payments">
-                <div class="nav-icon"><span class="icon-briefcase"></span></div>
-                <div class="nav-title">Payments</div>
-              </a>
+            <li>
+              <a href="javascript:;" data-toggle="collapse" data-target="#payment" class="collapsed" aria-expanded="false"><i class="fa fa-fw fa-arrows-v"></i>Thanh toán<i class="fa fa-fw fa-caret-down"></i></a>
+              <ul id="payment" class="collapse" aria-expanded="false" style="height: 0px;">
+                <li>
+                  <a href="<?php echo base_url() ?>admin/payments">Thu nhập</a>
+                </li>
+                <li>
+                  <a href="<?php echo base_url() ?>admin/payments/list_payment_out">Rút tiền</a>
+                </li>
+              </ul>
             </li>
 
 
