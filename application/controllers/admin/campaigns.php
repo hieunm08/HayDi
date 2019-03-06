@@ -16,11 +16,7 @@ class Campaigns extends CI_Controller
     {
         if (!empty($_POST)) {
 
-            if (isset($_POST['uploadclick'])) {
-                if (isset($_FILES['file'])) {
-                    $this->docFileExcel($_FILES['file']['tmp_name'], './folder/' . $_FILES['file']['name']);
-                }
-            } elseif (isset($_POST['userName'])) {
+            if (isset($_POST['userName'])) {
                 $userName = $_POST['userName'];
                 $password = $_POST['password'];
                 $fullname = $_POST['fullname'];
@@ -28,18 +24,22 @@ class Campaigns extends CI_Controller
                 $status = $_POST['status'];
                 $this->addSupplier($userName, $password, $fullname,  $type, $status);
 
-            } elseif ($_POST['supplier_search'] != null) {
+            } elseif  (($_POST['id'] != null) || ($_POST['name'] != null) || ($_POST['updated_at'] != null) || ($_POST['status'] != null)) {
                 $this->isCheck = true;
-                $supplier_cd = $_POST['supplier_search'];
-//                $this->list_suppliers($supplier_cd);
-                $this->list_suppliers_by_search($supplier_cd);
-            }elseif (isset($_POST['add'])) {
+             $id = $_POST['id'];
+            $name = $_POST['name'];
+             $updated_at = $_POST['updated_at'];
+            $fdate= strtotime($updated_at);
+            $tdate= date("Y/m/d",$fdate);
+            $status = $_POST['status'];
+                $this->search_Campaign($id,$name,$updated_at,$status);}
+          /*  }elseif (isset($_POST['add'])) {
                 $data['main_content'] = 'backend/campaigns/add_campaign';
                 $this->load->view('includes/template', $data);
-             }else {
+             }*/else {
                 $this->isCheck = false;
 //                $supplier_cd = $_POST['supplier_search'];
-                $this->list_suppliers();
+                $this->list_Campaigns();
             }
         } else {
             $this->isCheck = false;
@@ -106,7 +106,17 @@ class Campaigns extends CI_Controller
         }        
 
     
-    
+     function search_Campaign($id,$name,$updated_at,$status)
+        {
+            $this->load->library('pagination');
+            $this->load->model('campaign');
+            $data['campaigns'] = $this->campaign->search_campaign($id,$name,$updated_at,$status);
+            $data['links'] = $this->pagination->create_links();
+            $data['main_content'] = 'backend/campaigns/campaigns';
+             $data['title'] = 'Campaigns';
+             $this->load->view('includes/template', $data);
+        }
+
     function edit_campaign()
     {
        

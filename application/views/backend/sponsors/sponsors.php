@@ -8,7 +8,12 @@
         <link rel="stylesheet" href="dialog_css.css">
         <style>
         </style>
-        <body>
+ 
+ <script>
+     $(document).ready(function)(){
+        function load($data)
+}
+ </script>       <body>
             <div class="col-sm-10 col-md-11 main">
                 <div class="row" style="margin-right:0px;">
                     <div class="col-sm-10 col-md-10" style="padding-left:0px;">
@@ -19,64 +24,68 @@
                     </div>
                 </div>
                 <div class="row" style="margin-right:0px;margin-bottom: 10px;width: 500px">
-                    <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
-                        <form class="form-inline" method="POST" action="../admin/sponsors" style="float:left">
-                            <div class="form-group">
+                    <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">               
+                                                <div class="form-group">
+        
+                            <div class="input-group">
+                                <span class="input-group-addon">Search</span>
                                 <input type="text" class="form-control"  name="supplier_search"
                                 placeholder="<?php echo lang('Supplier cd') ?>">
-                                <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px;" type="submit"
+                                <!-- <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px;" type="submit"
                                 class="btn btn-primary"><?php echo lang('Search supplier'); ?>Search
-                                </button>
-                                <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px;" name="add" type="submit" id="btnadd"
+                                </button> -->
+                            </div>
+                        </div>
+                        <br/>
+                           <!--      <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px;" name="add" type="submit" id="btnadd"
                                 class="btn btn-advance"> Add
                                 </button>
-                            </div>
-                        </form>
-                        <form method="post" class="col-sm-4 col-md-4" action="" enctype="multipart/form-data" style="float: left;width:500px;">
+                          <!--   </div> --> 
+                       <!--  <form method="post" class="col-sm-4 col-md-4" action="" enctype="multipart/form-data" style="float: left;width:500px;">
                             <input type="file" name="file" style="float: left;margin-top: 18px"/>
                             <button type="submit" name="uploadclick" class="btn btn-primary"
                             style="margin-right:5px;margin-bottom: 10px; margin-top:10px;float: left" value="Upload">Up File
                             </button>
-                        </form>
+                        </form> -->
                     </div>
                 </div>
-                <div class="row" style="margin-right:0px;margin-bottom: 10px;width: 500px;">
+              <!--   <div class="row" style="margin-right:0px;margin-bottom: 10px;width: 500px;">
                     <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
                         <form class="form-inline" method="GET" action="../admin/suppliers/list_suppliers_by_item" style="float:left" >
                             <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
                                 <div class="form-group" >
-                                    <!-- <label for="company_street">Username</label> -->
+                                    <!-- <label for="company_street">Username</label> 
                                     <input type="text" class="form-control"  name="username"
                                     placeholder=Username>
                                 </div>
                                 <div class="form-group" style="margin-left: 20px;">
-                                    <!-- <label for="company_street">Username</label> -->
+                                    <label for="company_street">Username</label> -
                                     <input type="text" class="form-control"  name="fullname"
                                     placeholder=Fullname>
                                     
                                 </div>
-                                
-                                <div class="form-group" style="margin-left: 20px;">
-                                    <!-- <label for="company_street">Username</label> -->
+                                 -->
+                               <!--  <div class="form-group" style="margin-left: 20px;">
+                                    <label for="company_street">Username</label> 
                                     <select class="form-control" id="lt" name="type">
                                         <option value=""></option>
                                         <option value="">Guide</option>
                                         <option value="">Homestay</option>
                                         <option value="">Cars</option>
-                                    </select>
+                                    </select> -->
                                     <!--  <input type="text" class="form-control" name="supplier_search"
-                                    placeholder=Type> -->
+                                    placeholder=Type> 
                                     
                                 </div>
                                 <div class="form-group" style="margin-left: 20px;">
-                                    <!-- <label for="company_street">Username</label> -->
+                                     <label for="company_street">Username</label> 
                                     <select class="form-control" id="sel1" name="status">
                                         <option value=""></option>
                                         <option value="1">Active</option>
                                         <option value="0">Inactive</option>
                                     </select>
-                                    <!--  <input type="text" class="form-control" name="status"
-                                    placeholder=Status> -->
+                                    <input type="text" class="form-control" name="status"
+                                    placeholder=Status> 
                                     
                                 </div>
                                 <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px; margin-left: 20px;" type="Submit" id="btnadd"
@@ -85,6 +94,9 @@
                         </form>
                     </div>
                 </div>
+                                            <div id="result"></div>
+  -->
+  <div id="result">
                 <div class="row">
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped">
@@ -169,4 +181,15 @@
             </fieldset>
         </form>
     </div>
+    </div>
 </body>
+</html>
+<script>
+    $(document).ready(function)(){
+        function load_data($query){
+            $.ajax(){
+                url:"<?php echo base_url();?> sponsor/search_fetch "
+            }
+        }
+}
+</script>

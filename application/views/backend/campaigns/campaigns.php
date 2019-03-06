@@ -17,74 +17,27 @@
         <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
             <form class="form-inline" method="POST" action="../admin/campaigns" style="float:left">
                 <div class="form-group">
-                    <input type="text" class="form-control"  name="supplier_search"
-                           placeholder="<?php echo lang('Supplier cd') ?>">
-                    <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px;" type="submit"
+                    <input style="margin:6px 6px 6px 0px; width: 20%;float: left" type="text" class="form-control"  name="id" placeholder=" ID Chiến dịch">
+                     <input style="margin:6px 6px 6px 0px; width: 20%;float: left" type="text" class="form-control"  name="name" placeholder=" Chiến dịch">
+                      <input style="margin:6px 6px 6px 0px;width: 12%;float: left" type="text" class="form-control" id="updated_at"   data-date-format="DD-MM-YYYY"  name="updated_at" placeholder="Ngày cập nhật">
+                    
+                <select class="form-control" name="status" style="margin:6px 6px 6px 0px;width: 14%;float: left" placeholder="Status">
+                    <option value="">Trạng Thái</option>
+                    <option  value="0">Inactive</option>
+                    <option  value="1">Active</option>
+                </select>
+                                <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px;" type="submit"
                             class="btn btn-primary"><?php echo lang('Search supplier'); ?>Search
                     </button>
-
-                    <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px;" name="add" type="submit" id="btnadd"
+                   <!--  <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px;" name="add" type="submit" id="btnadd"
                             class="btn btn-advance"> Add
-                    </button>
+                    </button> -->
                 </div>
             </form>
-
-            <form method="post" class="col-sm-4 col-md-4" action="" enctype="multipart/form-data" style="float: left;width:500px;">
-                <input type="file" name="file" style="float: left;margin-top: 18px"/>
-                <button type="submit" name="uploadclick" class="btn btn-primary"
-                        style="margin-right:5px;margin-bottom: 10px; margin-top:10px;float: left" value="Upload">Up File
-                </button>
-
-            </form>
         </div>
     </div>
 
-    <div class="row" style="margin-right:0px;margin-bottom: 10px;width: 500px">
-        <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
-
-            <form class="form-inline" method="GET" action="../admin/suppliers/list_suppliers_by_item" style="float:left" >
-                <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
-                    <div class="form-group" >
-                        <!-- <label for="company_street">Username</label> -->
-                        <input type="text" class="form-control"  name="username" 
-                               placeholder=Username>
-                    </div>
-                     <div class="form-group" style="margin-left: 20px;">
-                        <!-- <label for="company_street">Username</label> -->
-                        <input type="text" class="form-control"  name="fullname" 
-                               placeholder=Fullname>
-                       
-                    </div>
-             
-                     <div class="form-group" style="margin-left: 20px;">
-                        <!-- <label for="company_street">Username</label> -->
-                         <select class="form-control" id="lt" name="type">  
-                            <option value=""></option>
-                            <option value="">Guide</option>
-                            <option value="">Homestay</option>
-                            <option value="">Cars</option>
-                        </select>
-                       <!--  <input type="text" class="form-control" name="supplier_search" 
-                               placeholder=Type> -->
-                       
-                    </div>
-                     <div class="form-group" style="margin-left: 20px;">
-                        <!-- <label for="company_street">Username</label> -->
-                         <select class="form-control" id="sel1" name="status">
-                            <option value=""></option>
-                            <option value="1">Active</option>
-                            <option value="0">Inactive</option>
-                        </select>
-                       <!--  <input type="text" class="form-control" name="status" 
-                               placeholder=Status> -->
-                       
-                    </div>
-                    <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px; margin-left: 20px;" type="Submit" id="btnadd"
-                                class="btn btn-info"> Search</button>
-                  </div>
-            </form>
-        </div>
-    </div>
+    
 
     <div class="row">
         <div class="table-responsive">
@@ -112,7 +65,6 @@
                 foreach ($campaigns as $campaign):
                     ?>
                     <tr>
-
                         <td><?php echo $i ?></td>
                         <td><?php echo $campaign->id ?></td>
                         <td><?php echo $campaign->name ?></td>
@@ -122,9 +74,6 @@
                         <td><?php echo $this->campaign->getCampaignStatus($campaign->status) ?></td>
                          <td><span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $campaign->updated_at))?>
                         <td><?php echo $campaign->type ?></td>
-
-                    
-                       
                        <td style="text-align:center">
                         <div class="btn-group" role="group">
                             <a href="<?php echo base_url('admin/campaigns/list_campaign_by_id/'.$campaign->id); ?>" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Update</a>

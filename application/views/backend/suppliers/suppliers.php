@@ -21,6 +21,7 @@
                             <div class="form-group">
                                 <input type="text" class="form-control"  name="supplier_search"
                                 placeholder="<?php echo lang('Supplier cd') ?>">
+                                
                                 <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px;" type="submit"
                                 class="btn btn-primary"><?php echo lang('Search supplier'); ?>Search
                                 </button>

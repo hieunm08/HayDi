@@ -61,7 +61,15 @@ class Campaign extends CI_Model
         return $query->result();
     }
 
-
+ 
+  function search_campaign($id,$name,$updated_at,$status){
+        $query = $this->db->query("SELECT * FROM campaign where id = '$id' OR  name = '%$name%' OR  updated_at = '$updated_at' OR status = '$status'");
+     /*   $this->db->from('booking');
+        $this->db->select("*");
+        $this->db->where("book_id",$book_id);
+        $query = $this->db->get();*/
+        return $query->result();
+    }
    
      function total_Campaign()
     {

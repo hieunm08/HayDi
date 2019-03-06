@@ -55,10 +55,10 @@ class Suppliers extends CI_Controller
     function list_suppliers()
     {
         $supplier = json_decode($this->curl->simple_get($this->API.'guiders?limit=10&lat=21.02867&lon=105.75589&distance=200000km'),true);
-        $data = $host['data'];//chuyen thanhh mang  data
+        $data = $supplier['data'];//chuyen thanhh mang  data
         $list = $data['list'];
         $this->load->library('pagination');
-        $this->load->model('host');
+        $this->load->model('supplier');
 
         $config['base_url'] = base_url() . 'admin/suppliers/list_suppliers';
         $config['total_rows'] = $this->supplier->total_suppliers();
