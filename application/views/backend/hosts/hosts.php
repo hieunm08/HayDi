@@ -3,11 +3,7 @@
             <div class="col-sm-10 col-md-10" style="padding-left:0px;">
                 <h1 class="page-header">Hosts</h1>
             </div>
-              <button style="margin-right:10px; background:red" id="btn1" class="btn btn-primary">Search Advance
-              </button>
-          <!--  <div class="col-sm-2 col-md-2">
-               <a href=""><button type="button" class="btn btn-primary top_button"><span class="icon-plus-2"></span> </button></a>
-            </div>-->
+            
              <div id="form-search1">
               <form class="form-inline" method="POST" action="../admin/bookings" style="float:left;">
                   <div class="form-group" style="width: 500px:">
@@ -29,10 +25,10 @@
                 <div id="form-search2" style="display: block">
                 <h4> Search Detail</h4>
             <div class="form-2" style="float: left; padding-right: 40px;width: 100%; display: ">
-                      <input style="margin:6px 6px 6px 0px; width: 10%;float: left" type="text" class="form-control" id="supplier_search" name="booking_search" placeholder="Từ khóa">" placeholder="Tên">
-                      <input style="margin:6px 6px 6px 0px;width: 20%;float: left" type="text" class="form-control" id="supplier_search" name="booking_search" placeholder="Từ khóa">" placeholder="ID Hướng dẫn viên">
-                      <input style="margin:6px 6px 6px 0px;width: 10%;float: left" type="text" class="form-control" id="supplier_search" name="booking_search" placeholder="Từ khóa">" placeholder="Ngày tạo">
-                <input style="margin:6px 6px 6px 0px;width: 10%;float: left" type="text" class="form-control" id="booking_search" placeholder="Từ khóa">" name="supplier_search" placeholder="Số ngày ">
+                      <input style="margin:6px 6px 6px 0px; width: 10%;float: left" type="text" class="form-control" id="supplier_search" name="booking_search" placeholder="Từ khóa">
+                      <input style="margin:6px 6px 6px 0px;width: 20%;float: left" type="text" class="form-control" id="supplier_search" name="booking_search" placeholder="Từ khóa">
+                      <input style="margin:6px 6px 6px 0px;width: 10%;float: left" type="text" class="form-control" id="supplier_search" name="booking_search" placeholder="Từ khóa">
+                <input style="margin:6px 6px 6px 0px;width: 10%;float: left" type="text" class="form-control" id="booking_search" placeholder="Từ khóa">
 
                 <select class="form-control" name="BookStatus" style="margin:6px 6px 6px 0px;width: 13%;float: left;placeholder=" bookstatus"="">
                     <option value="0">Paid</option>

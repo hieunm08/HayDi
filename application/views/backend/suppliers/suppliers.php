@@ -38,52 +38,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="row" style="margin-right:0px;margin-bottom: 10px;width: 500px;">
-                    <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
-                        <form class="form-inline" method="GET" action="../admin/suppliers/list_suppliers_by_item" style="float:left" >
-                            <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
-                                <div class="form-group" >
-                                    <!-- <label for="company_street">Username</label> -->
-                                    <input type="text" class="form-control"  name="username"
-                                    placeholder=Username>
-                                </div>
-                                <div class="form-group" style="margin-left: 20px;">
-                                    <!-- <label for="company_street">Username</label> -->
-                                    <input type="text" class="form-control"  name="fullname"
-                                    placeholder=Fullname>
-                                    
-                                </div>
-                                
-                                <div class="form-group" style="margin-left: 20px;">
-                                    <!-- <label for="company_street">Username</label> -->
-                                    <select class="form-control" id="lt" name="type">
-                                        <option value=""></option>
-                                        <option value="">Guide</option>
-                                        <option value="">Homestay</option>
-                                        <option value="">Cars</option>
-                                    </select>
-                                    <!--  <input type="text" class="form-control" name="supplier_search"
-                                    placeholder=Type> -->
-                                    
-                                </div>
-                                <div class="form-group" style="margin-left: 20px;">
-                                    <!-- <label for="company_street">Username</label> -->
-                                    <select class="form-control" id="status" name="status">
-                                        <option value="-1"></option>
-                                        <?php foreach($suppliers as $supplier):?>
-                                        <option value="<?php echo $supplier->status ?>" ><?php $this->supplier->show_Supplier_Status($supplier->status) ?></option>
-                                        <?php endforeach; ?>    
-                                    </select>
-                                    <!--  <input type="text" class="form-control" name="status"
-                                    placeholder=Status> -->
-                                    
-                                </div>
-                                <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px; margin-left: 20px;" type="Submit" id="btnadd"
-                                class="btn btn-info"> Search</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+           
                 <div class="row">
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped">

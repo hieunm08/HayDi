@@ -62,7 +62,7 @@ class Suppliers extends CI_Controller
 
         $config['base_url'] = base_url() . 'admin/suppliers/list_suppliers';
         $config['total_rows'] = $this->supplier->total_suppliers();
-        $config['per_page'] = 10;
+        $config['per_page'] = 5;
         $config["uri_segment"] = 4;
         //pagination styling
         $config['num_tag_open'] = '<li>';
@@ -96,8 +96,6 @@ class Suppliers extends CI_Controller
         $status = $_GET['status'];
         $this->session->set_flashdata('message', 'Suppliers successfully ');
         $this->supplier->change_Supplier_Status($id, $status);
-        $this->load->library('../controllers/email.php');
-        $this->email->index();
         redirect('admin/suppliers', 'refresh');
     }
 
