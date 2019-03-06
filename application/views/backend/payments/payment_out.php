@@ -89,9 +89,7 @@
                                     <th>Mã giao dịch</th>
                                     <th>Mã người dùng</th>
                                     <th>Yêu cầu từ</th>
-                                    <th>Số dư khả dụng</th>
-                                    <th>Số tiền rút</th>
-                                    <th>Số dư còn lại</th>
+                                    <th>Tổng tiền thanh toán</th>
                                     <th>Trạng thái</th>
                                     <th>Chức năng</th>
                                 </tr>

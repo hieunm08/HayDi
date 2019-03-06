@@ -2,159 +2,116 @@
 $this->load->helper('language');
 $this->lang->load('navigation', $this->session->userdata('language'));
 ?>
-
-
 <?php if ($this->session->userdata['role'] == 0) { //ADMINISTATOR ?>
- <div class="col-sm-2 col-md-1 sidebar">
-          <ul class="nav nav-sidebar">
-            <li>
-              <a href="javascript:;" data-toggle="collapse" data-target="#order" class="collapsed" aria-expanded="false"><i class="fa fa-fw fa-arrows-v"></i> Đơn hàng <i class="fa fa-fw fa-caret-down"></i></a>
-              <ul id="order" class="collapse" aria-expanded="false" style="height: 0px;">
-                <li>
-                  <a href="<?php echo base_url() ?>admin/bookings">Đơn hàng HDV</a>
-                </li>
-                <li>
-                  <a href="<?php echo base_url() ?>admin/bookings/list_booking_host">Đơn hàng host</a>
-                </li>
-              </ul>
-            </li>
-            <li <?php if ($page == "members"){ echo "class='active'";} ?>>
-              <a href="<?php echo base_url() ?>admin/members">
-                <div class="nav-icon"><span class="icon-user-3"></span></div>
-                <div class="nav-title"><?php echo lang('Members');?></div>
-              </a>
-            </li>
-
-
-            <li <?php if ($page == "hosts"){ echo "class='active'";} ?>>
-              <a href="<?php echo base_url() ?>admin/hosts">
-                <div class="nav-icon"><span class="icon-location"></span></div>
-                <div class="nav-title">Hosts</div>
-              </a>
-            </li>
-
-               <li <?php if ($page == "bookings"){ echo "class='active'";} ?>>
-              <a href="<?php echo base_url() ?>admin/suppliers">
-                <div class="nav-icon"><span class="icon-files"></i></span></div>
-                <div class="nav-title"><?php echo lang('Suppliers');?></div>
-              </a>
-            </li>
-
-
-
-            <li>
-              <a href="javascript:;" data-toggle="collapse" data-target="#payment" class="collapsed" aria-expanded="false"><i class="fa fa-fw fa-arrows-v"></i>Thanh toán<i class="fa fa-fw fa-caret-down"></i></a>
-              <ul id="payment" class="collapse" aria-expanded="false" style="height: 0px;">
-                <li>
-                  <a href="<?php echo base_url() ?>admin/payments">Thu nhập</a>
-                </li>
-                <li>
-                  <a href="<?php echo base_url() ?>admin/payments/list_payment_out">Rút tiền</a>
-                </li>
-              </ul>
-            </li>
-
-
-            <li <?php if ($page == "statistics"){ echo "class='active'";} ?>>
-              <a href="<?php echo base_url() ?>admin/campaigns">
-                <div class="nav-icon"><span class="icon-stats"></span></div>
-                <div class="nav-title">Campaigns</div>
-              </a>
-            </li>
-            <li <?php if ($page == "statistics"){ echo "class='active'";} ?>>
-              <a href="<?php echo base_url() ?>admin/sponsors">
-                <div class="nav-icon"><span class="icon-cog"></span></div>
-                <div class="nav-title">Sponsors</div>
-              </a>
-            </li>
-              <li <?php if ($page == "statistics"){ echo "class='active'";} ?>>
-              <a href="<?php echo base_url() ?>admin/news">
-                <div class="nav-icon"><span class="icon-stats"></span></div>
-                <div class="nav-title">News</div>
-              </a>
-            </li>
-            <li <?php if ($page == "statistics"){ echo "class='active'";} ?>>
-              <a href="<?php echo base_url() ?>admin/skills">
-                <div class="nav-icon"><span class="icon-fire"></span></div>
-                <div class="nav-title">Skills</div>
-              </a>
-            </li>
-            <li <?php if ($page == "statistics"){ echo "class='active'";} ?>>
-              <a href="<?php echo base_url() ?>admin/jobs">
-                <div class="nav-icon"><span class="icon-stats"></span></div>
-                <div class="nav-title">Jobs</div>
-              </a>
-            </li>
-            <li <?php if ($page == "statistics"){ echo "class='active'";} ?>>
-              <a href="<?php echo base_url() ?>admin/services">
-                <div class="nav-icon"><span class="icon-globe"></span></div>
-                <div class="nav-title">Service</div>
-              </a>
-            </li>
-            <li <?php if ($page == "settings"){ echo "class='active'";} ?>>
-              <a href="<?php echo base_url() ?>admin/settings">
-                <div class="nav-icon"><span class="icon-tools"></span></div>
-                <div class="nav-title"><?php echo lang('Settings');?></div>
-              </a>
-            </li>
-          </ul>
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <ul class="nav">
+    <li class="nav-item nav-profile">
+      <div class="nav-link">
+        <div class="user-wrapper">
+          <div class="profile-image">
+            <img src="<?php echo base_url(); ?>images/faces/face1.jpg" alt="profile image">
+          </div>
+          <div class="text-wrapper">
+            <p class="profile-name">Richard V.Welsh</p>
+            <div>
+              <small class="designation text-muted">Manager</small>
+              <span class="status-indicator online"></span>
+            </div>
+          </div>
         </div>
-<?php } elseif ($this->session->userdata['role'] == 1) { //EMPLOYEE ?>
-  <div class="col-sm-2 col-md-1 sidebar">
-          <ul class="nav nav-sidebar">
-            <li <?php if ($page == "dashboard" || $page == ''){ echo "class='active'";} ?> >
-              <a href="<?php echo base_url() ?>admin/dashboard">
-                <div class="nav-icon"><span class="icon-home"></span></span></div>
-                <div class="nav-title"><?php echo lang('Dashboard');?></div>
-              </a>
-            </li>
-            <li <?php if ($page == "bookings"){ echo "class='active'";} ?>>
-              <a href="<?php echo base_url() ?>admin/bookings">
-                <div class="nav-icon"><span class="icon-files"></i></span></div>
-                <div class="nav-title"><?php echo lang('Bookings');?></div>
-              </a>
-            </li>
-            <li <?php if ($page == "destinations"){ echo "class='active'";} ?>>
-              <a href="<?php echo base_url() ?>admin/destinations">
-                <div class="nav-icon"><span class="icon-location"></span></div>
-                <div class="nav-title"><?php echo lang('Destinations');?></div>
-              </a>
-            </li>
-            <li <?php if ($page == "tours"){ echo "class='active'";} ?>>
-              <a href="<?php echo base_url() ?>admin/tours">
-                <div class="nav-icon"><span class="icon-calendar"></span></div>
-                <div class="nav-title"><?php echo lang('Tours');?></div>
-              </a>
-            </li>
-            <li <?php if ($page == "clients"){ echo "class='active'";} ?>>
-              <a href="<?php echo base_url() ?>admin/clients">
-                <div class="nav-icon"><span class="icon-user-2"></span></div>
-                <div class="nav-title"><?php echo lang('Clients');?></div>
-              </a>
-            </li>
-          </ul>
-        </div>
-<?php } elseif ($this->session->userdata['role'] == 2) { //RESELLER ?>
-  <div class="col-sm-2 col-md-1 sidebar">
-          <ul class="nav nav-sidebar">
-            <li <?php if ($page == "dashboard" || $page == ''){ echo "class='active'";} ?> >
-              <a href="<?php echo base_url() ?>admin/dashboard">
-                <div class="nav-icon"><span class="icon-home"></span></span></div>
-                <div class="nav-title"><?php echo lang('Dashboard');?></div>
-              </a>
-            </li>
-            <li <?php if ($page == "bookings"){ echo "class='active'";} ?>>
-              <a href="<?php echo base_url() ?>admin/bookings">
-                <div class="nav-icon"><span class="icon-files"></i></span></div>
-                <div class="nav-title"><?php echo lang('Bookings');?></div>
-              </a>
-            </li>
-            <li <?php if ($page == "clients"){ echo "class='active'";} ?>>
-              <a href="<?php echo base_url() ?>admin/clients">
-                <div class="nav-icon"><span class="icon-user-2"></span></div>
-                <div class="nav-title"><?php echo lang('Clients');?></div>
-              </a>
-            </li>
-          </ul>
-        </div>
+        <button class="btn btn-success btn-block">New Project
+        <i class="mdi mdi-plus"></i>
+        </button>
+      </div>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="<?php echo base_url() ?>admin/dashboard">
+        <i class="menu-icon mdi mdi-television"></i>
+        <span class="menu-title">Dashboard</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" href="#order" aria-expanded="false" aria-controls="ui-basic">
+        <i class="menu-icon mdi mdi-content-copy"></i>
+        <span class="menu-title">Đơn Hàng</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="order">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url() ?>admin/bookings">Hướng Dẫn Viên</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url() ?>admin/bookings/list_booking_host">Host</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" href="#payment" aria-expanded="false" aria-controls="ui-basic">
+        <i class="menu-icon mdi mdi-content-copy"></i>
+        <span class="menu-title">Thanh Toán</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="payment">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url() ?>admin/payments">Thu nhập</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url() ?>admin/payments/list_payment_out">Rút tiền</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="<?php echo base_url() ?>admin/suppliers">
+        <i class="menu-icon mdi mdi-chart-line"></i>
+        <span class="menu-title">Hướng Dẫn Viên</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="<?php echo base_url() ?>admin/hosts">
+        <i class="menu-icon mdi mdi-table"></i>
+        <span class="menu-title">Hosts</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="<?php echo base_url() ?>admin/members">
+        <i class="menu-icon mdi mdi-backup-restore"></i>
+        <span class="menu-title">Thành Viên</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" href="#setting" aria-expanded="false" aria-controls="ui-basic">
+        <i class="menu-icon mdi mdi-content-copy"></i>
+        <span class="menu-title">Thiết lập</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="setting">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url() ?>admin/campaigns">Chiến dịch</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url() ?>admin/jobs">Công việc</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url() ?>admin/news">Tin tức</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url() ?>admin/services">Dịch vụ host</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url() ?>admin/skills">Kĩ năng</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url() ?>admin/sponsors">Quảng cáo</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+   
+  </ul>
+</nav>
 <?php } ?>

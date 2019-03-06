@@ -13,7 +13,7 @@ Class Booking extends CI_Model
     function show_bookings($limit, $start)
     {
         $this->db->limit($limit, $start);
-        $this->db->from('guider_orders');
+        $this->db->from('order_guider');
         $this->db->order_by('id','desc');
         $this->db->select("*");
         $query = $this->db->get();

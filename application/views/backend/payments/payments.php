@@ -35,51 +35,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="row" style="margin-right:0px;margin-bottom: 10px;width: 500px;">
-                    <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
-                        <form class="form-inline" method="GET" action="../admin/suppliers/list_suppliers_by_item" style="float:left" >
-                            <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
-                                <div class="form-group" >
-                                    <!-- <label for="company_street">Username</label> -->
-                                    <input type="text" class="form-control"  name="username"
-                                    placeholder=Username>
-                                </div>
-                                <div class="form-group" style="margin-left: 20px;">
-                                    <!-- <label for="company_street">Username</label> -->
-                                    <input type="text" class="form-control"  name="fullname"
-                                    placeholder=Fullname>
-                                    
-                                </div>
-                                
-                                <div class="form-group" style="margin-left: 20px;">
-                                    <!-- <label for="company_street">Username</label> -->
-                                    <select class="form-control" id="lt" name="type">
-                                        <option value=""></option>
-                                        <option value="">Guide</option>
-                                        <option value="">Homestay</option>
-                                        <option value="">Cars</option>
-                                    </select>
-                                    <!--  <input type="text" class="form-control" name="supplier_search"
-                                    placeholder=Type> -->
-                                    
-                                </div>
-                                <div class="form-group" style="margin-left: 20px;">
-                                    <!-- <label for="company_street">Username</label> -->
-                                    <select class="form-control" id="sel1" name="status">
-                                        <option value=""></option>
-                                        <option value="1">Active</option>
-                                        <option value="0">Inactive</option>
-                                    </select>
-                                    <!--  <input type="text" class="form-control" name="status"
-                                    placeholder=Status> -->
-                                    
-                                </div>
-                                <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px; margin-left: 20px;" type="Submit" id="btnadd"
-                                class="btn btn-info"> Search</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+          
                 <div class="row">
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped">
@@ -89,7 +45,6 @@
                                     <th>Mã người dùng</th>
                                     <th>Loại thu nhập</th>
                                     <th>Tổng tiền</th>
-                                    <th>Số dư khả dụng</th>
                                     <th>Chức năng</th>
                                 </tr>
                             </thead>
@@ -117,7 +72,7 @@
         <ul class="pagination"><?php echo $links ?></ul>
     </div>
     <div class="row" style="margin-right:0px;">
-                    <h3 class="page-header">Lịch sử giao dịch</h3>
+                    <h3 class="page-header">Lịch sử thu nhập</h3>
                 </div>
     <div class="row">
                     <div class="table-responsive">

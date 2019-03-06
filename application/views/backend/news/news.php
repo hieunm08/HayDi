@@ -1,90 +1,33 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>jQuery UI Dialog - Modal form</title>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="dialog_css.css">
-        <style>
-        </style>
-        <body>
-            <div class="col-sm-10 col-md-11 main">
-                <div class="row" style="margin-right:0px;">
-                    <div class="col-sm-10 col-md-10" style="padding-left:0px;">
-                        <h1 class="page-header">News</h1>
-                    </div>
-                    <div class="col-sm-2 col-md-2">
-                       <a href="<?php echo base_url('admin/news/add_news'); ?>"><button type="button" class="btn btn-primary top_button"><span class="icon-plus-2"></span> Add News</button></a>
-                    </div>
-                </div>
-                <div class="row" style="margin-right:0px;margin-bottom: 10px;width: 500px">
-                    <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
-                        <form class="form-inline" method="POST" action="../admin/news" style="float:left">
-                            <div class="form-group">
-                                <input type="text" class="form-control"  name="supplier_search"
-                                placeholder="<?php echo lang('Supplier cd') ?>">
-                                <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px;" type="submit"
-                                class="btn btn-primary"><?php echo lang('Search supplier'); ?>Search
-                                </button>
-                                <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px;"name="add" type="submit" id="btnadd"
-                                class="btn btn-advance"> Add
-                                </button>
-                            </div>
-                        </form>
-                        <form method="post" class="col-sm-4 col-md-4" action="" enctype="multipart/form-data" style="float: left;width:500px;">
-                            <input type="file" name="file" style="float: left;margin-top: 18px"/>
-                            <button type="submit" name="uploadclick" class="btn btn-primary"
-                            style="margin-right:5px;margin-bottom: 10px; margin-top:10px;float: left" value="Upload">Up File
-                            </button>
-                        </form>
-                    </div>
-                </div>
-                <div class="row" style="margin-right:0px;margin-bottom: 10px;width: 500px;">
-                    <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
-                        <form class="form-inline" method="GET" action="../admin/suppliers/list_suppliers_by_item" style="float:left" >
-                            <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
-                                <div class="form-group" >
-                                    <!-- <label for="company_street">Username</label> -->
-                                    <input type="text" class="form-control"  name="username"
-                                    placeholder=Username>
-                                </div>
-                                <div class="form-group" style="margin-left: 20px;">
-                                    <!-- <label for="company_street">Username</label> -->
-                                    <input type="text" class="form-control"  name="fullname"
-                                    placeholder=Fullname>
-                                    
-                                </div>
-                                
-                                <div class="form-group" style="margin-left: 20px;">
-                                    <!-- <label for="company_street">Username</label> -->
-                                    <select class="form-control" id="lt" name="type">
-                                        <option value=""></option>
-                                        <option value="">Guide</option>
-                                        <option value="">Homestay</option>
-                                        <option value="">Cars</option>
-                                    </select>
-                                    <!--  <input type="text" class="form-control" name="supplier_search"
-                                    placeholder=Type> -->
-                                    
-                                </div>
-                                <div class="form-group" style="margin-left: 20px;">
-                                    <!-- <label for="company_street">Username</label> -->
-                                    <select class="form-control" id="sel1" name="status">
-                                        <option value=""></option>
-                                        <option value="1">Active</option>
-                                        <option value="0">Inactive</option>
-                                    </select>
-                                    <!--  <input type="text" class="form-control" name="status"
-                                    placeholder=Status> -->
-                                    
-                                </div>
-                                <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px; margin-left: 20px;" type="Submit" id="btnadd"
-                                class="btn btn-info"> Search</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+<div class="content-wrapper">
+          <div class="row" >
+            <div class="col-sm-10 col-md-10" style="padding-left:0px;">
+                <h1 class="page-header">Tin tức</h1>
+            </div>
+              
+             <div id="form-search1" >
+              <form  class="form-inline" method="POST" action="../admin/bookings" style="float:left;" >
+                  <div class="form-group" style="width: 500px:">
+                  <input style="margin:6px 6px 6px 0px; width: 20%;float: left" type="text" class="form-control"  id="item_type" name="guider_id" placeholder=" Tên Hướng Dẫn Viên">
+                      <input style="margin:6px 6px 6px 0px;width: 12%;float: left" type="text" class="form-control" id="time_start"   data-date-format="DD-MM-YYYY"  name="start_day" placeholder="Ngày tạo">
+                       <input style="margin:6px 6px 6px 0px;width: 12%;float: left" type="text" class="form-control" id="time_end"  data-date-format="DD-MM-YYYY" name="end_day" placeholder="Ngày kết thúc">
+                <select class="form-control" name="status" style="margin:6px 6px 6px 0px;width: 15%;float: left;placeholder="BookStatus">
+                    <option>Chọn Trạng Thái</option>
+                    <option  value="0">Mới</option>
+                    <option  value="1">Đã Thanh Toán </option>
+                    <option  value="2">Hủy</option>
+                    <option  value="3">Xác nhận</option>
+                    <option  value="4">Hoàn thành</option>
+                </select>
+                      <input style="margin:6px 6px 6px 0px;width: 10%;float: left" type="text" class="form-control"  name="money"
+      placeholder="Tổng tiền ">
+                      <button style="margin-right:10px;" type="submit"
+                              class="btn btn-primary">Tìm kiếm 
+                      </button>
+                  </div>
+              </form>
+              </div>
+          </div>
+        </br>
                 <div class="row">
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped">

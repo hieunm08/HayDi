@@ -1,10 +1,10 @@
 <div class="col-sm-10 col-md-11 main">
 	<div class="row" >
 		<div class="col-sm-12 col-md-12" style="padding-left:0px;">
-			<h1 class="page-header"><a href="<?php echo base_url().'admin/news' ?>"><i class="icon-arrow-left-3"></i></a> Update News</h1>
+			<h1 class="page-header"><a href="<?php echo base_url().'admin/news' ?>"><i class="icon-circle-arrow-left"></i></a> Update News</h1>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row">	
 		<div class="col-sm-5 col-md-5">
 			<?php $this-> load->model('tintuc'); ?>
 			<?php foreach ($news as $news): ?>

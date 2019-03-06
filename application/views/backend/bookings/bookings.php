@@ -1,35 +1,11 @@
 
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>jQuery UI Dialog - Modal form</title>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="dialog_css.css">
-        <script type="text/javascript" href="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script type="text/javascript" href="https://ajax.googleapis.com/ajax/libs/d3js/5.7.0/d3.min.js"></script>
-        <script type="text/javascript">
-        $( function(){
-          $("#time_start").datepicker();
-        } );
-        $(function(){
-          $("#time_end").datepicker();
-        });
-        </script> 
-    </head>
-        <body>
-        <div class="col-sm-10 col-md-11 main">
+
+        <div class="content-wrapper">
           <div class="row" >
             <div class="col-sm-10 col-md-10" style="padding-left:0px;">
                 <h1 class="page-header">Đơn hàng hướng dẫn viên</h1>
             </div>
-              <button style="margin-right:10px; background:red" id="btn1"
-                      class="btn btn-primary">Search Advance
-              </button>
-          <!--  <div class="col-sm-2 col-md-2">
-               <a href="<?php /*echo base_url('admin/bookings/add_ticket'); */?>"><button type="button" class="btn btn-primary top_button"><span class="icon-plus-2"></span> <?php /*echo lang('Book a ticket');*/?></button></a>
-            </div>-->
+              
              <div id="form-search1" >
               <form  class="form-inline" method="POST" action="../admin/bookings" style="float:left;" >
                   <div class="form-group" style="width: 500px:">
@@ -72,9 +48,10 @@
                     <th>Lat</th>
                     <th>Lon</th>
                     <th>Ghi Chú</th>
-                    <th>Trạng thái</th>
+                    <th>Trạng thái thanh toán</th>
                     <th>Phương thức thanh toán</th>
-                    <th>Tổng Tiền</th>                                     
+                    <th>Trạng thái đơn hàng</th>  
+                    <th>Tổng tiền</th>                                    
                     <th>Ngày cập nhật</th>
                       <th width="12%" ><?php echo lang('Options');?></th>
                   </tr>
@@ -108,15 +85,16 @@
                           <!-- <td>
                         <span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $booking->time_start))?>
                         <div class="pull-right"><span class="icon-clock" style="color:red;"></span> <?php echo date('H:i', strtotime( $booking->time_start)) ?></div>
-                      </td> -->
-                <td><?php echo $booking->time_start?></td>
+                      </td> <--></-->
+                <td><?php echo $booking->start_day?></td>
 
-                    <td><?php echo $booking->local_meet?></td>
+                    <td><?php echo $booking->address_meet?></td>
                       <td><?php echo $booking->lat?></td>
                       <td><?php echo $booking->lon?></td>
                       <td><?php echo $booking->note?></td>
-                      <td><?php echo $this-> booking->status_order ($booking->status) ?> </td>
-                       <td><?php echo $this-> booking->paid_type ($booking->paid_type) ?></td>
+                     <td><?php echo $this->booking->status_payment($booking->payment_status) ?> </td>
+                        <td><?php echo $this->booking->paid_type ($booking->payment_type) ?></td>
+                        <td><?php echo $this->booking->status_order($booking->status)?></td>
                         <td><?php echo $booking->money?></td>
                         <td>
                         <span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $booking->created_at))?>

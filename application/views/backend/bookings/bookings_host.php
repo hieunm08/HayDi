@@ -1,25 +1,6 @@
 
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>jQuery UI Dialog - Modal form</title>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="dialog_css.css">
-        <script type="text/javascript" href="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script type="text/javascript" href="https://ajax.googleapis.com/ajax/libs/d3js/5.7.0/d3.min.js"></script>
-        <script type="text/javascript">
-        $( function(){
-          $("#time_start").datepicker();
-        } );
-        $(function(){
-          $("#time_end").datepicker();
-        });
-        </script> 
-    </head>
-        <body>
-        <div class="col-sm-10 col-md-11 main">
+
+        <div class="content-wrapper">
           <div class="row" >
             <div class="col-sm-10 col-md-10" style="padding-left:0px;">
                 <h1 class="page-header">Đơn hàng Host</h1>
