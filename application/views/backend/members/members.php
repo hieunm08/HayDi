@@ -1,5 +1,5 @@
 
-        <div class="content-wrapper">
+        <div class="col-sm-10 col-md-11 main">
           <div class="row" >
             <div class="col-sm-10 col-md-10" style="padding-left:0px;">
                 <h1 class="page-header"><?php echo lang('Members');?></h1>

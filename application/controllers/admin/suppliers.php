@@ -65,9 +65,9 @@ class Suppliers extends CI_Controller
         $config['per_page'] = 5;
         $config["uri_segment"] = 4;
         //pagination styling
-        $config['num_tag_open'] = '<li>';
+        $config['num_tag_open'] = '<li class="page-item">';
         $config['num_tag_close'] = '</li>';
-        $config['cur_tag_open'] = '<li class="active"><a href"#">';
+        $config['cur_tag_open'] = '<li class="page-item active"><a href"#">';
         $config['cur_tag_close'] = '</a></li>';
         $config['next_tag_open'] = '<li>';
         $config['next_tag_close'] = '</li>';
@@ -106,6 +106,7 @@ class Suppliers extends CI_Controller
         $this->load->model('supplier');
 
         $data['suppliers'] = $this->supplier->show_suppliers($supplier_cd);
+        $data['city_code'] = $this->supplier->getCityCode();
 
         $data['links'] = $this->pagination->create_links();
         $data['main_content'] = 'backend/suppliers/suppliers_info';
@@ -174,6 +175,7 @@ class Suppliers extends CI_Controller
     }
     //sua thogn tin
      function edit_supplier(){
+       
         $id = $this->uri->segment(4);
                 $this->load->model('supplier');
                 $data = $this->input->post();
@@ -230,6 +232,7 @@ class Suppliers extends CI_Controller
         $this->supplier->delete_supplier($id);
         redirect('admin/suppliers', 'refresh');
     }
+
 
     private function docFileExcel($file)
     {

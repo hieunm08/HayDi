@@ -55,19 +55,13 @@ class Supplier extends CI_Model
                     VALUES('$supplier_User','$supplier_Pass','$supplier_Fullname','$supplier_Type','$supplier_Status')");
     }
 
-    function update_Supplier($supplier_User, $supplier_Pass, $supplier_Fullname, $supplier_Type, $supplier_Status, $id)
-    {
-           $query = $this->db->query("UPDATE supplier_mst SET supplier_User='$supplier_User', supplier_Pass='$supplier_Pass', supplier_Fullname='$supplier_Fullname', supplier_Type='$supplier_Type', supplier_Status='$supplier_Status' WHERE supplier_ID = '$id' ");
-          
-        }
+   
     function saveSupplier($data, $id)
     {
-
-       /* $data['from_start_time'] = date('Y-m-d', strtotime(element('from_start_date', $data))). ' ' .strtotime(element('from_start_time', $data));*/
        if (!empty($data['password'])) {
-        $crop_data = elements(array('name','phone','password','email','sub_phone','address','country_code','level','type','status','languages','price','unit','description'), $data);
+        $crop_data = elements(array('name','phone','password','email','sub_phone','address','country_code','level','type','status','languages','price','unit','updated_at','description'), $data);
         }else{
-             $crop_data = elements(array('name','phone','email','sub_phone','address','country_code','level','type','status','languages','price','unit','description'), $data);
+             $crop_data = elements(array('name','phone','email','sub_phone','address','country_code','level','type','status','languages','price','unit','updated_at','description'), $data);
         }
         $this->db->where('id', $id);
         $this->db->update('users', $crop_data);
@@ -141,7 +135,12 @@ class Supplier extends CI_Model
         $this->db->where('id', $id);
         $this->db->delete('users');
     }
-   
+    function getCityCode(){
+        $this->db->select("*");
+        $this->db->from('country');
+        $query = $this->db->get();
+        return $query->result();   
+    }
 
   
 }

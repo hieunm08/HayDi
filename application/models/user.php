@@ -109,6 +109,17 @@ Class User extends CI_Model
 		   return $row->id;
 		}
 	}
+	function member_firstname($username){
+		$this->db->select('firstname');
+		$this->db->where('username',$username);
+		$query = $this->db->get('users_admin');
+
+		if ($query->num_rows() > 0)
+		{
+		   $row = $query->row();
+		   return $row->firstname;
+		}
+	}
 	function member_language($username){
 		$this->db->select('language');
 		$this->db->where('username',$username);

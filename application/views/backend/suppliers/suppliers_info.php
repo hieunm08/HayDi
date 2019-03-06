@@ -1,7 +1,7 @@
 <div class="col-sm-10 col-md-11 main">
   <div class="row" >
     <div class="col-sm-12 col-md-12" style="padding-left:0px;">
-      <h1 class="page-header"><a href="<?php echo base_url().'admin/suppliers' ?>"><i class="icon-arrow-left-3"></i></a> <?php echo lang('Edit supplier')?></h1>
+      <h1 class="page-header"><a href="<?php echo base_url().'admin/suppliers' ?>"><i class="icon-arrow-left"></i></a> <?php echo lang('Edit supplier')?></h1>
     </div>
   </div>
   <div class="row">
@@ -57,8 +57,14 @@
           <?php echo form_error('company_street'); ?>
         </div>
         <div class="form-group">
-          <label for="company_street">Mã Quốc Gia</label>
-          <input type="text" class="form-control" id="country_input" name="country_code" value="<?php echo($supplier->country_code) ?>" >
+          <label for="company_street">Mã Quốc Gia</label> 
+          <select class="form-control"  id="cmbMake" name="country_code"  >
+              <option selected value=<?php echo $supplier->country_code ?> ><?php echo $supplier->country_code ?></option>
+              <?php foreach ($city_code as $city_code ){ ?>  
+                <option value=<?php echo $city_code->code  ?> ><?php echo $city_code->code ?></option>
+              <?php } ?> 
+          </select>
+          
         </div>
         
         <div class="form-group">
@@ -68,7 +74,16 @@
         </div>
         <div class="form-group">
           <label for="company_street">Type</label>
-            <input type="text" class="form-control" id="company_street" name="type" value="<?php echo($supplier->type) ?> ">
+            <select class="form-control" id="sel1" name="type">
+            <?php
+            if ($supplier->type == "guider") { ?>
+            <option value="guider">Guider</option>
+            <option value="customer">Customer</option>
+            <?php }else{ ?>
+            <option value="customer">Customer</option>
+            <option value="guider">Guider</option>
+            <?php } ?>
+          </select>
           <?php echo form_error('company_street'); ?>
         </div>
         <div class="form-group">
@@ -113,6 +128,10 @@
         <div class="form-group">
           <label for="company_street">Ngày đăng kí</label>
           <input disabled type="text" class="form-control" id="company_street" name="created_at" value="<?php echo date('d/m/Y',strtotime( $supplier->created_at)) ?>" >
+          <?php echo form_error('company_street'); ?>
+        </div>
+        <div class="form-group">
+          <input  type="hidden" class="form-control" id="company_street" name="updated_at" value="<?php echo (mdate('%Y-%m-%d %H:%i:%s', now())) ?>" >
           <?php echo form_error('company_street'); ?>
         </div>
         <input type="hidden" name="id" value=" <?php echo ($supplier->id) ?>">

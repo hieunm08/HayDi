@@ -12,9 +12,9 @@ $this->lang->load('navigation', $this->session->userdata('language'));
             <img src="<?php echo base_url(); ?>images/faces/face1.jpg" alt="profile image">
           </div>
           <div class="text-wrapper">
-            <p class="profile-name">Richard V.Welsh</p>
+            <p class="profile-name"><?php echo ($this->session->userdata['firstname']) ?></p>
             <div>
-              <small class="designation text-muted">Manager</small>
+              <small class="designation text-muted">Admin</small>
               <span class="status-indicator online"></span>
             </div>
           </div>
@@ -77,6 +77,12 @@ $this->lang->load('navigation', $this->session->userdata('language'));
       </a>
     </li>
     <li class="nav-item">
+      <a class="nav-link" href="<?php echo base_url() ?>admin/trips">
+        <i class="menu-icon mdi mdi-table"></i>
+        <span class="menu-title">Trips</span>
+      </a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link" href="<?php echo base_url() ?>admin/members">
         <i class="menu-icon mdi mdi-backup-restore"></i>
         <span class="menu-title">Thành Viên</span>
@@ -107,6 +113,9 @@ $this->lang->load('navigation', $this->session->userdata('language'));
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url() ?>admin/sponsors">Quảng cáo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url() ?>admin/rooms">Room</a>
           </li>
         </ul>
       </div>

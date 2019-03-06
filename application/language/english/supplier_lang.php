@@ -20,4 +20,6 @@ $lang['Guide'] = "Guide";
 $lang['Homestay'] = "Homestay";
 $lang['Car'] = "Car";
 $lang['Edit supplier'] = "Edit supplier";
+$lang['Phục vụ'] = "Phục vụ";
+$lang['Không phục vụ'] = "Không phục vụ";
 ?>

@@ -123,7 +123,9 @@
                         </tbody>
                     </table>
                 </div>
-            <ul class="pagination"><?php echo $links ?></ul>
+                <nav aria-label="...">
+            <ul class="pagination pagination-sm"><?php echo $links ?></ul>
+        </nav>
         </div>
     </div>
     <div

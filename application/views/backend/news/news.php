@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+<div class="">
           <div class="row" >
             <div class="col-sm-10 col-md-10" style="padding-left:0px;">
                 <h1 class="page-header">Tin tức</h1>
@@ -30,7 +30,7 @@
         </br>
                 <div class="row">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <th>STT</th>
@@ -80,7 +80,7 @@
                         </tbody>
                     </table>
                 </div>
-            <ul class="pagination"><?php echo $links ?></ul>
+            <ul class="pagination pagination-sm"><?php echo $links ?></ul>
         </div>
     </div>
     <div
