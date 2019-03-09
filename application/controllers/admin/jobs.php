@@ -59,7 +59,7 @@ class Jobs extends CI_Controller
 
             $config['base_url'] = base_url() . 'admin/jobs/list_jobs';
             $config['total_rows'] = $this->job->totalJob();
-            $config['per_page'] = 2;
+            $config['per_page'] = 8;
             $config["uri_segment"] = 4;
             //pagination styling
             $config['num_tag_open'] = '<li>';
@@ -105,21 +105,34 @@ class Jobs extends CI_Controller
     }
     function add_job()
     {
-        $this->load->library('pagination');
-        $this->load->model('job');
-        $data = $this->input->post();
-       
-        $this->job->createJob($data);
-        redirect('admin/jobs', 'refresh');
+        $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+        $this->form_validation->set_rules('name', 'name', 'trim|required|alpha');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            
+            
+            $data['main_content'] = 'backend/jobs/add_job';
+            $data['title'] = 'Add job';
+            $this->load->view('includes/template', $data);
+        }
+        else
+        {
+            $this->load->model('job');
+            $data = $this->input->post();
+            $this->job->createJob($data);
+            $this->session->set_flashdata('message', 'Thêm thành công');
+            redirect('admin/jobs', 'refresh');
+        }
     }
 
    
     function delete_job($id)
     {
-        $this->load->model('skill');
-        $this->session->set_flashdata('message', 'Suppliers successfully deleted');
-        $this->skill->deleteSkill($id);
-        redirect('admin/skills', 'refresh');
+        $this->load->model('job');
+        $this->session->set_flashdata('message', 'Xóa thành công');
+        $this->job->deleteJob($id);
+        redirect('admin/jobs', 'refresh');
     }
     
 

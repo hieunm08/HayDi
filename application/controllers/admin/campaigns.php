@@ -121,7 +121,6 @@ class Campaigns extends CI_Controller
     {
        
         $data['name']=$this->input->post('name');
-        $data['images']=$this->input->post('images');
         $data['link']=$this->input->post('link');
         $data['desc']=$this->input->post('desc');
         $data['status']=$this->input->post('status');

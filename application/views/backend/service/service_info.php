@@ -1,7 +1,7 @@
  <div class="col-sm-10 col-md-11 main">
           <div class="row" >
             <div class="col-sm-12 col-md-12" style="padding-left:0px;">
-             <h1 class="page-header"><a href="<?php echo base_url().'admin/services' ?>"><i class="icon-arrow-left-3"></i></a> Update Service</h1>
+             <h1 class="page-header"><a href="<?php echo base_url().'admin/services' ?>"><i class="mdi mdi-arrow-left-bold-circle-outline"></i></a> Cập nhật Service</h1>
             </div>
           </div>
      <div class="row">
@@ -33,7 +33,7 @@
     
              
              <input type="hidden" name="id" value=" <?php echo ($service->id) ?>">
-             <button type="submit" class="btn btn-success"  name="update"  value="submit"><span class="icon-checkmark"></span> Update</button>
+             <button type="submit" class="btn btn-success"  name="update"  value="submit"><span class="icon-checkmark"></span> Cập nhật</button>
              </form>
          </div>
      <?php endforeach; ?>

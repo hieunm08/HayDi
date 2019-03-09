@@ -54,9 +54,9 @@ class Tintuc extends CI_Model
     function showNewsStatus($status)
     {
         if ($status==0) {
-        echo '<span class="label label-default">'.lang('Inactive').'</span>';
+        echo '<span class="badge badge-secondary">'.lang('Inactive').'</span>';
         }else{
-        echo '<span class="label label-success">'.lang('Active').'</span>';
+        echo '<span class="badge badge-success">'.lang('Active').'</span>';
         }
     }
     function getNewsGroupById($id)

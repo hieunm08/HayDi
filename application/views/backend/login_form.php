@@ -130,11 +130,10 @@ div.im-colormask > div {
                 </div>
                 <div class="form-group">
                   <button class="btn btn-block g-login">
-                    <img class="mr-3" src="../../images/file-icons/icon-google.svg" alt="">Log in with Google</button>
+                    <img class="mr-3" src="<?php echo base_url() ?>images/file-icons/icon-google.svg" alt="">Log in with Google</button>
                 </div>
                 <div class="text-block text-center my-3">
                   <span class="text-small font-weight-semibold">Not a member ?</span>
-                  <a href="register.html" class="text-black text-small">Create new account</a>
                 </div>
               </form>
             </div>
@@ -159,15 +158,15 @@ div.im-colormask > div {
   </div>
   <!-- container-scroller -->
   <!-- plugins:js -->
-  <script src="<?php echo base_url() ?>/vendors/js/vendor.bundle.base.js"></script>
-  <script src="<?php echo base_url() ?>/vendors/js/vendor.bundle.addons.js"></script>
+  <script src="<?php echo base_url() ?>vendors/js/vendor.bundle.base.js"></script>
+  <script src="<?php echo base_url() ?>vendors/js/vendor.bundle.addons.js"></script>
   <!-- endinject -->
   <!-- inject:js -->
-  <script src="<?php echo base_url() ?>/js/off-canvas.js"></script>
-  <script src="<?php echo base_url() ?>/js/hoverable-collapse.js"></script>
-  <script src="<?php echo base_url() ?>/js/misc.js"></script>
-  <script src="<?php echo base_url() ?>/js/settings.js"></script>
-  <script src="<?php echo base_url() ?>/js/todolist.js"></script>
+  <script src="<?php echo base_url() ?>js/off-canvas.js"></script>
+  <script src="<?php echo base_url() ?>js/hoverable-collapse.js"></script>
+  <script src="<?php echo base_url() ?>js/misc.js"></script>
+  <script src="<?php echo base_url() ?>js/settings.js"></script>
+  <script src="<?php echo base_url() ?>js/todolist.js"></script>
   <!-- endinject -->
 
 

@@ -1,7 +1,7 @@
 <div class="col-sm-10 col-md-11 main">
 	<div class="row" >
 		<div class="col-sm-12 col-md-12" style="padding-left:0px;">
-			<h1 class="page-header"><a href="<?php echo base_url().'admin/news' ?>"><i class="icon-arrow-left-3"></i></a> Create News</h1>
+			<h1 class="page-header"><a href="<?php echo base_url().'admin/news' ?>"><i class="mdi mdi-arrow-left-bold-circle-outline"></i></a> Tạo News</h1>
 		</div>
 	</div>
 	<div class="row">
@@ -46,7 +46,7 @@
 				</div>
 				<div class="form-group">
 					<label for="customer">Loại tin</label>
-					<select  id="cmbMake" name="group_id" >
+					<select class="form-control"  id="cmbMake" name="group_id" >
 			     		<?php foreach ($group as $group ){ ?> 			
 	     					<option value=<?php echo $group->id ?> ><?php echo $group->name ?></option>
 		     		 	<?php } ?> 
@@ -54,7 +54,7 @@
 					<?php echo form_error('customer'); ?>
 				</div>
 		
-		<button type="submit" class="btn btn-success"  name="create"  value="submit"><span class="icon-checkmark"></span> Create</button>
+		<button type="submit" class="btn btn-success"  name="create"  value="submit"><span class="icon-checkmark"></span>Tạo</button>
 	</form>
 </div>
 </div>

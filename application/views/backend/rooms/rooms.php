@@ -34,7 +34,7 @@
                             <thead>
                                 <tr>
                                     <th>STT</th>
-                                    <th><?php echo lang('ID number'); ?></th>
+                                    <th>Mã phòng</th>
                                     <th>Mã host</th>
                                     <th>Tên phòng</th>
                                     <th>Số giường ngủ</th>

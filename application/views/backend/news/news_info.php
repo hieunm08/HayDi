@@ -1,7 +1,7 @@
 <div class="col-sm-10 col-md-11 main">
 	<div class="row" >
 		<div class="col-sm-12 col-md-12" style="padding-left:0px;">
-			<h1 class="page-header"><a href="<?php echo base_url().'admin/news' ?>"><i class="icon-circle-arrow-left"></i></a> Update News</h1>
+			<h1 class="page-header"><a href="<?php echo base_url().'admin/news' ?>"><i class="mdi mdi-arrow-left-bold-circle-outline"></i></a> Update News</h1>
 		</div>
 	</div>
 	<div class="row">	

@@ -59,7 +59,7 @@ class Services extends CI_Controller
 
             $config['base_url'] = base_url() . 'admin/services/list_service';
             $config['total_rows'] = $this->service->totalService();
-            $config['per_page'] = 2;
+            $config['per_page'] = 8;
             $config["uri_segment"] = 4;
             //pagination styling
             $config['num_tag_open'] = '<li>';
@@ -106,20 +106,33 @@ class Services extends CI_Controller
     }
     function add_service()
     {
-        $this->load->library('pagination');
-        $this->load->model('service');
-        $data = $this->input->post();
-       
-        $this->service->createService($data);
-        redirect('admin/services', 'refresh');
+        $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+        $this->form_validation->set_rules('name', 'title', 'trim|required|string');
+        $this->form_validation->set_rules('icon', 'thumb', 'trim');
+        $this->form_validation->set_rules('desc', 'link', 'trim|string');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->load->model('service');
+            $data['main_content'] = 'backend/service/add_service';
+            $data['title'] = 'Add service';
+            $this->load->view('includes/template', $data);
+
+        }else{
+            $this->load->model('service');
+            $data = $this->input->post();
+            $this->session->set_flashdata('message', ' successfully ');
+            $this->service->createService($data);
+            redirect('admin/services', 'refresh');
+        }
     }
    
-    function delete_skill($id)
+    function delete_service($id)
     {
-        $this->load->model('skill');
-        $this->session->set_flashdata('message', 'Suppliers successfully deleted');
-        $this->skill->deleteSkill($id);
-        redirect('admin/skills', 'refresh');
+        $this->load->model('service');
+        $this->session->set_flashdata('message', ' successfully deleted');
+        $this->service->deleteService($id);
+        redirect('admin/services', 'refresh');
     }
     
 

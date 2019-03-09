@@ -1,9 +1,11 @@
-<div class="content-wrapper">
+<div class="col-sm-10 col-md-11 main">
     <div class="row" >
         <div class="col-sm-10 col-md-10" style="padding-left:0px;">
             <h1 class="page-header">Dịch vụ Host</h1>
         </div>
-        
+         <div class="col-sm-2 col-md-2">
+                <a href="<?php echo base_url('admin/services/add_service'); ?>"><button type="button" class="btn btn-primary top_button"><span class="icon-plus-2"></span> Add service</button></a>
+            </div>
         <div id="form-search1" >
             <form  class="form-inline" method="POST" action="../admin/bookings" style="float:left;" >
                 <div class="form-group" style="width: 500px:">
@@ -27,6 +29,9 @@
             </form>
         </div>
     </div>
+     <?php
+        if ($this->session->flashdata('message') != '') echo '<div class="alert alert-success" role="alert">' . $this->session->flashdata('message') . '</div>';
+        ?>
     </br>
     <div class="row">
         <div class="table-responsive">
@@ -34,8 +39,8 @@
                 <thead>
                     <tr>
                         <th>STT</th>
-                        <th><?php echo lang('ID number'); ?></th>
-                        <th>Tên</th>
+                        <th>Mã dịch vụ</th>
+                        <th>Tên dịch vụ</th>
                         <th>Icon</th>
                         <th>Mô tả</th>
                         <th>Chức năng</th>
@@ -56,8 +61,8 @@
                         <td><?php echo $service->desc ?></td>
                         <td style="text-align:center">
                             <div class="btn-group" role="group">
-                                <a href="<?php echo base_url('admin/services/list_service_by_id/'.$service->id); ?>" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Update</a>
-                                <a href="<?php echo base_url('admin/services/delete_service/' .$service->id); ?>" onclick="return confirm('Bạn có chắc chắn muốn XÓA quảng cáo này?')" class="btn btn-default btn-xs"><span class="icon-cancel-2" style="color:red"></span> Delete</a>
+                                <a href="<?php echo base_url('admin/services/list_service_by_id/'.$service->id); ?>" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Chỉnh sửa</a>
+                                <a href="<?php echo base_url('admin/services/delete_service/' .$service->id); ?>" onclick="return confirm('Bạn có chắc chắn muốn XÓA quảng cáo này?')" class="btn btn-default btn-xs"><span class="icon-cancel-2" style="color:red"></span> Xóa</a>
                             </div>
                         </td>
                         <?php $i++; endforeach; ?>
@@ -103,4 +108,3 @@
         </fieldset>
     </form>
 </div>
-</body>

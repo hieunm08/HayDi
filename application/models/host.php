@@ -41,7 +41,14 @@ class Host extends CI_Model
     }
 
    
-    
+     function getAllHost($limit, $start)
+    {
+        $this->db->limit($limit, $start);
+        $this->db->from('host');
+        $this->db->select("*");
+        $query = $this->db->get();  
+        return $query->result();
+    }
    
     function show_all_host($limit, $start)
     {

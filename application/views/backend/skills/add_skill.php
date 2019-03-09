@@ -1,7 +1,7 @@
  <div class="col-sm-10 col-md-11 main">
           <div class="row" >
             <div class="col-sm-12 col-md-12" style="padding-left:0px;">
-             <h1 class="page-header"><a href="<?php echo base_url().'admin/skills' ?>"><i class="icon-arrow-left-3"></i></a> Create Skills</h1>
+             <h1 class="page-header"><a href="<?php echo base_url().'admin/skills' ?>"><i class="mdi mdi-arrow-left-bold-circle-outline"></i></a> Tạo Skills</h1>
             </div>
           </div>
      <div class="row">
@@ -9,7 +9,7 @@
              <?php $this-> load->model('skill'); ?>
     <?php echo form_open('admin/skills/add_skill') ?>
              <div class="form-group">
-                 <label for="item_type">Tên User</label>
+                 <label for="item_type">Tên skill</label>
                  <input type="text" class="form-control" name="name" value="">
                  <?php echo form_error('name'); ?>
              </div>
@@ -26,7 +26,7 @@
             
     
              
-             <button type="submit" class="btn btn-success"  name="create"  value="submit"><span class="icon-checkmark"></span> Create</button>
+             <button type="submit" class="btn btn-success"  name="create"  value="submit"><span class="icon-checkmark"></span> Tạo</button>
              </form>
          </div>
      </div>

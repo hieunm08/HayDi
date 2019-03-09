@@ -1,7 +1,10 @@
-<div class="">
+<div class="col-sm-10 col-md-11 main">
           <div class="row" >
             <div class="col-sm-10 col-md-10" style="padding-left:0px;">
                 <h1 class="page-header">Tin tức</h1>
+            </div>
+            <div class="col-sm-2 col-md-2">
+                <a href="<?php echo base_url('admin/news/add_news'); ?>"><button type="button" class="btn btn-primary top_button"><span class="icon-plus-2"></span> Add news</button></a>
             </div>
               
              <div id="form-search1" >
@@ -27,6 +30,11 @@
               </form>
               </div>
           </div>
+          <div class="row">
+        <?php
+        if ($this->session->flashdata('message') != '') echo '<div class="alert alert-success" role="alert">' . $this->session->flashdata('message') . '</div>';
+        ?>
+    </div>
         </br>
                 <div class="row">
                     <div class="table-responsive">
@@ -63,17 +71,17 @@
                                     <?php foreach ($news_group as $news_group ): ?>
                                          <td><?php echo $news_group->name ?></td>
                                     <?php endforeach ?>
-                                    <td><span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $news->updated_at))?>
+                                    <td><span class="mdi mdi-calendar-clock" style="color: red;"></span> <?php echo date('d/m/Y',strtotime( $news->updated_at))?>
                                     <td><?php echo $this->tintuc->showNewsStatus($news->status) ?></td>
                                     <td style="text-align:center">
                                         <div class="btn-group" role="group">
-                                           <a href="<?php echo base_url('admin/news/list_news_by_id/'.$news->id); ?>" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Update</a>
+                                           <a href="<?php echo base_url('admin/news/list_news_by_id/'.$news->id); ?>" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Chỉnh sửa</a>
                                             <?php if ($news->status==1) { ?>
-                                            <a href="<?php echo base_url("admin/news/block_news?id={$news->id}&status={$news->status}"); ?>" onclick="return confirm('Bạn có chắc chắn muốn HỦY quảng cáo này?')" class="btn btn-default btn-xs"><span class="icon-minus" style="color:red"></span> Hủy</a>
+                                            <a href="<?php echo base_url("admin/news/block_news?id={$news->id}&status={$news->status}"); ?>" onclick="return confirm('Bạn có chắc chắn muốn HỦY quảng cáo này?')" class="btn btn-default btn-xs"><span class="icon-minus" style="color:red"></span> Ngừng kích hoạt</a>
                                             <?php }else{ ?>
                                             <a href="<?php echo base_url("admin/news/block_news?id={$news->id}&status={$news->status}"); ?>" onclick="return confirm('Bạn có chắc chắn muốn KÍCH HOẠT quảng cáo này?')" class="btn btn-default btn-xs"><span class="icon-plus" style="color:blue"></span> Kích hoạt</a>
                                             <?php } ?>
-                                            <a href="<?php echo base_url('admin/news/delete_news/' .$news->id); ?>" onclick="return confirm('Bạn có chắc chắn muốn XÓA quảng cáo này?')" class="btn btn-default btn-xs"><span class="icon-cancel-2" style="color:red"></span> Delete</a>
+                                            <a href="<?php echo base_url('admin/news/delete_news/' .$news->id); ?>" onclick="return confirm('Bạn có chắc chắn muốn XÓA quảng cáo này?')" class="btn btn-default btn-xs"><span class="icon-cancel-2" style="color:red"></span> Xóa</a>
                                         </div>
                                     </td>
                             <?php $i++; endforeach; ?>

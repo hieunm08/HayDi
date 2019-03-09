@@ -19,7 +19,7 @@ class Supplier extends CI_Model
             echo '<span class="label label-primary">'.lang('Homestay').'</span>';
         }else if($supplier_type==1)
         { 
-            echo '<span class="label label-success">'.lang('Guide').'</span>';
+            echo '<span class="badge badge-success">'.lang('Guide').'</span>';
     }else{
             echo '<span class="label label-info">'.lang('Car').'</span>';
     }
@@ -28,10 +28,10 @@ class Supplier extends CI_Model
      function show_Supplier_Status($supplier_status)
     {
         if ($supplier_status==0) {
-           echo '<span class="label label-default">'.lang('Inactive').'</span>';
+           echo '<span class="badge badge-success">'.lang('Inactive').'</span>';
         }else
         { 
-          echo '<span class="label label-success">'.lang('Active').'</span>';
+          echo '<span class="badge badge-success">'.lang('Active').'</span>';
     }
 }
     function change_Supplier_Status($id, $status){

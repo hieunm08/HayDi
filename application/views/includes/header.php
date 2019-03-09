@@ -6,11 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Star Admin Premium Bootstrap Admin Dashboard Template</title>
     <!-- plugins:css -->
+    <!-- Open sans google fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,300,800' rel='stylesheet' type='text/css'>
+    <!-- <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> -->
+    <!-- Bootstrap core CSS -->
+    <link href="<?php echo base_url(); ?>css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- METRO UI CSS 2.0 FONTS -->
+    <link href="<?php echo base_url(); ?>css/iconFont.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+  
+    <link href="<?php echo base_url(); ?>css/datetimepicker.min.css" rel="stylesheet">
+
+    <!-- Morris charts -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+   
     <link rel="stylesheet" href="<?php echo base_url(); ?>vendors/iconfonts/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>vendors/css/vendor.bundle.addons.css">
+
     <!-- endinject -->
     <!-- plugin css for this page -->
+
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/style.css">

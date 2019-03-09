@@ -113,12 +113,12 @@ class News extends CI_Controller
     function add_news()
     {
         $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
-        $this->form_validation->set_rules('title', 'tiêu đề', 'trim|required|callback__citynull_check');
-        $this->form_validation->set_rules('thumb', 'ảnh đại diện', 'trim|required|callback__citynull_check');
-        $this->form_validation->set_rules('link', 'đường dẫn', 'trim|required');
-        $this->form_validation->set_rules('intro', 'giới thiệu', 'trim|required');
-        $this->form_validation->set_rules('content', 'nội dung', 'string|trim|required');
-        $this->form_validation->set_rules('status', 'trạng thái', 'trim|required');
+        $this->form_validation->set_rules('title', 'title', 'trim|required|callback__citynull_check');
+        $this->form_validation->set_rules('thumb', 'thumb', 'trim|required|callback__citynull_check');
+        $this->form_validation->set_rules('link', 'link', 'trim|required');
+        $this->form_validation->set_rules('intro', 'intro', 'trim|required');
+        $this->form_validation->set_rules('content', 'content', 'string|trim|required');
+        $this->form_validation->set_rules('status', 'status', 'trim|required');
         $this->form_validation->set_rules('group_id', 'mã nhóm', 'trim|required');
 
         if ($this->form_validation->run() == FALSE)
@@ -151,14 +151,14 @@ class News extends CI_Controller
         $this->load->model('tintuc');   
         $id = $_GET['id'];
         $status = $_GET['status'];
-        $this->session->set_flashdata('message', 'Suppliers successfully ');
+        $this->session->set_flashdata('message', ' successfully ');
         $this->tintuc->changeNewsStatus($id, $status);
         redirect('admin/news', 'refresh');
     }
     function delete_news($id)
     {
         $this->load->model('tintuc');
-        $this->session->set_flashdata('message', 'Suppliers successfully deleted');
+        $this->session->set_flashdata('message', ' successfully deleted');
         $this->tintuc->deleteNews($id);
         redirect('admin/news', 'refresh');
     }

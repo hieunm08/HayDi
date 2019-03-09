@@ -42,24 +42,21 @@ class Hosts extends CI_Controller
              else {
                 $this->isCheck = false;
 //                $supplier_cd = $_POST['supplier_search'];
-                $this->list_hosts();
+                $this->list_host();
             }
         } else {
             $this->isCheck = false;
-            $this->list_hosts();
+            $this->list_host();
         }
     }
     
-    function list_hosts()
+    function list_host()
     {
-        $host = json_decode($this->curl->simple_get($this->API.'hosts?limit=10&lat=21.02867&lon=105.75589&distance=200000km'),true);
-        $data = $host['data'];//chuyen thanhh mang  data
-        $list = $data['list'];
         $this->load->library('pagination');
         $this->load->model('host');
 
-        $config['base_url'] = base_url() . 'admin/hosts/list_hosts';
-        $config['total_rows'] = $host['data']['total'];
+        $config['base_url'] = base_url() . 'admin/hosts/list_host';
+        $config['total_rows'] = $this->host->total_hosts();
         $config['per_page'] = 8;
         $config["uri_segment"] = 4;
         //pagination styling
@@ -76,14 +73,7 @@ class Hosts extends CI_Controller
 
         $this->pagination->initialize($config);
         $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-
-//        if ($this->isCheck) {
-//            $data['suppliers'] = $this->supplier->show_suppliers($config['per_page'], $page, $supplier_cd);
-//        } else {
-            /*$data['hosts'] = $this->host->show_all_host($config['per_page'], $page);
-            $listHost = $data['list'];*/
-//        }
-
+        $data['hosts'] = $this->host->getAllHost($config['per_page'], $page);
         $data['links'] = $this->pagination->create_links();
         $data['main_content'] = 'backend/hosts/hosts';
         $data['title'] = 'Host';
@@ -123,9 +113,6 @@ class Hosts extends CI_Controller
         $data['hd']= json_decode($this->curl->simple_get($this->API.'hosts/'.$id));
         $this->load->library('pagination');
        
-        //echo(json_encode($data['host']));
-      
-       //die();
       
 
         $data['links'] = $this->pagination->create_links();
@@ -134,116 +121,105 @@ class Hosts extends CI_Controller
         $this->load->view('includes/template', $data);
         }        
 
-        //theo tat ca
+    function add_host()
+    {
+        $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+        $this->form_validation->set_rules('name', 'name', 'trim|required');
+        $this->form_validation->set_rules('phone', 'phone', 'trim|required');
+        $this->form_validation->set_rules('email', 'email', 'trim|required');
+
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->load->model('host');
+             $this->load->model('supplier');
+
+            $data['city_code'] = $this->supplier->getCityCode();
+            $data['main_content'] = 'backend/hosts/add_host';
+            $data['title'] = 'Add host';
+            $this->load->view('includes/template', $data);
+
+        }else
+        {
+        $data_array =  array(
+        "name"        =>    $this->input->post('name'),
+        "phone"        =>   $this->input->post('phone'),
+        "email"        =>    $this->input->post('email'),
+        "images"        =>   array(
+            $this->input->post('images')
+        ),
+        "video" => $this->input->post('video'),
+        "intro" => $this->input->post('intro'),
+        "address"        =>    $this->input->post('address'),
+        "country_code"        =>    $this->input->post('country_code'),
+        "price"        =>    $this->input->post('price'),
+        "price_baby"        =>    $this->input->post('price_baby'),
+        "unit"        =>    $this->input->post('unit'),
+        "surcharge"        =>    $this->input->post('surcharge'),
+        "room_number"        =>    $this->input->post('room_number'),
+        "customers_same_time"        =>    $this->input->post('customers_same_time'),
+        "with_boss"        =>    $this->input->post('with_boss'),
+        "type"        =>    $this->input->post('type'),
+        "services"        =>   array(
+            "service_id" =>  $this->input->post('service_id'),
+            "access" =>  $this->input->post('access'),
+            "cost" =>  $this->input->post('cost'),
+            "unit" =>  $this->input->post('unit'),
+        ),
+        );
+        $make_call = callAPI('POST', 'http://api.haydi.vn:3001/backend/hosts', json_encode($data_array));
+        $response = json_decode($make_call, true);
+        echo($make_call);
+        redirect('admin/hosts', 'refresh');
+    }
+}
     function edit_host(){
-       if(isset($_POST['edit'])){
-        $id = $_POST['id'];
-            $data = $this->input->post();
-            $update =  $this->curl->simple_put($this->API.'backend/hosts/'.$id,$data , array(CURLOPT_BUFFERSIZE => 10)); 
-            if($update)
-            {
-                $this->session->set_flashdata('hasil','Update Data Berhasil');
-                echo "thành công";
-            }else
-            {
-               $this->session->set_flashdata('hasil','Update Data Gagal');
-               echo "thất bại";
-            }
-             redirect('admin/hosts', 'refresh');
-        }else{
-            $params = array('id'=>  $this->uri->segment(3));
-            $data['datakontak'] = json_decode($this->curl->simple_get($this->API.'/kontak',$params));
-            $this->load->view('kontak/edit',$data);
-        }
-        }
-    function list_suppliers_by_search($supplier_cd)
-    {
-        $this->load->library('pagination');
-        $this->load->model('supplier');
+        $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+        $this->form_validation->set_rules('name', 'name', 'trim|required');
+        $this->form_validation->set_rules('phone', 'phone', 'trim|required');
+        $this->form_validation->set_rules('email', 'email', 'trim|required');
 
-        $data['suppliers'] = $this->supplier->Find_Supplier($supplier_cd);
 
-        $data['links'] = $this->pagination->create_links();
-        $data['main_content'] = 'backend/suppliers/suppliers';
-        $data['title'] = 'suppliers';
-       /* if ($_POST['supplier_search'] != null) {
-            
-        }else{*/
-           // redirect('admin/suppliers', 'refresh');
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->load->model('host');
+            $this->load->model('supplier');
 
+            $data['city_code'] = $this->supplier->getCityCode();
+            $data['main_content'] = 'backend/hosts/host_info';
+            $data['title'] = 'Edit host';
             $this->load->view('includes/template', $data);
-        }        
-    
-    //theo tung item
- function list_suppliers_by_item()
-    {
-        $this->isCheck = true;
-        $this->load->library('pagination');
-        $this->load->model('supplier');
 
-        $username = $_GET['username'];
-        $fullname = $_GET['fullname'];
-        $type = $_GET['type'];
-        $status = $_GET['status'];
-
-        $data['suppliers'] = $this->supplier->Find_Supplier_By_Item($username, $fullname, $type,  $status);
-
-        $data['links'] = $this->pagination->create_links();
-        $data['main_content'] = 'backend/suppliers/suppliers';
-        $data['title'] = 'suppliers';
-       /* if ($_POST['supplier_search'] != null) {
-            
-        }else{*/
-           // redirect('admin/suppliers', 'refresh');
-
-            $this->load->view('includes/template', $data);
-        }        
-
-    //them thong tin
-    function addSupplier($userName, $password, $fullname, $type, $status)
-    {
-        //TODO chua hien thi len view con da them dc
-        $this->load->library('pagination');
-        $this->load->model('supplier');
-
-        $data['supplier'] = $this->supplier->insert_infomation( $userName, $password, $fullname, (int)$type, $status);
-        redirect('admin/suppliers', 'refresh');
+        }else
+        {
+        $id = $this->input->post('id');
+        $data_array =  array(
+        "name"        =>    $this->input->post('name'),
+        "phone"        =>   $this->input->post('phone'),
+        "email"        =>    $this->input->post('email'),
+        "images"        =>   array(
+            $this->input->post('images')
+        ),
+        "video" => $this->input->post('video'),
+        "intro" => $this->input->post('intro'),
+        "address"        =>    $this->input->post('address'),
+        "country_code"        =>    $this->input->post('country_code'),
+        "price"        =>    $this->input->post('price'),
+        "price_baby"        =>    $this->input->post('price_baby'),
+        "unit"        =>    $this->input->post('unit'),
+        "surcharge"        =>    $this->input->post('surcharge'),
+        "room_number"        =>    $this->input->post('room_number'),
+        "customers_same_time"        =>    $this->input->post('customers_same_time'),
+        "with_boss"        =>    $this->input->post('with_boss'),
+        "type"        =>    $this->input->post('type')
+        );
+        $make_call = callAPI('PUT', 'http://api.haydi.vn:3001/backend/hosts/'. $id, json_encode($data_array));
+        $response = json_decode($make_call, true);
+        echo($make_call);
+        redirect('admin/hosts', 'refresh');  
     }
-    //sua thogn tin
-     function updateSupplier(){
+}
     
-        //TODO chua hien thi len view con da them dc
-                $name = $_GET['name'];
-                $phone = $_GET['phone'];
-                if ($_GET['password']!="") {
-                      $password = $_GET['password'];
-                }
-                $email = $_GET['email'];
-                $sub_phone = $_GET['sub_phone'];
-                $address = $_GET['address'];
-                $country_code = $_GET['country_code'];
-                $level = $_GET['level'];
-                $type = $_GET['type'];
-                $status = $_GET['status'];
-                $languages = $_GET['languages'];
-                $price = $_GET['price'];
-                $price_unit = $_GET['price_unit'];
-                $desc = $_GET['desc'];
-                $id = $_GET['id'];
-        $this->load->library('pagination');
-        $this->load->model('supplier');
-
-        if (isset($password)) {
-            $data['supplier'] = $this->supplier->update_Supplier( $name, $phone,  $password, $email,  $sub_phone,  $address,  $country_code, $level, $status, $languages,  $price,   $price_unit, $desc, $id);
-            redirect('admin/suppliers', 'refresh');
-        }else{
-            $data['supplier'] = $this->supplier->update_Supplier( $name, $phone, $email,  $sub_phone,  $address,  $country_code, $level, $status, $languages,  $price,   $price_unit, $desc, $id);
-            redirect('admin/suppliers', 'refresh');
-        }
-       
-        $data['supplier'] = $this->supplier->update_Supplier( $userName, $password, $fullname, $type, $status, $id);
-       // redirect('admin/suppliers', 'refresh');
-    }
     private function is_logged_in()
     {
         $is_logged_in = $this->session->userdata('is_logged_in');

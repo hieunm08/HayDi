@@ -1,9 +1,11 @@
-<div class="content-wrapper">
+<div class="col-sm-10 col-md-11 main">
     <div class="row" >
         <div class="col-sm-10 col-md-10" style="padding-left:0px;">
             <h1 class="page-header">Kĩ năng</h1>
         </div>
-        
+        <div class="col-sm-2 col-md-2">
+            <a href="<?php echo base_url('admin/skills/add_skill'); ?>"><button type="button" class="btn btn-primary top_button"><span class="icon-plus-2"></span> Add skill</button></a>
+        </div>
         <div id="form-search1" >
             <form  class="form-inline" method="POST" action="../admin/bookings" style="float:left;" >
                 <div class="form-group" style="width: 500px:">
@@ -28,13 +30,16 @@
         </div>
     </div>
     </br>
+     <?php
+        if ($this->session->flashdata('message') != '') echo '<div class="alert alert-success" role="alert">' . $this->session->flashdata('message') . '</div>';
+        ?>
     <div class="row">
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>STT</th>
-                        <th><?php echo lang('ID number'); ?></th>
+                        <th>Mã skill</th>
                         <th>Tên</th>
                         <th>Icon</th>
                         <th>Mô tả</th>
@@ -42,7 +47,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $this->load->model('payment'); ?>
                     <?php
                     if ($this->pagination->per_page >= $this->pagination->total_rows) $i = 1;
                     else $i = 1 + ($this->pagination->cur_page - 1) * $this->pagination->per_page;
@@ -51,13 +55,13 @@
                     <tr>
                         <td><?php echo $i ?></td>
                         <td><?php echo $skills->id ?></td>
-                        <td ><?php echo $skills->name ?></td>
+                        <td><?php echo $skills->name ?></td>
                         <td><?php echo $skills->icon ?></td>
                         <td><?php echo $skills->desc ?></td>
                         <td style="text-align:center">
                             <div class="btn-group" role="group">
-                                <a href="<?php echo base_url('admin/skills/list_skills_by_id/'.$skills->id); ?>" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Update</a>
-                                <a href="<?php echo base_url('admin/skills/delete_skill/' .$skills->id); ?>" onclick="return confirm('Bạn có chắc chắn muốn XÓA quảng cáo này?')" class="btn btn-default btn-xs"><span class="icon-cancel-2" style="color:red"></span> Delete</a>
+                                <a href="<?php echo base_url('admin/skills/list_skills_by_id/'.$skills->id); ?>" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Chỉnh sửa</a>
+                                <a href="<?php echo base_url('admin/skills/delete_skill/' .$skills->id); ?>" onclick="return confirm('Bạn có chắc chắn muốn XÓA quảng cáo này?')" class="btn btn-default btn-xs"><span class="icon-cancel-2" style="color:red"></span> Xóa</a>
                             </div>
                         </td>
                         <?php $i++; endforeach; ?>

@@ -13,25 +13,22 @@ class Campaign extends CI_Model
 
     }
 
-    function show_Supplier_Type($supplier_type)
+    function show_sponsor_status($is_sponsor)
     {
-        if ($supplier_type==0) {
-            echo '<span class="label label-primary">'.lang('Homestay').'</span>';
-        }else if($supplier_type==1)
-        { 
-            echo '<span class="label label-success">'.lang('Guide').'</span>';
-    }else{
-            echo '<span class="label label-info">'.lang('Car').'</span>';
+        if ($is_sponsor==0) {
+            echo '<span class="badge badge-secondary">'.lang('Không').'</span>';
+        }else{
+            echo '<span class="badge badge-success">'.lang('Có').'</span>';
+        }
     }
-}
 
      function getCampaignStatus($campaign_status)
     {
         if ($campaign_status==0) {
-           echo '<span class="label label-default">'.lang('Inactive').'</span>';
+           echo '<span class="badge badge-secondary">'.lang('Inactive').'</span>';
         }else
         { 
-          echo '<span class="label label-success">'.lang('Active').'</span>';
+          echo '<span class="badge badge-success">'.lang('Active').'</span>';
     }
 }
     function changeCampaignStatus($id, $status){
@@ -89,7 +86,7 @@ class Campaign extends CI_Model
     }
     function updateCampaign($data, $id)
     {
-        $crop_data = elements(array('name','images','link','desc','status','is_sponsor','updated_at', 'type'), $data);
+        $crop_data = elements(array('name','link','desc','status','is_sponsor','updated_at', 'type'), $data);
         $this->db->where('id', $id);
         $this->db->update('campaign', $crop_data);
     }  

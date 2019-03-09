@@ -121,13 +121,13 @@ class Sponsors extends CI_Controller
     function add_sponsor()
     {
         $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
-        $this->form_validation->set_rules('sponsor_id', 'Mã', 'trim|required|callback__citynull_check');
-        $this->form_validation->set_rules('type', 'Loại', 'trim|required|callback__citynull_check');
-        $this->form_validation->set_rules('date_start', 'Thời gian bắt đầu', 'trim|required');
-        $this->form_validation->set_rules('time_start', 'Thời gian bắt đầu', 'trim|required');
-        $this->form_validation->set_rules('date_end', 'Thời gian kết thúc', 'string|trim|required');
-        $this->form_validation->set_rules('time_end', 'Thời gian kết thúc', 'trim|required');
-        $this->form_validation->set_rules('sponsor_money', 'Số tiền quảng cáo', 'trim|required');
+        $this->form_validation->set_rules('sponsor_id', 'Mã', 'trim|required');
+        $this->form_validation->set_rules('type', 'Loại', 'trim|required');
+        $this->form_validation->set_rules('date_start', 'Thời gian bắt đầu', 'trim');
+        $this->form_validation->set_rules('time_start', 'Thời gian bắt đầu', 'trim');
+        $this->form_validation->set_rules('date_end', 'Thời gian kết thúc', 'trim');
+        $this->form_validation->set_rules('time_end', 'Thời gian kết thúc', 'trim');
+        $this->form_validation->set_rules('sponsor_money', 'Số tiền quảng cáo', 'trim');
 
         if ($this->form_validation->run() == FALSE)
         {

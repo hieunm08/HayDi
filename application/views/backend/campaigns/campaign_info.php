@@ -1,7 +1,7 @@
 <div class="col-sm-10 col-md-11 main">
 	<div class="row" >
 		<div class="col-sm-12 col-md-12" style="padding-left:0px;">
-			<h1 class="page-header"><a href="<?php echo base_url().'admin/campaigns' ?>"><i class="icon-arrow-left-3"></i></a> Cập nhật chiến dịch</h1>
+			<h1 class="page-header"><a href="<?php echo base_url().'admin/campaigns' ?>"><i class="mdi mdi-arrow-left-bold-circle-outline"></i></a> Cập nhật chiến dịch</h1>
 		</div>
 	</div>
 	<div class="row">
@@ -20,10 +20,15 @@
 				<?php echo form_error('customer'); ?>
 			</div>
 			<div class="form-group">
-				<label for="item_type">Ảnh</label>
-				<textarea rows="3" cols="50"  class="form-control"  name="images" ><?php echo ( $campaign->images ) ?>  </textarea>
-				<?php echo form_error('customer'); ?>
-			</div>
+                      <label>Ảnh</label>
+                      <input type="file" name="img[]" class="file-upload-default">
+                      <div class="input-group col-xs-12">
+                        <input type="text" class="form-control file-upload-info" disabled="" placeholder="Upload Image">
+                        <span class="input-group-append">
+                          <button class="file-upload-browse btn btn-info" type="button">Upload</button>
+                        </span>
+                      </div>
+                    </div>
 			<div class="form-group">
 				<label for="item_type">Link</label>
 				<input type="text" class="form-control" name="link" value="<?php echo ( $campaign->link ) ?>">
@@ -71,13 +76,22 @@
 				</script>
 			</div>
 		</div>
+		<?php $type = array("customer","guider");
+		array_unshift($type,   $campaign->type );
+		$result=array_unique($type);
+
+		 ?>	
 		<div class="form-group">
-				<label for="item_type"> Loại</label>
-				<input type="text" class="form-control" name="type" value="<?php echo ( $campaign->type ) ?>">
-				<?php echo form_error('customer'); ?>
+				<label for="item_type">Chiến dịch cho</label>
+				<select  class="form-control" id="cmbMake" name="type" >
+					<?php foreach ($result as $result): ?>
+						<option value=<?php echo $result ?> ><?php echo $result ?></option>
+					<?php endforeach ?>
+					
+				</select>
 			</div>
 		<div class="form-group">
-			<label for="role"> Is Sponsor </label>
+			<label for="role"> Quảng cáo </label>
 			<br>
 			<?php if($campaign->is_sponsor == '1') {?>
 			<label class="radio-inline">
@@ -95,7 +109,7 @@
 				</label>
 				<?php echo form_error('role'); ?>
 			</div>
-		<div class="form-group">s
+		<div class="form-group">
 			<label for="role"> Trạng Thái </label>
 			<br>
 			<?php if($campaign->status == '1') {?>
@@ -113,12 +127,12 @@
 				<?php } ?>
 			</label>
 				<?php echo form_error('role'); ?>
-			</div>
+		</div>
 		
 			<input type="hidden" name="id" value=" <?php echo ($campaign->id) ?>">
-			<button type="submit" class="btn btn-success"  name="update"  value="submit"><span class="icon-checkmark"></span> Update</button>
+			<button type="submit" class="btn btn-success"  name="update"  value="submit"><span class="icon-checkmark"></span> Cập nhật</button>
 	</form>
 </div>
 <?php endforeach; ?>
-</div>
+
 </div>

@@ -3,7 +3,9 @@
             <div class="col-sm-10 col-md-10" style="padding-left:0px;">
                 <h1 class="page-header">Hosts</h1>
             </div>
-            
+            <div class="col-sm-2 col-md-2">
+                <a href="<?php echo base_url('admin/hosts/add_host'); ?>"><button type="button" class="btn btn-primary top_button"><span class="icon-plus-2"></span> Add host</button></a>
+            </div>
              <div id="form-search1">
               <form class="form-inline" method="POST" action="../admin/bookings" style="float:left;">
                   <div class="form-group" style="width: 500px:">
@@ -48,59 +50,58 @@
 				<thead>
 					<tr>
 						<th>STT</th>
-						<th>ID</th>
-						<th>Id</th>
-						<th>Họ tên</th>
-						<th>Giá</th>
+						<th>Mã host</th>
+						<th>Mã người dùng</th>
+						<th>Tên</th>
+						<th>Số điện thoại</th>
+						<th>Email</th>
+						<th>Giới thiệu</th>
 						<th>Địa chỉ</th>
-						<th>Đơn vị giá</th>
-						<th>Quốc gia</th>
 						<th>Mã quốc gia</th>
-						<th>Ảnh</th>
+						<th>Giá</th>
+						<th>Giá trẻ em</th>
+						<th>Phụ phí</th>
+						<th>Số phòng</th>
+						<th>Loại</th>
+						<th>Trạng thái hoạt động</th>
+						<th>Trạng thái </th>
+						<th>Ngày tạo </th>
+						<th>Ngày cập nhật </th>
 						<th>Chức năng</th>
 					</tr>
 				</thead>
 				<tbody>
-					<?php $i = 1; foreach($list as $host): ?>
+					<?php $i = 1; foreach($hosts as $host): ?>
 					<tr>
 						<td><?php echo $i ?></td>
-						<td><?php echo $host['id'] ?></td>
-						<td><?php echo $host['_id'] ?></td>
-						<td><?php echo $host['name'] ?></td>
+						<td><?php echo $host->id ?></td>
+						<td><?php echo $host->user_id ?></td>
+						<td><?php echo $host->name ?></td>
+						<td><?php echo $host->phone ?></td>
+						<td><?php echo $host->email ?></td>
+						<td><?php echo $host->intro ?></td>
+						<td><?php echo $host->address ?></td>
+						<td><?php echo $host->country_code ?></td>
+						<td><?php echo $host->price ?></td>
+						<td><?php echo $host->price_baby ?></td>
+						<td><?php echo $host->surcharge ?></td>
+						<td><?php echo $host->room_number ?></td>
+						<td><?php echo $host->type ?></td>
+						<td><?php echo $host->status ?></td>
+						<td><?php echo $host->is_full ?></td>
+						<td>
+                        <span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $host->created_at))?>                    
+                      	</td>
+                      	<td>
+                        <span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $host->updated_at))?>
+                      	</td>
 						
-						<td><?php echo $host['price'] ?></td>
-						<td><?php echo $host['address'] ?></td>
-						<td><?php echo $host['unit'] ?></td>
-						<td><?php echo $host['country'] ?></td>
-						<td><?php echo $host['country_code'] ?></td>
-						<td><?php echo $host['image'] ?></td>
-
-						<!-- <td><span class="label label-info"><?php echo $host->type ?></span></td> 
-						<td><?php echo $this->host->getHostStatus($host->status) ?></td>
-						<td><span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $host->created_at))?>
-						</td> -->
-					<td style="text-align:center">
-						<div class="btn-group" role="group">
-							<a href="<?php echo base_url('admin/hosts/host_detail/' . $host['id'] ); ?>"class="btn btn-info btn-xs">
-								<span class="icon-search"><?php echo lang('View') ?></span></a>
-								<!-- <?php if ($host->status="active") {
-								?> 	
-								<a href="<?php echo base_url("admin/hosts/block_host?id={$host->id}&status={$host->status}"); ?>"
-									onclick="return confirm('Are you sure you want to Block this Host?')"
-								class="btn btn-warning   btn-xs"></span>
-															Block</a>
-															<?php }else{ ?>
-															<a href="<?php echo base_url("admin/hosts/block_host?id={$host->id}&status={$host->status}"); ?>"
-								onclick="return confirm('Are you sure you want to Active this Host?')"
-								class="btn btn-success btn-xs">
-															Active</a> -->
-							<?php } ?>
-							<a href="<?php echo base_url('admin/hosts/delete_host/' .$host['id']) ?>"
-								onclick="return confirm('Are you sure you want to delete this host?')"
-							class="btn btn-danger   btn-xs"></span>
-						Delete</a>
-					</div>
-				</td>
+						<td style="text-align:center">
+                            <div class="btn-group" role="group">
+                                <a href="<?php echo base_url('admin/hosts/host_detail/'.$host->id); ?>" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Chỉnh sửa</a>
+                            </div>
+                        </td>
+						
 			</tr>
 			<?php $i++; endforeach; ?>
 		</tbody>

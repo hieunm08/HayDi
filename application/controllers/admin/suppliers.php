@@ -95,7 +95,7 @@ class Suppliers extends CI_Controller
         $id = $_GET['id'];
         $status = $_GET['status'];
         $this->session->set_flashdata('message', 'Suppliers successfully ');
-        $this->supplier->change_Supplier_Status($id, $status);
+        $this->supplier->change_Supplier_Status($id, $active_guide);
         redirect('admin/suppliers', 'refresh');
     }
 

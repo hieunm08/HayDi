@@ -57,7 +57,7 @@ class Skills extends CI_Controller
 
             $config['base_url'] = base_url() . 'admin/skills/list_skills';
             $config['total_rows'] = $this->skill->totalSkill();
-            $config['per_page'] = 2;
+            $config['per_page'] = 8;
             $config["uri_segment"] = 4;
             //pagination styling
             $config['num_tag_open'] = '<li>';
@@ -103,12 +103,11 @@ class Skills extends CI_Controller
     }
     function add_skill()
     {
-        //$this->form_validation->set_message('required', $this->lang->line('required'));
- 
-
-        $this->form_validation->set_rules('name', 'lang:username', 'string|trim|required');
-        $this->form_validation->set_rules('icon', 'Icon', 'trim|required');
-        $this->form_validation->set_rules('desc', 'Mô tả', 'string|trim|required');
+       
+        $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+        $this->form_validation->set_rules('name', 'name', 'string|trim|required');
+        $this->form_validation->set_rules('icon', 'Icon', 'trim');
+        $this->form_validation->set_rules('desc', 'Mô tả', 'string|trim');
        
         if ($this->form_validation->run() == FALSE)
         {
@@ -121,7 +120,7 @@ class Skills extends CI_Controller
             $this->load->library('pagination');
             $this->load->model('skill');
             $data = $this->input->post();
-           
+            $this->session->set_flashdata('message', ' successfully ');
             $this->skill->createSkill($data);
             redirect('admin/skills', 'refresh');
         }
@@ -130,7 +129,7 @@ class Skills extends CI_Controller
     function delete_skill($id)
     {
         $this->load->model('skill');
-        $this->session->set_flashdata('message', 'Suppliers successfully deleted');
+        $this->session->set_flashdata('message', 'successfully deleted');
         $this->skill->deleteSkill($id);
         redirect('admin/skills', 'refresh');
     }
