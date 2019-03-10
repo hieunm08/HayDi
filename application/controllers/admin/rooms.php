@@ -109,14 +109,14 @@ class Rooms extends CI_Controller
         if ($this->form_validation->run() == FALSE)
         {
             $this->load->model('room');
-            $data['main_content'] = 'backend/rooms/add_room';
+            $data['main_content'] = 'backend/rooms/add_rooms';
             $data['title'] = 'Add Room';
             $this->load->view('includes/template', $data);
         }else{
             $this->load->library('pagination');
             $this->load->model('room');
             $data = $this->input->post();
-                $this->room->addroom($data);
+             $this->room->addroom($data);
             redirect('admin/rooms', 'refresh');
         }
     }

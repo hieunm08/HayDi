@@ -29,7 +29,7 @@ $crop_data = elements(array('host_id','name','bed_number','bed_type','price','un
 $this->db->update('room',$crop_data);
     }
 
-         function addroom($data,$id){
+ function addroom($data){
         $crop_data = elements(array('host_id','name','bed_number','bed_type','price','unit','is_breakfast','updated_at'), $data);
          $add_room = $this->db->insert_string('room', $crop_data);
         $this->db->query($add_room);
