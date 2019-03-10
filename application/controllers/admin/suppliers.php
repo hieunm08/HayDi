@@ -90,12 +90,12 @@ class Suppliers extends CI_Controller
         $data['title'] = 'Hướng Dẫn Viên';
         $this->load->view('includes/template', $data);
     }
-    function block_Supplier(){
+    function active_guider(){
         $this->load->model('supplier');
         $id = $_GET['id'];
-        $status = $_GET['status'];
-        $this->session->set_flashdata('message', 'Suppliers successfully ');
-        $this->supplier->change_Supplier_Status($id, $active_guide);
+        $active_guide = $_GET['active_guide'];
+        $this->session->set_flashdata('message', 'Thành công ');
+        $this->supplier->activeGuider($id, $active_guide);
         redirect('admin/suppliers', 'refresh');
     }
 
@@ -111,10 +111,6 @@ class Suppliers extends CI_Controller
         $data['links'] = $this->pagination->create_links();
         $data['main_content'] = 'backend/suppliers/suppliers_info';
         $data['title'] = 'suppliers';
-       /* if ($_POST['supplier_search'] != null) {
-            
-        }else{*/
-           // redirect('admin/suppliers', 'refresh');
 
             $this->load->view('includes/template', $data);
         }        

@@ -14,7 +14,13 @@ class Service extends CI_Model
         $query = $this->db->get();
         return $query->num_rows();
     }
-    //phân trang
+    
+     function getHostService(){
+        $this->db->select("*");
+        $this->db->from('service');
+        $query = $this->db->get();
+        return $query->result();   
+    }
     function getAllService($limit, $start)
     {
         $this->db->limit($limit, $start);

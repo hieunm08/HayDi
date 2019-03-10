@@ -25,20 +25,29 @@ class Supplier extends CI_Model
     }
 }
 
-     function show_Supplier_Status($supplier_status)
+    function show_Supplier_Status($supplier_status)
     {
-        if ($supplier_status==0) {
-           echo '<span class="badge badge-success">'.lang('Inactive').'</span>';
-        }else
-        { 
-          echo '<span class="badge badge-success">'.lang('Active').'</span>';
+    if ($supplier_status==0) {
+    echo '<span class="badge badge-success">'.lang('Inactive').'</span>';
+    }else
+    {
+    echo '<span class="badge badge-success">'.lang('Active').'</span>';
     }
-}
-    function change_Supplier_Status($id, $status){
-        if ($status==0) {
-            $query = $this->db->query("UPDATE users SET status = '1' WHERE id = '$id' ");
+    }
+    function showActiveGuider($active_guide)
+    {
+    if ($active_guide==0) {
+    echo '<span class="badge badge-secondary">'.lang('Chưa kích hoạt').'</span>';
+    }else
+    {
+    echo '<span class="badge badge-success">'.lang('Đã kích hoạt').'</span>';
+    }
+    }
+    function activeGuider($id, $active_guide){
+        if ($active_guide==0) {
+            $query = $this->db->query("UPDATE users SET active_guide = '1' WHERE id = '$id' ");
         }else {
-            $query = $this->db->query("UPDATE users SET status = '0' WHERE id = '$id' ");
+            $query = $this->db->query("UPDATE users SET active_guide = '0' WHERE id = '$id' ");
         }
     }
 

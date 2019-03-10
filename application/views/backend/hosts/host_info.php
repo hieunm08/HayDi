@@ -11,8 +11,7 @@
   </div>
   <div class="row" >
     <?php
-    foreach ($hd as $host){
-
+    foreach ($hosts as $host){
     }
     ?>
     <div class="col-sm-4 col-md-4">
@@ -31,9 +30,9 @@
         </div>
         <div class="form-group">
           <label for="company_name">Ảnh</label>
-          <input type="text" class="form-control" id="company_name" name="images" value="<?php echo $host->image ?>">
+          <input type="file" class="form-control" id="company_name" multiple name="images[]" value="<?php echo $host->image ?>">
         </div>
-        <div class="form-group">
+        <div class="form-group">  
           <label for="company_name">Video</label>
           <input type="text" class="form-control" id="company_name" name="video" value="<?php echo $host->video ?>">
         </div>
@@ -54,7 +53,7 @@
         <div class="form-group">
           <label for="company_street">Mã Quốc Gia</label> 
           <select class="form-control"  id="cmbMake" name="country_code"  >
-            <option value=<?php echo $host->country_code  ?> ><?php echo $host->country_code ?></option>
+              <option value=<?php echo $host->country_code  ?> ><?php echo $host->country_code ?></option>
               <?php foreach ($city_code as $city_code ){ ?>  
                 <option value=<?php echo $city_code->code  ?> ><?php echo $city_code->code ?></option>
               <?php } ?> 
@@ -71,19 +70,26 @@
           <label for="company_street">Giá trẻ em</label>
           <input type="text" class="form-control" id="country_input" name="price_baby" value="<?php echo $host->price_baby ?>" >
         </div>
-      <div class="form-group">
-          <label for="company_street">Đơn vị giá</label>
-          <select class="form-control"  id="cmbMake" name="unit"  >    
-              <option value="USD" >USD</option>
-        <option value="VND">VND</option>
-            </select>
-        </div>
+        <?php $type = array("USD","VND");
+        array_unshift($type,   $host->unit );
+        $result=array_unique($type);
+
+     ?> 
+    <div class="form-group">
+        <label for="item_type">Đơn vị giá</label>
+        <select  class="form-control" id="cmbMake" name="unit" >
+          <?php foreach ($result as $result): ?>
+            <option value=<?php echo $result ?> ><?php echo $result ?></option>
+          <?php endforeach ?>
+          
+        </select>
+    </div>
         <div class="form-group">
           <label for="role"> Trạng Thái </label>
           <br>
           <?php if($host->status == 'active') {?>
           <label class="radio-inline">
-            <input type="radio" checkeds name="status" value="active" >Active
+            <input type="radio" checked name="status" value="active" >Active
           </label>
           <label class="radio-inline">
             <input type="radio"  name="status" value="inactive" >Inactive
@@ -100,7 +106,26 @@
 
         </div>
         <div class="col-sm-4 col-md-4">
-
+        
+        <div class="form-group">
+          <label for="company_street">Trạng thái phòng</label>
+          <br>
+          <?php if($host->is_full == '0') {?>
+          <label class="radio-inline">
+            <input type="radio" checked name="is_full" value="0" >Còn phòng
+          </label>
+          <label class="radio-inline">  
+            <input type="radio"  name="is_full" value="1" > Đã đầy
+            <?php }else{ ?>
+            <label class="radio-inline">
+              <input type="radio" checked name="is_full" value="1" >Đã đầy
+            </label>
+            <label class="radio-inline">
+              <input type="radio"  name="is_full" value="0" >Còn phòng
+              <?php } ?>
+            </label>
+          </label>
+        </div>
         <div class="form-group">
           <label for="company_street">Phụ phí</label>
             <input type="text" class="form-control" id="company_street" name="surcharge" value="<?php echo $host->surcharge ?>">
@@ -123,13 +148,20 @@
         <option value="0">Không</option>
             </select>
         </div>
-         <div class="form-group">
-          <label for="company_street">Loại</label>
-          <select class="form-control"  id="cmbMake" name="type"  >    
-              <option value="host" >Host</option>
-        <option value="hotel">Hotel</option>
-            </select>
-        </div>
+         <?php $type = array("host","hotel");
+        array_unshift($type,   $host->type );
+        $result=array_unique($type);
+
+     ?> 
+    <div class="form-group">
+        <label for="item_type">Loại</label>
+        <select  class="form-control" id="cmbMake" name="type" >
+          <?php foreach ($result as $result): ?>
+            <option value=<?php echo $result ?> ><?php echo $result ?></option>
+          <?php endforeach ?>
+          
+        </select>
+    </div>
         
         <input type="hidden" class="form-control" id="company_street" name="id" value="<?php echo $host->id ?>">
         </div>

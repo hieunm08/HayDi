@@ -136,11 +136,11 @@ class Bookings extends CI_Controller {
         }
 
     
-        function list_booking_byID($book_id)
+        function list_guider_booking_by_id($id)
         {
             $this->load->library('pagination');
             $this->load->model('booking');
-            $data['bookings'] = $this->booking->show_bookings_id($book_id);
+            $data['bookings_guider'] = $this->booking->getGuiderOrderById($id);
             $data['links'] = $this->pagination->create_links();
             $data['main_content'] = 'backend/bookings/update_booking';
             $data['title'] = 'Bookings';
@@ -191,26 +191,20 @@ class Bookings extends CI_Controller {
              $this->load->view('includes/template', $data);
         }
 
-        function updatebooking()
-        {
-/*            $data['start_day'] = date('Y-m-d G:i:s');
-*/            $data['start_day'] = $this->input->post('start_day');
-            $data['end_day'] = $this->input->post('end_day');
-            $data['guider_id'] = $this->input->post('guider_id');
-            $data['hours'] = $this->input->post('hours');
-            $data['note'] = $this->input->post('note');
-            $data['status'] = $this->input->post('status');
-            $data['money'] = $this->input->post('money');
-            $data['paid_type'] = $this->input->post('paid_type');
-            $data['id'] = $this->input->post('id');
-            $this->load->library('pagination');
-            $this->load->model('booking');
-            $id = $this->uri->segment(4);
-            $this->booking->update_booking($data,$id);
-            redirect('admin/bookings', 'refresh');
+    function edit_guider_booking()
+    {
+        $data['status']=$this->input->post('status');
+        $data['updated_at']=mdate('%Y-%m-%d %H:%i:%s', now());
+        $data['id']=$this->input->post('id');
+        $this->load->library('pagination');
+        $this->load->model('booking');
+        $id = $this->uri->segment(4);
+       
+        $this->booking->updateGuiderBooking($data, $id);
+        redirect('admin/bookings/bookings', 'refresh');
 
 
-        }
+    }
 
         function cancel_trips($id){
         $this->load->model('booking');

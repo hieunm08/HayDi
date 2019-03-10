@@ -102,7 +102,7 @@ class Sponsors extends CI_Controller
         $data['sponsors'] = $this->sponsor->getSponsorById($id);
 
         $data['links'] = $this->pagination->create_links();
-        $data['main_content'] = 'backend/sponsors/sponsor_info';
+        $data['main_content'] = 'backend/sponsors/test.php';
         $data['title'] = 'Sponsor';
         $this->load->view('includes/template', $data);
     } 

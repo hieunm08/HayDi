@@ -49,12 +49,18 @@ Class Booking extends CI_Model
         $this->db->where('id', $id);
         $this->db->update('order_host', $crop_data);
     }  
-
-    function show_bookings_id($book_id)
+    function updateGuiderBooking($data, $id)
     {
-        $this->db->from('guider_orders');
+        $crop_data = elements(array('status','updated_at'), $data);
+        $this->db->where('id', $id);
+        $this->db->update('order_guider', $crop_data);
+    }  
+
+    function getGuiderOrderById($id)
+    {
+        $this->db->from('order_guider');
         $this->db->select("*");
-        $this->db->where("id",$book_id);
+        $this->db->where("id",$id);
         $query = $this->db->get();
         return $query->result();
     }

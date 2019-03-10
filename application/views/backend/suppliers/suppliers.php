@@ -38,7 +38,11 @@
                         </form>
                     </div>
                 </div>
-           
+                <div class="row">
+        <?php
+        if ($this->session->flashdata('message') != '') echo '<div class="alert alert-success" role="alert">' . $this->session->flashdata('message') . '</div>';
+        ?>
+    </div>
                 <div class="row">
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped">
@@ -54,7 +58,8 @@
                                     <th>Địa chỉ</th>
                                     <th>Mã quốc gia</th>
                                     <th>Level</th>
-                                    <th>Trạng thái</th>
+                                    <th>Trạng thái hoạt động</th>
+                                    <th>Trạng thái tài khoản</th>
                                     <th>Type</th>
                                     <th>Giá</th>
                                     <th>Đơn vị giá</th>
@@ -83,6 +88,7 @@
                                     <td><?php echo $supplier->country_code ?></td>
                                     <td><?php echo $supplier->level ?></td>
                                     <td><?php echo $this->supplier->show_Supplier_Status($supplier->status) ?></td>
+                                     <td><?php echo $this->supplier->showActiveGuider($supplier->active_guide) ?></td>
                                     <td><span class="label label-info"><?php echo $supplier->type ?></span></td>
                                     <td><?php echo $supplier->price ?></td>
                                     <td><?php echo $supplier->unit ?></td>
@@ -91,31 +97,21 @@
                                     <td><span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $supplier->updated_at))?>
                                     </td>
                                 
-                                <!--  // cái list_tickets là gì đấuy
-                                //hinh nhu no la cai danh sách thoi ông
-                                uh còn cái model kia ô muốn lấy gì thì select cái đó nhé nãy tôi tiện nên tôi lấy * luôn còn ông muốn lấy trường nào thì lấy trg đó vs lại nó có oder by đó -->
                                 <td style="text-align:center">
                                     <div class="btn-group" role="group">
-                                        <!--                                <a href="" onclick="return confirm('Are you sure you want to delete this booking ticket?')" class="btn btn-default btn-xs"><span class="icon-cancel-2" style="color:red"></span> -->
-                                        <?php //echo lang('Delete')
-                                        ?><!--</a>-->
                                         <a href="<?php echo base_url('admin/suppliers/list_suppliers_by_id/'.$supplier->id); ?>" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Update</a>
-                                        <?php if ($supplier->status==1) {
+                                        <?php if ($supplier->active_guide==1) {
                                         ?>
-                                        <a href="<?php echo base_url("admin/suppliers/block_Supplier?id={$supplier->id}&status={$supplier->status}"); ?>"
+                                        <a href="<?php echo base_url("admin/suppliers/active_guider?id={$supplier->id}&active_guide={$supplier->active_guide}"); ?>"
                                             onclick="return confirm('Are you sure you want to Block this supplier?')"
                                             class="btn btn-default btn-xs"><span class="icon-minus" style="color:red"></span>
-                                        Block</a>
+                                        Khóa tài khoản</a>
                                         <?php }else{ ?>
-                                        <a href="<?php echo base_url("admin/suppliers/block_Supplier?id={$supplier->id}&status={$supplier->status}"); ?>"
+                                        <a href="<?php echo base_url("admin/suppliers/active_guider?id={$supplier->id}&active_guide={$supplier->active_guide}"); ?>"
                                             onclick="return confirm('Are you sure you want to Active this supplier?')"
                                             class="btn btn-default btn-xs"><span class="icon-plus" style="color:blue"></span>
-                                        Active</a>
+                                        Kích hoạt</a>
                                         <?php } ?>
-                                        <a href="<?php echo base_url('admin/suppliers/delete_supplier/' .$supplier->id) ?>"
-                                            onclick="return confirm('Are you sure you want to delete this supplier?')"
-                                            class="btn btn-default btn-xs"><span class="icon-cancel-2" style="color:red"></span>
-                                        Delete</a>
                                     </div>
                                 </td>
                             </tr>

@@ -49,6 +49,7 @@ class Hosts extends CI_Controller
             $this->list_host();
         }
     }
+
     
     function list_host()
     {
@@ -79,34 +80,7 @@ class Hosts extends CI_Controller
         $data['title'] = 'Host';
         $this->load->view('includes/template', $data);
     }
-    function block_host(){
-       if(isset($_POST['submit'])){
-            $data = array(
-                'id'       =>  $this->input->post('id'),
-                'name'      =>  $this->input->post('name'),
-                'price'=>  $this->input->post('price'),
-                'address'      =>  $this->input->post('address'),
-                'unit'=>  $this->input->post('unit'),
-                'country'=>  $this->input->post('country'),
-                'country_code'=>  $this->input->post('country_code')
-
-            );
-            $update =  $this->curl->simple_put($this->API.'/kontak', $data, array(CURLOPT_BUFFERSIZE => 10)); 
-            if($update)
-            {
-                $this->session->set_flashdata('hasil','Update Data Berhasil');
-            }else
-            {
-               $this->session->set_flashdata('hasil','Update Data Gagal');
-            }
-            redirect('kontak');
-        }else{
-            $params = array('id'=>  $this->uri->segment(3));
-            $data['datakontak'] = json_decode($this->curl->simple_get($this->API.'/kontak',$params));
-            $this->load->view('kontak/edit',$data);
-        }
-    }
-
+    
 
     function host_detail($id)
     {
@@ -119,7 +93,22 @@ class Hosts extends CI_Controller
         $data['main_content'] = 'backend/hosts/host_info';
         $data['title'] = 'Host';
         $this->load->view('includes/template', $data);
-        }        
+        }   
+
+    function list_host_by_id($id)
+    {
+        $this->load->library('pagination');
+        $this->load->model('host');
+        $this->load->model('supplier');
+        $data['city_code'] = $this->supplier->getCityCode();
+        $data['hosts'] = $this->host->getHostById($id);
+
+        $data['links'] = $this->pagination->create_links();
+        $data['main_content'] = 'backend/hosts/host_info';
+        $data['title'] = 'Host';
+        $this->load->view('includes/template', $data);
+
+    }     
 
     function add_host()
     {
@@ -131,9 +120,12 @@ class Hosts extends CI_Controller
 
         if ($this->form_validation->run() == FALSE)
         {
-            $this->load->model('host');
-             $this->load->model('supplier');
+            
 
+            $this->load->model('host');
+            $this->load->model('supplier');
+            $this->load->model('service');
+            $data['host_service'] = $this->service->getHostService();
             $data['city_code'] = $this->supplier->getCityCode();
             $data['main_content'] = 'backend/hosts/add_host';
             $data['title'] = 'Add host';
@@ -146,7 +138,7 @@ class Hosts extends CI_Controller
         "phone"        =>   $this->input->post('phone'),
         "email"        =>    $this->input->post('email'),
         "images"        =>   array(
-            $this->input->post('images')
+            $this->input->post('images[]')
         ),
         "video" => $this->input->post('video'),
         "intro" => $this->input->post('intro'),
@@ -160,17 +152,17 @@ class Hosts extends CI_Controller
         "customers_same_time"        =>    $this->input->post('customers_same_time'),
         "with_boss"        =>    $this->input->post('with_boss'),
         "type"        =>    $this->input->post('type'),
-        "services"        =>   array(
+       /* "services"        =>   array(
             "service_id" =>  $this->input->post('service_id'),
             "access" =>  $this->input->post('access'),
             "cost" =>  $this->input->post('cost'),
             "unit" =>  $this->input->post('unit'),
-        ),
+        ),*/
         );
         $make_call = callAPI('POST', 'http://api.haydi.vn:3001/backend/hosts', json_encode($data_array));
         $response = json_decode($make_call, true);
         echo($make_call);
-        redirect('admin/hosts', 'refresh');
+        //redirect('admin/hosts', 'refresh');
     }
 }
     function edit_host(){
@@ -192,31 +184,61 @@ class Hosts extends CI_Controller
 
         }else
         {
-        $id = $this->input->post('id');
-        $data_array =  array(
-        "name"        =>    $this->input->post('name'),
-        "phone"        =>   $this->input->post('phone'),
-        "email"        =>    $this->input->post('email'),
-        "images"        =>   array(
-            $this->input->post('images')
-        ),
-        "video" => $this->input->post('video'),
-        "intro" => $this->input->post('intro'),
-        "address"        =>    $this->input->post('address'),
-        "country_code"        =>    $this->input->post('country_code'),
-        "price"        =>    $this->input->post('price'),
-        "price_baby"        =>    $this->input->post('price_baby'),
-        "unit"        =>    $this->input->post('unit'),
-        "surcharge"        =>    $this->input->post('surcharge'),
-        "room_number"        =>    $this->input->post('room_number'),
-        "customers_same_time"        =>    $this->input->post('customers_same_time'),
-        "with_boss"        =>    $this->input->post('with_boss'),
-        "type"        =>    $this->input->post('type')
-        );
-        $make_call = callAPI('PUT', 'http://api.haydi.vn:3001/backend/hosts/'. $id, json_encode($data_array));
-        $response = json_decode($make_call, true);
-        echo($make_call);
-        redirect('admin/hosts', 'refresh');  
+            if($this->input->post('images[]')){
+                $id = $this->input->post('id');
+                $data_array =  array(
+                "name"        =>    $this->input->post('name'),
+                "phone"        =>   $this->input->post('phone'),
+                "email"        =>    $this->input->post('email'),
+                "images"        =>   array(
+                    $this->input->post('images[]')
+                ),
+                "video" => $this->input->post('video'),
+                "intro" => $this->input->post('intro'),
+                "address"        =>    $this->input->post('address'),
+                "country_code"        =>    $this->input->post('country_code'),
+                "price"        =>    $this->input->post('price'),
+                "price_baby"        =>    $this->input->post('price_baby'),
+                "unit"        =>    $this->input->post('unit'),
+                //"status"        =>    $this->input->post('status'),
+                //"is_full"        =>    $this->input->post('is_full'),
+                "surcharge"        =>    $this->input->post('surcharge'),
+                "room_number"        =>    $this->input->post('room_number'),
+                "customers_same_time"        =>    $this->input->post('customers_same_time'),
+                "with_boss"        =>    $this->input->post('with_boss'),
+                "type"        =>    $this->input->post('type'),
+                );
+                $make_call = callAPI('PUT', 'http://api.haydi.vn:3001/backend/hosts/'. $id, json_encode($data_array));
+                $response = json_decode($make_call, true);
+                echo($make_call);
+                redirect('admin/hosts', 'refresh');              
+            }else{
+                $id = $this->input->post('id');
+                $data_array =  array(
+                "name"        =>    $this->input->post('name'),
+                "phone"        =>   $this->input->post('phone'),
+                "email"        =>    $this->input->post('email'),
+                "video" => $this->input->post('video'),
+                "intro" => $this->input->post('intro'),
+                "address"        =>    $this->input->post('address'),
+                "country_code"        =>    $this->input->post('country_code'),
+                "price"        =>    $this->input->post('price'),
+                "price_baby"        =>    $this->input->post('price_baby'),
+                "unit"        =>    $this->input->post('unit'),
+                //"status"        =>    $this->input->post('status'),
+                //"is_full"        =>    $this->input->post('is_full'),
+                "surcharge"        =>    $this->input->post('surcharge'),
+                "room_number"        =>    $this->input->post('room_number'),
+                "customers_same_time"        =>    $this->input->post('customers_same_time'),
+                "with_boss"        =>    $this->input->post('with_boss'),
+                "type"        =>    $this->input->post('type'),
+                );
+                $make_call = callAPI('PUT', 'http://api.haydi.vn:3001/backend/hosts/'. $id, json_encode($data_array));
+                $response = json_decode($make_call, true);
+                echo($make_call);
+                redirect('admin/hosts', 'refresh');  
+            }
+        
     }
 }
     

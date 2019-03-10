@@ -64,7 +64,7 @@
 						<th>Số phòng</th>
 						<th>Loại</th>
 						<th>Trạng thái hoạt động</th>
-						<th>Trạng thái </th>
+						<th>Trạng thái phòng</th>
 						<th>Ngày tạo </th>
 						<th>Ngày cập nhật </th>
 						<th>Chức năng</th>
@@ -98,7 +98,7 @@
 						
 						<td style="text-align:center">
                             <div class="btn-group" role="group">
-                                <a href="<?php echo base_url('admin/hosts/host_detail/'.$host->id); ?>" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Chỉnh sửa</a>
+                                <a href="<?php echo base_url('admin/hosts/list_host_by_id/'.$host->id); ?>" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Chỉnh sửa</a>
                             </div>
                         </td>
 						
