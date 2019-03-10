@@ -6,7 +6,7 @@
                         <h1 class="page-header">Room</h1>
                     </div>
                     <div class="col-sm-2 col-md-2">
-                       <a href="<?php echo base_url('admin/sponsors/add_sponsor'); ?>"><button type="button" class="btn btn-primary top_button"><span class="icon-plus-2"></span> Add Sponsor</button></a>
+                       <a href="<?php echo base_url('admin/rooms/add_rooms'); ?>"><button type="button" class="btn btn-primary top_button"><span class="icon-plus-2"></span> Add Room</button></a>
                     </div>
                 </div>
                 <div class="row" style="margin-right:0px;margin-bottom: 10px;width: 500px">
@@ -61,10 +61,11 @@
                                     <td><?php echo $rooms->bed_type ?></td>
                                     <td><?php echo $rooms->price ?></td>
                                     <td><?php echo $rooms->unit ?></td>
-                                    <td><?php echo $this->host->showIsBreakfast($rooms->is_breakfast) ?></td>
+                                    <td><?php echo $this->room->showIsBreakfast($rooms->is_breakfast) ?></td>
                                     <td><span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $rooms->updated_at))?>
                                     <td style="text-align:center">
                                         <div class="btn-group" role="group">
+                                             <a href="<?php echo base_url('admin/rooms/list_room_byID/'. $rooms->id) ?>" target="_blank" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Update</a>
                                         </div>
                                     </td>
                             <?php $i++; endforeach; ?>

@@ -3,28 +3,24 @@
 class Sponsors extends CI_Controller
 {
     public $isCheck = false;
-    var $API = "";
 
     function __construct()
     {
         parent::__construct();
         $this->is_logged_in();
-        $this->API="http://api.haydi.vn:3001/";
         $this->load->library('curl');
         $this->load->helper('language');
          $this->load->library('form_validation');
-        $this->lang->load('supplier', $this->session->userdata('language'));
+        $this->lang->load('sponsors', $this->session->userdata('language'));
     }
 
     function index()
     {
-        if (!empty($_POST)) {
+        if (!empty($_POST)) {   
 
             if (isset($_POST['uploadclick'])) {
-                if (isset($_FILES['file'])) {
-                    $this->docFileExcel($_FILES['file']['tmp_name'], './folder/' . $_FILES['file']['name']);
-                }
-            } elseif (isset($_POST['userName'])) {
+              
+            if (isset($_POST['userName'])) {
                 $userName = $_POST['userName'];
                 $password = $_POST['password'];
                 $fullname = $_POST['fullname'];
@@ -32,11 +28,9 @@ class Sponsors extends CI_Controller
                 $status = $_POST['status'];
                 $this->addSupplier($userName, $password, $fullname,  $type, $status);
 
-            } elseif ($_POST['supplier_search'] != null) {
-                $this->isCheck = true;
-                $supplier_cd = $_POST['supplier_search'];
-//                $this->list_suppliers($supplier_cd);
-                $this->list_suppliers_by_search($supplier_cd);
+            } elseif (($_POST['id']!=null)){
+                $data['id'] =$this->sponsor->search_sponsors('id');
+                $this->load->view('sponsor',$data);
             }elseif (isset($_POST['add'])) {
                 $data['main_content'] = 'backend/sponsors/add_sponsor';
                 $this->load->view('includes/template', $data);
@@ -50,6 +44,42 @@ class Sponsors extends CI_Controller
             $this->list_sponsors();
         }
     }
+
+    function search_sponsors($id){
+        $id = $this->input->post('id');
+        $this->load->library('pagination');
+            $this->load->model('sponsor');
+            $data['sponsors'] = $this->booking->search_sponsors($id,$type);
+            $data['links'] = $this->pagination->create_links();
+            $data['main_content'] = 'backend/sponsors/sponsors';
+             $data['title'] = 'Sponsors';
+             $this->load->view('includes/template', $data);
+        /*$this->load->library('pagination')
+        $config = array();
+        $config['base_url']='#';
+        $config['total_rows']=$this->sponsor->fech_data($id);
+         $config['per_page'] = 3;
+            $config["uri_segment"] = 4;
+            //pagination styling
+            $config['num_tag_open'] = '<li>';
+            $config['num_tag_close'] = '</li>';
+            $config['cur_tag_open'] = '<li class="active"><a href"#">';
+            $config['cur_tag_close'] = '</a></li>';
+            $config['next_tag_open'] = '<li>';
+            $config['next_tag_close'] = '</li>';
+            $config['prev_tag_open'] = '<li>';
+            $config['prev_tag_close'] = '</li>';
+            $config['prev_link'] = '&laquo;';
+            $config['next_link'] = '&raquo;';
+            $this->pagination->initialize($config);
+            $page = $this->uri->segment(4);
+            $start= ($page -1)*$config['per_page'];
+            $output = array(
+                'pagination_link'=> $this->pagination-> create_links(),
+                'sponsors_list' => $this->sponsor-> fech_data($config["per_page"],$start,$id)
+            );
+             echo json_encode($output);*/
+ }
     
     function list_sponsors()
         {
@@ -146,17 +176,16 @@ class Sponsors extends CI_Controller
         }
     }
 
-    private function is_logged_in()
-    {
-        $is_logged_in = $this->session->userdata('is_logged_in');
-        if (!isset($is_logged_in) || $is_logged_in != true) {
+private function is_logged_in()
+        {
+            $is_logged_in = $this->session->userdata('is_logged_in');
 
+            if (!isset($is_logged_in) || $is_logged_in != true) {
+                echo 'login please';
+                die();
+            }
         }
-    }
-
-   
-
     
 }
 
-
+}

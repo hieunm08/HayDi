@@ -39,6 +39,8 @@ class Bookings extends CI_Controller {
             }
 
     }
+
+    
         function pdf($id)
         {
             $this->load->helper('dompdf');

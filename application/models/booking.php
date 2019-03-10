@@ -65,7 +65,7 @@ Class Booking extends CI_Model
         return $query->result();
     }
     function search_bookings_id($guider_id,$start_day,$end_day,$status,$money){
-        $query = $this->db->query("SELECT * FROM guider_orders where guider_id = '$guider_id' OR  start_day = '$start_day' OR  end_day = '$end_day' OR status = '$status' OR  money ='$money'");
+        $query = $this->db->query("SELECT * FROM order_guider where guider_id = '$guider_id' OR  start_day = '$start_day' OR  end_day = '$end_day' OR status = '$status' OR  money ='$money'");
      /*   $this->db->from('booking');
         $this->db->select("*");
         $this->db->where("book_id",$book_id);

@@ -77,9 +77,9 @@ class Supplier extends CI_Model
 
     }
         //tim kiem tat ca
-    function Find_Supplier($supplier_search)
+    function Find_Supplier($id,$name,$phone,$email,$address,$status,$type)
     {
-           $query = $this->db->query("SELECT * FROM supplier_mst WHERE supplier_User LIKE '%$supplier_search%' OR supplier_Fullname LIKE '%$supplier_search%' OR supplier_Type LIKE '$supplier_search'  ");
+           $query = $this->db->query("SELECT * FROM users WHERE id ='$id' OR name='$name' OR phone ='$phone' OR email='$email' OR address ='$address' OR status ='$status' OR type= '$type'");
            return $query->result();
     }
         //tim kiem theo muc

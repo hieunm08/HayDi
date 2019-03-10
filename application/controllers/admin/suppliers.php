@@ -32,16 +32,24 @@ class Suppliers extends CI_Controller
                 $status = $_POST['status'];
                 $this->addSupplier($userName, $password, $fullname,  $type, $status);
 
-            } elseif ($_POST['supplier_search'] != null) {
+            } elseif (($_POST['id']!= null)|| ($_POST['name']!= null)|| ($_POST['phone']!= null)||($_POST['email']!= null)||($_POST['address']!= null)|| ($_POST['status']!= null)||($_POST['type
+                ']!= null)) {
                 $this->isCheck = true;
-                $supplier_cd = $_POST['supplier_search'];
-//                $this->list_suppliers($supplier_cd);
-                $this->list_suppliers_by_search($supplier_cd);
-            } elseif ($_POST['add'] != null) {
+                $id = $_POST['id'];
+                $name = $_POST['name'];
+                $phone = $_POST['phone'];
+                $email = $_POST['email'];
+                $address = $_POST['address'];
+                $status = $_POST['status'];
+                $type = $_POST['type'];
+            $this->list_suppliers_by_search($id,$name,$phone,$email,$address,$status,$type);
+        }
+//        
+            /*} elseif ($_POST['add'] != null) {
                 $data['links'] = $this->pagination->create_links();
                 $data['main_content'] = 'backend/skills/add_skill';
                 $this->load->view('includes/template', $data);
-             }else {
+             }*/else {
                 $this->isCheck = false;
 //                $supplier_cd = $_POST['supplier_search'];
                 $this->list_suppliers();
@@ -84,7 +92,7 @@ class Suppliers extends CI_Controller
 //        } else {
             $data['suppliers'] = $this->supplier->show_all_suppliers($config['per_page'], $page);
 //        }
-
+                
         $data['links'] = $this->pagination->create_links();
         $data['main_content'] = 'backend/suppliers/suppliers';
         $data['title'] = 'Hướng Dẫn Viên';
@@ -116,13 +124,11 @@ class Suppliers extends CI_Controller
         }        
 
         //theo tat ca
-    function list_suppliers_by_search($supplier_cd)
+    function list_suppliers_by_search($id,$name,$phone,$email,$address,$status,$type)
     {
         $this->load->library('pagination');
         $this->load->model('supplier');
-
-        $data['suppliers'] = $this->supplier->Find_Supplier($supplier_cd);
-
+        $data['suppliers'] = $this->supplier->Find_Supplier($id,$name,$phone,$email,$address,$status,$type);   
         $data['links'] = $this->pagination->create_links();
         $data['main_content'] = 'backend/suppliers/suppliers';
         $data['title'] = 'suppliers';

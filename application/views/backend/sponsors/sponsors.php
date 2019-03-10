@@ -11,10 +11,81 @@
         </style>
  
  <script>
-     $(document).ready(function)(){
-        function load($data)
-}
- </script>       <body>
+     /*$(document).ready(function)(){
+        search_data(1)
+        function search_data(page)
+        {
+            $('#result').html("<div id='load'></div>")
+            var actiong='fetch_data';
+            var id =get_search('id');
+            $ajax({
+                    url:"<?php echo base_url();?> sponsor/fetch_data"+page,
+                    method:"POST";
+                    dataType:"JSON",
+                    data:{ action:action, id:id                        
+                    },
+                    success:function(data){
+
+                        $('.filter_data').html(data.sponsor_list);
+                        $("#pagination_link").html(data.pagination);
+                    }
+
+
+            })
+
+       }
+
+     function get_search(class_name)
+    {
+        var search = [];
+        $('.'+class_name+':checked').each(function(){
+            search.push($(this).val());
+        });
+        return search;
+    }
+    $(document).on('click', '.pagination li a', function(event){
+        event.preventDefault();
+        var page = $(this).data('ci-pagination-page');
+        search_data(page);
+    });
+    $('.common_selector').click(function(){
+        search_data(1);
+    });*/
+
+<script>
+$(document).ready(function(){
+
+ load_data();
+
+ function load_data(query)
+ {
+  $.ajax({
+   url:"<?php echo base_url(); ?>ajaxsearch/fetch",
+   method:"POST",
+   data:{query:query},
+   success:function(data){
+    $('#result').html(data);
+   }
+  })
+ }
+
+ $('#search_text').keyup(function(){
+  var search = $(this).val();
+  if(search != '')
+  {
+   load_data(search);
+  }
+  else
+  {
+   load_data();
+  }
+ });
+});
+</script>
+
+ </script> 
+
+       <body>
             <div class="col-sm-10 col-md-11 main">
                 <div class="row" style="margin-right:0px;">
                     <div class="col-sm-10 col-md-10" style="padding-left:0px;">
@@ -29,21 +100,19 @@
                                                 <div class="form-group">
         
                             <div class="input-group">
-                                <span class="input-group-addon">Search</span>
-                                <input type="text" class="form-control"  name="supplier_search"
-                                placeholder="<?php echo lang('Supplier cd') ?>">
-                                <!-- <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px;" type="submit"
+                                <input type="text" class="form-control"  name="id" id="id"
+                                placeholder="<?php echo lang('Supplier cd') ?> ">
+                                <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px;" type="submit"
                                 class="btn btn-primary"><?php echo lang('Search supplier'); ?>Search
-                                </button> -->
+                                </button>
                             </div>
                         </div>
                         <br/>
                   
                     </div>
                 </div>
-          
-  <div id="result">
-                <div class="row">
+         
+                 <div class="row">
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped">
                             <thead>
@@ -59,7 +128,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $this->load->model('payment'); ?>
+                                <?php $this->load->model('sponsor'); ?>
                                 <?php
                                 if ($this->pagination->per_page >= $this->pagination->total_rows) $i = 1;
                                 else $i = 1 + ($this->pagination->cur_page - 1) * $this->pagination->per_page;
@@ -89,11 +158,6 @@
                     </table>
                 </div>
             <ul class="pagination"><?php echo $links ?></ul>
-
-        </div>
-        
-    
- 
 </div>
 <div
     "form-2" id="dialog-form" style="display: none; " title="Create Supplier">
@@ -138,10 +202,8 @@
 </html>
 <script>
     $(document).ready(function)(){
-        function load_data($query){
-            $.ajax(){
-                url:"<?php echo base_url();?> sponsor/search_fetch "
-            }
+        function filter_data($page){
+          var action='fetch_data';
+          }
         }
-}
 </script>

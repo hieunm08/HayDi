@@ -33,9 +33,15 @@ class Hosts extends CI_Controller
                 $status = $_POST['status'];
                 $this->addSupplier($userName, $password, $fullname,  $type, $status);
 
-            } elseif ($_POST['supplier_search'] != null) {
+            } elseif ($_POST['id'] != null || ($_POST['name'])|| ($_POST['phone'])||($_POST['address'])|| ($_POST['status'])||($_POST['type
+                '])) {
                 $this->isCheck = true;
-                $supplier_cd = $_POST['supplier_search'];
+                $id = $_POST['id'];
+                $name = $_POST['name'];
+                $phone = $_POST['phone'];
+                $address = $_POST['address'];
+                $status = $_POST['status'];
+                $type = $_POST['type'];
 //                $this->list_suppliers($supplier_cd);
                 $this->list_suppliers_by_search($supplier_cd);
             }

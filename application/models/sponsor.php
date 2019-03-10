@@ -23,6 +23,16 @@ class Sponsor extends CI_Model
         $query = $this->db->get();  
         return $query->result();
     }
+    function fetch_data($query){
+        $this->db->select("*");
+        $this->db->from("sponsor",$query);
+        if ($query!='') {
+            $this->db->like('sponsor_id',$query);
+            $this->db->or_like('type',$query);
+        }
+        $this->db->order_by('sponsor_id',$query);  
+        return $this->db->get();
+    }
     function getSponsorById($id)
     {
         $this->db->select("*");

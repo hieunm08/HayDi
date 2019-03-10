@@ -19,9 +19,26 @@
                     <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
                         <form class="form-inline" method="POST" action="../admin/suppliers" style="float:left">
                             <div class="form-group">
-                                <input type="text" class="form-control"  name="supplier_search"
-                                placeholder="<?php echo lang('Supplier cd') ?>">
-                                
+                                <input type="text" class="form-control"  name="id"
+                                placeholder="ID">
+                                <input type="text" class="form-control"  name="name"
+                                placeholder="Họ tên">
+                                <input type="text" class="form-control"  name="phone"
+                                placeholder="Số điện thoại">
+                                <input type="text" class="form-control"  name="email"
+                                placeholder="Email">
+                                <input type="text" class="form-control"  name="address"
+                                placeholder="Địa chỉ">
+                                 <select class="form-control" name="status" style="margin:6px 6px 6px 0px;width: 15%;float: left; placeholder="Trạng thái">
+                    <option value="">Chọn Trạng Thái</option>
+                    <option  value="0">Active</option>
+                    <option  value="1">Inactive </option>
+                            </select>
+                            <select class="form-control" name="type" style="margin:6px 6px 6px 0px;width: 15%;float: left;placeholder="BookStatus">
+                    <option value="">Chọn Chọn Loại</option>
+                    <option  value="customer">Người dùng</option>
+                    <option  value="guider">Hướng dẫn viên </option>
+                            </select>
                                 <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px;" type="submit"
                                 class="btn btn-primary"><?php echo lang('Search supplier'); ?>Search
                                 </button>
