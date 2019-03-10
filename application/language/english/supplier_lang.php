@@ -26,4 +26,8 @@ $lang['Có'] = "Có";
 $lang['Không'] = "Không";
 $lang['Đã kích hoạt'] = "Đã kích hoạt";
 $lang['Chưa kích hoạt'] = "Chưa kích hoạt";
+$lang['Còn phòng'] = "Còn phòng";
+$lang['Hết phòng'] = "Hết phòng";
+$lang['host'] = "Host";
+$lang['hotel'] = "Hotel";
 ?>

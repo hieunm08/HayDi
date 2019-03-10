@@ -86,9 +86,9 @@
 						<td><?php echo $host->price_baby ?></td>
 						<td><?php echo $host->surcharge ?></td>
 						<td><?php echo $host->room_number ?></td>
-						<td><?php echo $host->type ?></td>
-						<td><?php echo $host->status ?></td>
-						<td><?php echo $host->is_full ?></td>
+						<td><?php echo $this->host->showType($host->type) ?></td>
+						<td><?php echo $this->host->getHostStatus($host->status) ?></td>
+						<td><?php echo $this->host->showIsFull($host->is_full) ?></td>
 						<td>
                         <span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $host->created_at))?>                    
                       	</td>

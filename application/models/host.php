@@ -22,6 +22,24 @@ class Host extends CI_Model
             echo '<span class="label label-default">'.lang('Không phục vụ').'</span>';
         }
     }
+    function showIsFull($actice_guide)
+    {
+        if ($actice_guide==0) {
+           echo '<span class="label label-success">'.lang('Còn phòng').'</span>';
+        }else
+        { 
+          echo '<span class="label label-default">'.lang('Hết phòng').'</span>';
+    }
+}
+     function showType($type)
+    {
+        if ($type=="host") {
+           echo '<span class="label label-success">'.lang('host').'</span>';
+        }else
+        { 
+          echo '<span class="label label-primary">'.lang('hotel').'</span>';
+    }
+}
      function getHostStatus($host_status)
     {
         if ($host_status="active") {

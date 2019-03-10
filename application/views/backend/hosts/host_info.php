@@ -106,26 +106,8 @@
 
         </div>
         <div class="col-sm-4 col-md-4">
-        
-        <div class="form-group">
-          <label for="company_street">Trạng thái phòng</label>
-          <br>
-          <?php if($host->is_full == '0') {?>
-          <label class="radio-inline">
-            <input type="radio" checked name="is_full" value="0" >Còn phòng
-          </label>
-          <label class="radio-inline">  
-            <input type="radio"  name="is_full" value="1" > Đã đầy
-            <?php }else{ ?>
-            <label class="radio-inline">
-              <input type="radio" checked name="is_full" value="1" >Đã đầy
-            </label>
-            <label class="radio-inline">
-              <input type="radio"  name="is_full" value="0" >Còn phòng
-              <?php } ?>
-            </label>
-          </label>
-        </div>
+         
+       
         <div class="form-group">
           <label for="company_street">Phụ phí</label>
             <input type="text" class="form-control" id="company_street" name="surcharge" value="<?php echo $host->surcharge ?>">
@@ -176,17 +158,8 @@
     
     </div>
    
-
   </div>
 </div>
-<script>
-$(function() {
-    $("#country_input").autocomplete({
-        source: data
-        
-    });
-});
 
 
-</script>
  
