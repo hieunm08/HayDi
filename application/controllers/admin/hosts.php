@@ -131,7 +131,7 @@ class Hosts extends CI_Controller
             $this->load->model('host');
             $this->load->model('supplier');
             $this->load->model('service');
-            $data['host_service'] = $this->service->getHostService();
+            $data['host_service'] = $this->service->getService();
             $data['city_code'] = $this->supplier->getCityCode();
             $data['main_content'] = 'backend/hosts/add_host';
             $data['title'] = 'Add host';
@@ -144,7 +144,7 @@ class Hosts extends CI_Controller
         "phone"        =>   $this->input->post('phone'),
         "email"        =>    $this->input->post('email'),
         "images"        =>   array(
-            $this->input->post('images[]')
+            $this->input->post('images')
         ),
         "video" => $this->input->post('video'),
         "intro" => $this->input->post('intro'),

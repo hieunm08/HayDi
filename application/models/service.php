@@ -15,7 +15,7 @@ class Service extends CI_Model
         return $query->num_rows();
     }
     
-     function getHostService(){
+     function getService(){
         $this->db->select("*");
         $this->db->from('service');
         $query = $this->db->get();
@@ -53,6 +53,17 @@ class Service extends CI_Model
     {
         $this->db->where('id', $id);
         $this->db->delete('service');
+    }
+    function getServiceName($id){
+        $this->db->select('name');
+        $this->db->where('id',$id);
+        $query = $this->db->get('service');
+
+        if ($query->num_rows() > 0)
+        {
+           $row = $query->row();
+           return $row->name;
+        }
     }
   
 }

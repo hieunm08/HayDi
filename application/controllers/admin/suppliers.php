@@ -70,7 +70,7 @@ class Suppliers extends CI_Controller
 
         $config['base_url'] = base_url() . 'admin/suppliers/list_suppliers';
         $config['total_rows'] = $this->supplier->total_suppliers();
-        $config['per_page'] = 5;
+        $config['per_page'] = 20;
         $config["uri_segment"] = 4;
         //pagination styling
         $config['num_tag_open'] = '<li class="page-item">';

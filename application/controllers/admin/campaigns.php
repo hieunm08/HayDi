@@ -70,13 +70,7 @@ class Campaigns extends CI_Controller
 
         $this->pagination->initialize($config);
         $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-
-//        if ($this->isCheck) {
-//            $data['suppliers'] = $this->supplier->show_suppliers($config['per_page'], $page, $supplier_cd);
-//        } else {
-            $data['campaigns'] = $this->campaign->get_Campaign_Pagination($config['per_page'], $page);
-//        }
-
+        $data['campaigns'] = $this->campaign->get_Campaign_Pagination($config['per_page'], $page);
         $data['links'] = $this->pagination->create_links();
         $data['main_content'] = 'backend/campaigns/campaigns';
         $data['title'] = 'campaigns';

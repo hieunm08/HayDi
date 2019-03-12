@@ -13,22 +13,19 @@ class Supplier extends CI_Model
 
     }
 
-    function show_Supplier_Type($supplier_type)
+    function showSupplierType($type)
     {
-        if ($supplier_type==0) {
-            echo '<span class="label label-primary">'.lang('Homestay').'</span>';
-        }else if($supplier_type==1)
-        { 
-            echo '<span class="badge badge-success">'.lang('Guide').'</span>';
-    }else{
-            echo '<span class="label label-info">'.lang('Car').'</span>';
+        if ($type=='customer') {
+            echo '<span class="badge badge-success">'.lang('Customer').'</span>';
+        }else{
+            echo '<span class="badge badge-primary">'.lang('Guider').'</span>';
+        }
     }
-}
 
-    function show_Supplier_Status($supplier_status)
+    function showSupplierStatus($supplier_status)
     {
     if ($supplier_status==0) {
-    echo '<span class="badge badge-success">'.lang('Inactive').'</span>';
+    echo '<span class="badge badge-secondary">'.lang('Inactive').'</span>';
     }else
     {
     echo '<span class="badge badge-success">'.lang('Active').'</span>';

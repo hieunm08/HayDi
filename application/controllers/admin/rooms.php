@@ -51,12 +51,11 @@ class Rooms extends CI_Controller
         {
             $this->load->library('pagination');
             $this->load->model('room');
-
-
+            $this->load->model('host');
 
             $config['base_url'] = base_url() . 'admin/rooms/list_room';
             $config['total_rows'] = $this->room->totalRoom();
-            $config['per_page'] = 2;
+            $config['per_page'] = 10;
             $config["uri_segment"] = 4;
             //pagination styling
             $config['num_tag_open'] = '<li>';
@@ -78,92 +77,101 @@ class Rooms extends CI_Controller
             $data['title'] = 'Rooms';
             $this->load->view('includes/template', $data);
         }
-    function list_service_by_id($id)
+    function list_room_by_id($id)
     {
         $this->load->library('pagination');
-        $this->load->model('service');
+        $this->load->model('room');
+        $this->load->model('host');
 
-        $data['service'] = $this->service->getServiceById($id);
-
+        $data['room'] = $this->room->getRoomById($id);
         $data['links'] = $this->pagination->create_links();
-        $data['main_content'] = 'backend/service/service_info';
-        $data['title'] = 'Service';
+        $data['main_content'] = 'backend/rooms/room_info';
+        $data['title'] = 'Room';
         $this->load->view('includes/template', $data);
     }  
 
 
-     function add_rooms()
+     function add_room()
     {
         $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
-        $this->form_validation->set_rules('id', 'Mã', 'trim|required');
-        $this->form_validation->set_rules('host_id', 'Mã host', 'trim|required');
-                $this->form_validation->set_rules('name', ' Tên phòng', 'trim');
-        $this->form_validation->set_rules('bed_number', 'Số giường ngủ', 'trim');
-        $this->form_validation->set_rules('bed_type', 'Kiểu giường', 'trim');
-        $this->form_validation->set_rules('price', 'Giá', 'trim');
-        $this->form_validation->set_rules('unit', 'Đơn vị', 'trim');
-                $this->form_validation->set_rules('is_breakfast', 'Phục vụ kết thúc', 'trim');
-
-        $this->form_validation->set_rules('update_at', 'Thời gian cập nhật', 'trim');
+        $this->form_validation->set_rules('host_id', 'Hotel name', 'trim|required');
+        $this->form_validation->set_rules('name', ' name', 'trim|required');
+        $this->form_validation->set_rules('bed_number', 'Bed number', 'trim|required');
+        $this->form_validation->set_rules('bed_type', 'Bed type', 'trim|required');
+        $this->form_validation->set_rules('price', 'price', 'trim|required');
+        $this->form_validation->set_rules('unit', 'unit', 'trim|required');
+        $this->form_validation->set_rules('is_breakfast', 'Breakfast', 'trim|required');
 
         if ($this->form_validation->run() == FALSE)
         {
             $this->load->model('room');
-            $data['main_content'] = 'backend/rooms/add_rooms';
+            $this->load->model('host');
+            $data['hotel_name'] = $this->host->getHotel();
+            $data['main_content'] = 'backend/rooms/add_room';
             $data['title'] = 'Add Room';
             $this->load->view('includes/template', $data);
         }else{
-            $this->load->library('pagination');
             $this->load->model('room');
-            $data = $this->input->post();
-             $this->room->addroom($data);
-            redirect('admin/rooms', 'refresh');
+            $data = array(
+            "host_id" => $this->input->post('host_id'),
+            "name" => $this->input->post('name'),
+            "images" => $this->input->post('images'),
+            "bed_number" => $this->input->post('bed_number'),
+            "bed_type" => $this->input->post('bed_type'),
+            "price" => $this->input->post('price'),
+            "unit" => $this->input->post('unit'),
+            "is_breakfast" => $this->input->post('is_breakfast'),
+            "updated_at" => mdate('%Y-%m-%d %H:%i:%s', now())
+            );
+
+            $this->session->set_flashdata('message', 'Thêm thành công');
+            $this->room->createRoom($data);
+            redirect('admin/rooms/add_room', 'refresh');
         }
     }
 
-     function list_room_byID($room_id)
+        function edit_room(){
+            $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+            $this->form_validation->set_rules('bed_number', 'Bed number', 'trim|required');
+            $this->form_validation->set_rules('bed_type', 'Bed type', 'trim|required');
+            $this->form_validation->set_rules('price', 'price', 'trim|required');
+            $this->form_validation->set_rules('unit', 'unit', 'trim|required');
+            $this->form_validation->set_rules('is_breakfast', 'Breakfast', 'trim|required');
+
+        if ($this->form_validation->run() == FALSE)
         {
-            $this->load->library('pagination');
             $this->load->model('room');
-            $data['rooms'] = $this->room->show_room_byID($room_id);
-            $data['links'] = $this->pagination->create_links();
-            $data['main_content'] = 'backend/rooms/rooms_info';
-            $data['title'] = 'Rooms';
-            $this->load->view('includes/template',$data);
-        }
-
-        function update_room(){
-            $data['host_id']=$this->input->post('host_id');
-            $data['name']=$this->input->post('name');
-
-            $data['bed_number']=$this->input->post('bed_number');
-
-            $data['bed_type']=$this->input->post('bed_type');
-
-            $data['price']=$this->input->post('price');
-             $data['unit']=$this->input->post('unit');
-
-
-            $data['is_breakfast']=$this->input->post('is_breakfast');
-
-            $data['update_at']=$this->input->post('update_at');
-           $data['id']  =$this->input->post('id');
-            $this->load->library('pagination');
+            $this->load->model('host');
+            $data['hotel_name'] = $this->host->getHotel();
+            $data['main_content'] = 'backend/rooms/room_info';
+            $data['title'] = 'Edit Room';
+            $this->load->view('includes/template', $data);
+        }else{
             $this->load->model('room');
-            $id = $this->uri->segment(4);
-            $this->room->updateroom($data,$id);
+            $data = array(
+            "images" => $this->input->post('images'),
+            "bed_number" => $this->input->post('bed_number'),
+            "bed_type" => $this->input->post('bed_type'),
+            "price" => $this->input->post('price'),
+            "unit" => $this->input->post('unit'),
+            "is_breakfast" => $this->input->post('is_breakfast'),
+            "updated_at" => mdate('%Y-%m-%d %H:%i:%s', now())
+            );
+
+            $this->session->set_flashdata('message', ' thành công');
+            $this->room->updateRoom($data);
             redirect('admin/rooms', 'refresh');
-
+        }
         }
    
 
    
-    function delete_skill($id)
+    function delete_room($id)
     {
-        $this->load->model('skill');
-        $this->session->set_flashdata('message', 'Suppliers successfully deleted');
-        $this->skill->deleteSkill($id);
-        redirect('admin/skills', 'refresh');
+        $this->load->model('room');
+        $this->session->set_flashdata('message', 'successfully deleted');
+        $this->room->deleteRoom($id);
+        redirect('admin/rooms', 'refresh');
     }
     
 

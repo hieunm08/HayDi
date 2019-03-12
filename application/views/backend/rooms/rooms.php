@@ -6,7 +6,7 @@
                         <h1 class="page-header">Room</h1>
                     </div>
                     <div class="col-sm-2 col-md-2">
-                       <a href="<?php echo base_url('admin/rooms/add_rooms'); ?>"><button type="button" class="btn btn-primary top_button"><span class="icon-plus-2"></span> Add Room</button></a>
+                       <a href="<?php echo base_url('admin/rooms/add_room'); ?>"><button type="button" class="btn btn-primary top_button"><span class="icon-plus-2"></span> Add Room</button></a>
                     </div>
                 </div>
                 <div class="row" style="margin-right:0px;margin-bottom: 10px;width: 500px">
@@ -26,6 +26,11 @@
                   
                     </div>
                 </div>
+                <div class="row">
+                    <?php
+                    if ($this->session->flashdata('message') != '') echo '<div class="alert alert-success" role="alert">' . $this->session->flashdata('message') . '</div>';
+                    ?>
+                </div>
           
   <div id="result">
                 <div class="row">
@@ -35,12 +40,13 @@
                                 <tr>
                                     <th>STT</th>
                                     <th>Mã phòng</th>
-                                    <th>Mã host</th>
                                     <th>Tên phòng</th>
+                                    <th>Mã khách sạn</th>
+                                    <th>Tên khách sạn</th>
                                     <th>Số giường ngủ</th>
                                     <th>Kiểu giường</th>
                                     <th>Giá</th>
-                                    <th>Đơn vị</th>
+                                    <th>Đơn vị giá</th>
                                     <th>Phục vụ ăn sáng</th>
                                     <th>Ngày cập nhật</th>
                                     <th>Chức năng</th>
@@ -55,8 +61,10 @@
                                 <tr>
                                     <td><?php echo $i ?></td>
                                     <td><?php echo $rooms->id ?></td>
-                                    <td><?php echo $rooms->host_id ?></td>
                                     <td><?php echo $rooms->name ?></td>
+                                    <td><?php echo $rooms->host_id ?></td>
+                                    <td><?php echo $this->host->getHotelName($rooms->host_id) ?></td>
+                                    
                                     <td><?php echo $rooms->bed_number ?></td>
                                     <td><?php echo $rooms->bed_type ?></td>
                                     <td><?php echo $rooms->price ?></td>
@@ -65,7 +73,8 @@
                                     <td><span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $rooms->updated_at))?>
                                     <td style="text-align:center">
                                         <div class="btn-group" role="group">
-                                             <a href="<?php echo base_url('admin/rooms/list_room_byID/'. $rooms->id) ?>" target="_blank" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Update</a>
+                                            <a href="<?php echo base_url('admin/rooms/list_room_by_id/'. $rooms->id) ?>" target="_blank" class="btn btn-default btn-xs"><span class="icon-pencil" style="color:green"></span> Chỉnh sửa</a>
+                                            <a href="<?php echo base_url('admin/rooms/delete_room/' .$rooms->id); ?>" onclick="return confirm('Bạn có chắc chắn muốn XÓA phòng này?')" class="btn btn-default btn-xs"><span class="icon-cancel-2" style="color:red"></span> Xóa</a>
                                         </div>
                                     </td>
                             <?php $i++; endforeach; ?>

@@ -131,6 +131,29 @@ class Host extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
+    function getHostByTypeHost()
+    {
+        $this->db->select("*");
+        $this->db->from('host');
+        $this->db->where('type', 'host');
+        $query = $this->db->get();
+        return $query->result();
+    }
+    function getHotel()
+    {
+        $this->db->select("*");
+        $this->db->from('host');
+        $this->db->where('type', 'hotel');
+        $query = $this->db->get();
+        return $query->result();
+    }
+    function getAllHostName()
+    {
+        $this->db->select("*");
+        $this->db->from('host');
+        $query = $this->db->get();
+        return $query->result();
+    }
 
     //phuong thuc xoa
 
@@ -139,6 +162,32 @@ class Host extends CI_Model
         $this->db->where('id', $id);
         $this->db->delete('host');
     }
+
+    function getHostName($id){
+        $this->db->select('name');
+        $this->db->where('id',$id);
+        $query = $this->db->get('host');
+
+        if ($query->num_rows() > 0)
+        {
+           $row = $query->row();
+           return $row->name;
+        }
+    }
+    function getHotelName($id){
+        $this->db->select('name');
+        //$where = "id='$id' AND type='boss' ";
+        $this->db->where('id',$id);
+        $this->db->where('type','hotel');
+        $query = $this->db->get('host');
+
+        if ($query->num_rows() > 0)
+        {
+           $row = $query->row();
+           return $row->name;
+        }
+    }
+
    
   
 

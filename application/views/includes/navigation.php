@@ -106,7 +106,10 @@ $this->lang->load('navigation', $this->session->userdata('language'));
             <a class="nav-link" href="<?php echo base_url() ?>admin/news">Tin tức</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url() ?>admin/services">Dịch vụ host</a>
+            <a class="nav-link" href="<?php echo base_url() ?>admin/services">Dịch vụ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url() ?>admin/host_services">Dịch vụ cho Host</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url() ?>admin/skills">Kĩ năng</a>
@@ -115,7 +118,7 @@ $this->lang->load('navigation', $this->session->userdata('language'));
             <a class="nav-link" href="<?php echo base_url() ?>admin/sponsors">Quảng cáo</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url() ?>admin/rooms">Room</a>
+            <a class="nav-link" href="<?php echo base_url() ?>admin/rooms">Phòng khách sạn</a>
           </li>
         </ul>
       </div>

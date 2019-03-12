@@ -68,11 +68,11 @@
             <td><?php echo $booking->trip_id?></td>
             <td>
               <span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $booking->start_day))?>
-              <div class="pull-right"><span class="icon-clock" style="color:red;"></span> <?php echo date('H:i', strtotime( $booking->start_day)) ?></div>
+              
             </td>
             <td>
               <span class="icon-calendar" style="color:red;"></span> <?php echo date('d/m/Y',strtotime( $booking->end_day))?>
-              <div class="pull-right"><span class="icon-clock" style="color:red;"></span> <?php echo date('H:i', strtotime( $booking->end_day)) ?></div>
+              
             </td>
             <td><?php echo $booking->hours?></td>
             <td><?php echo $booking->start_day?></td>

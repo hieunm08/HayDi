@@ -30,4 +30,6 @@ $lang['Còn phòng'] = "Còn phòng";
 $lang['Hết phòng'] = "Hết phòng";
 $lang['host'] = "Host";
 $lang['hotel'] = "Hotel";
+$lang['Customer'] = "Customer";
+$lang['Guider'] = "Guider";
 ?>

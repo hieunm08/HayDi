@@ -64,12 +64,6 @@ class Bookings extends CI_Controller {
             $this->load->library('pagination');
             $config['base_url'] = base_url() . 'admin/bookings/list_bookings';
 
-            if ($this->session->userdata['role'] == 2) {
-                $this->db->where('created_by', $this->session->userdata['user_id']);
-                $config['total_rows'] = $this->db->count_all_results('trips');
-            } else {
-                $config['total_rows'] = $this->db->count_all_results('trips');
-            }
 
             $config['per_page'] = 10;
             $config["uri_segment"] = 4;
@@ -88,7 +82,6 @@ class Bookings extends CI_Controller {
             $this->pagination->initialize($config);
             $this->load->model('booking');
             $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-            //$data['bookings'] = $this->booking->show_bookings();
             if ($this->session->userdata['role'] == 2)
                 $data['bookings'] = $this->booking->show_bookings($config['per_page'], $page, $this->session->userdata['user_id']);
             else
@@ -105,16 +98,9 @@ class Bookings extends CI_Controller {
         {
             $this->load->library('pagination');
             $this->load->model('booking');
-
-            //dùng api
-           /* $sponsor = json_decode($this->curl->simple_get($this->API.'sponsors?type=host'));
-            $ojb=$sponsor->data;
-            $data['arr']= $ojb->list;
-          */
-
-            $config['base_url'] = base_url() . 'admin/sponsor/list_sponsors';
+            $config['base_url'] = base_url() . 'admin/bookings/list_booking_host';
             $config['total_rows'] = $this->booking->totalBookingHost();
-            $config['per_page'] = 2;
+            $config['per_page'] = 20;
             $config["uri_segment"] = 4;
             //pagination styling
             $config['num_tag_open'] = '<li>';
@@ -127,13 +113,12 @@ class Bookings extends CI_Controller {
             $config['prev_tag_close'] = '</li>';
             $config['prev_link'] = '&laquo;';
             $config['next_link'] = '&raquo;';
-
             $this->pagination->initialize($config);
             $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-            $data['bookings'] = $this->booking->getAllBookingHost($config['per_page'], $page);
+            $data['booking_host'] = $this->booking->getAllBookingHost($config['per_page'], $page);
             $data['links'] = $this->pagination->create_links();
             $data['main_content'] = 'backend/bookings/bookings_host';
-            $data['title'] = 'Host booking';
+            $data['title'] = 'campaigns';
             $this->load->view('includes/template', $data);
         }
 
