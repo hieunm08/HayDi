@@ -13,7 +13,25 @@ class Host extends CI_Model
 
     }
 
-    
+     public function search_list_host($id,$user_id,$name,$email,$phone,$address,$status,$type,$is_full)
+     {
+         $where = '1=1';
+        if(isset($id) && $id!=null && !empty($id)) { $where.=" and id ='".$id ."'";}
+        if(isset($user_id) && $user_id!=null && !empty($user_id)) { $where.=" and user_id ='".$user_id ."'";}
+
+        if(isset($name) && $name!=null && !empty($name)) { $where.=" and name ='".$name."'" ;}
+        if(isset($phone) &&$phone!=null && !empty($phone)) { $where.=" and phone ='".$phone."'" ;}
+        if(isset($email) && $email!=null && !empty($email)) { $where.=" and email ='".$email."'" ;}
+        if(isset($address) && $address!=null && !empty($address)) { $where.=" and address ='".$address."'" ;}
+        if(isset($status) && $status!=null && !empty($status)) { $where.=" and status ='".$status."'" ;}
+        if(isset($type) && $type!=null && !empty($type)) { $where.=" and type ='".$type."'" ;}
+        if(isset($is_full) && $type!=null && !empty($is_full)) { $where.=" and is_full ='".$type."'" ;}
+        $this->db->select('*');
+        $this->db->from('host');
+        $this->db->where($where, NULL, FALSE);
+        $query = $this->db->get();
+        return $query->result();
+     }
     function showIsBreakfast($is_breakfast)
     {
         if ($is_breakfast==1) {

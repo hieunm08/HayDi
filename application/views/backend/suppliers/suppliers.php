@@ -19,23 +19,23 @@
                 <div class="col-sm-4 col-md-4" style="padding-left:0px;width: 1000px">
                     <form class="form-inline" method="POST" action="../admin/suppliers" style="float:left">
                         <div class="form-group">
-                            <input type="text" class="form-control"  name="id"
+                            <input type="text" style="width:6%; margin-right:5px" class="form-control"  name="id"
                             placeholder="ID">
-                            <input type="text" class="form-control"  name="name"
+                            <input type="text" style="width:6%; margin-right:5px" class="form-control"  name="name"
                             placeholder="Họ tên">
-                            <input type="text" class="form-control"  name="phone"
+                            <input type="text" style="width:6%; margin-right:5px" class="form-control"  name="phone"
                             placeholder="Số điện thoại">
-                            <input type="text" class="form-control"  name="email"
+                            <input type="text" style="width:7%; margin-right:5px" class="form-control"  name="email"
                             placeholder="Email">
-                            <input type="text" class="form-control"  name="address"
+                            <input type="text" style="width:7%; margin-right:5px" class="form-control"  name="address"
                             placeholder="Địa chỉ">
-                            <select class="form-control" name="status" style="margin:6px 6px 6px 0px;width: 15%;float: left; placeholder="Trạng thái">
-                                <option value="">Chọn Trạng Thái</option>
+                            <select class="form-control" name="status" style="margin:6px 6px 6px 0px;width: 10%;float: left; placeholder="Trạng thái">
+                                <option value=""> Trạng Thái</option>
                                 <option  value="0">Active</option>
                                 <option  value="1">Inactive </option>
                             </select>
-                            <select class="form-control" name="type" style="margin:6px 6px 6px 0px;width: 15%;float: left;placeholder="BookStatus">
-                                <option value="">Chọn Chọn Loại</option>
+                            <select class="form-control" name="type" style="margin:6px 6px 6px 0px;width: 10%;float: left;placeholder="BookStatus">
+                                <option value="">Chọn Loại</option>
                                 <option  value="customer">Người dùng</option>
                                 <option  value="guider">Hướng dẫn viên </option>
                             </select>

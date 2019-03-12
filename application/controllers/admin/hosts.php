@@ -33,17 +33,18 @@ class Hosts extends CI_Controller
                 $status = $_POST['status'];
                 $this->addSupplier($userName, $password, $fullname,  $type, $status);
 
-            } elseif ($_POST['id'] != null || ($_POST['name'])|| ($_POST['phone'])||($_POST['address'])|| ($_POST['status'])||($_POST['type
-                '])) {
+            } elseif (($_POST['id']!= null)|| ($_POST['user_id']!= null)|| ($_POST['name']!= null)|| ($_POST['phone']!= null)||($_POST['email']!= null)||($_POST['address']!= null)|| ($_POST['status']!= null)||($_POST['type']!= null)||($_POST['is_full']!= null)) {
                 $this->isCheck = true;
                 $id = $_POST['id'];
+                $user_id = $_POST['user_id'];
                 $name = $_POST['name'];
                 $phone = $_POST['phone'];
+                $email = $_POST['email'];
                 $address = $_POST['address'];
                 $status = $_POST['status'];
                 $type = $_POST['type'];
-//                $this->list_suppliers($supplier_cd);
-                $this->list_suppliers_by_search($supplier_cd);
+                 $is_full = $_POST['is_full'];
+                $this->search_host($id,$user_id,$name,$email,$phone,$address,$status,$type,$is_full);
             }
              else {
                 $this->isCheck = false;
@@ -115,6 +116,17 @@ class Hosts extends CI_Controller
         $this->load->view('includes/template', $data);
 
     }     
+
+
+function search_host($id,$user_id,$name,$email,$phone,$address,$status,$type,$is_full){
+$this->load->library('pagination');
+$this->load->model('host');
+$data['hosts']= $this->host->search_list_host($id,$user_id,$name,$email,$phone,$address,$status,$type,$is_full);
+$data['links']= $this->pagination->create_links();
+$data['main_content']='backend/hosts/hosts';
+$data['title']='hosts'; 
+$this->load->view('includes/template',$data);
+}
 
     function add_host()
     {

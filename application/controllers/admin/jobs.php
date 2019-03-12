@@ -31,11 +31,11 @@ class Jobs extends CI_Controller
                 $status = $_POST['status'];
                 $this->addSupplier($userName, $password, $fullname,  $type, $status);
 
-            } elseif ($_POST['supplier_search'] != null) {
+            } elseif ($_POST['job_search'] != null) {
                 $this->isCheck = true;
-                $supplier_cd = $_POST['supplier_search'];
+                $job_search = $_POST['job_search'];
 //                $this->list_suppliers($supplier_cd);
-                $this->list_suppliers_by_search($supplier_cd);
+                $this->jobs_search($job_search);
             }elseif (isset($_POST['add'])) {
                 $data['main_content'] = 'backend/jobs/add_job';
                 $this->load->view('includes/template', $data);
@@ -79,6 +79,15 @@ class Jobs extends CI_Controller
             $data['links'] = $this->pagination->create_links();
             $data['main_content'] = 'backend/jobs/jobs';
             $data['title'] = 'Jobs';
+            $this->load->view('includes/template', $data);
+        }
+        function jobs_search($job_search){
+            $this->load->library('pagination');
+            $this->load->model('job');
+            $data['Jobs'] = $this->job->jobs_search_model($job_search);
+            $data['links'] = $this->pagination->create_links();
+           $data['main_content'] = 'backend/jobs/jobs';
+          $data['title'] = 'jobs';
             $this->load->view('includes/template', $data);
         }
     function list_jobs_by_id($id)

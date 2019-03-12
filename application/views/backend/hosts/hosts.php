@@ -7,43 +7,53 @@
                 <a href="<?php echo base_url('admin/hosts/add_host'); ?>"><button type="button" class="btn btn-primary top_button"><span class="icon-plus-2"></span> Add host</button></a>
             </div>
              <div id="form-search1">
-              <form class="form-inline" method="POST" action="../admin/bookings" style="float:left;">
-                  <div class="form-group" style="width: 500px:">
-                      <input type="text" class="form-control" id="booking_search" name="booking_search" placeholder="Từ khóa">
-                      <button style="margin-right:10px;" type="submit" class="btn btn-primary">Tìm kiếm 
-                      </button>
+             	<h3 style="font-weight: 
+             	300"> Tìm kiếm </h3>
+              <form class="form-inline" method="POST" action="../admin/hosts" style="float:left;">
+                  <div class="form-group">
+                            <input type="text" style="width:6%; margin-right:5px" class="form-control"  name="id"
+                            placeholder="Mã Host">
+                            <input type="text" style="width:6%; margin-right:5px" class="form-control"  name="user_id"
+                            placeholder="Mã người dùng">
+                            <input type="text" style="width:8%; margin-right:5px"class="form-control"  name="name"
+                            placeholder="Tên Host">
+                            <input type="text" style="width:6%; margin-right:5px" class="form-control"  name="email"
+                            placeholder="Email">
+                            <input type="text" style="width:8%; margin-right:5px" class="form-control"  name="phone"
+                            placeholder="Số điện thoại">
+                            <input type="text" style="width:6%; margin-right:5px" class="form-control"  name="address"
+                            placeholder="Địa chỉ">
+                            <select class="form-control" name="status" style="margin:6px 6px 6px 0px;width: 12%;float: left; placeholder="Trạng thái">
+                                <option value="">Trạng Thái hoạt động</option>
+                                <option  value="0">Active</option>
+                                <option  value="1">Inactive </option>
+                            </select>
+                            <select class="form-control" name="type" style="margin:6px 6px 6px 0px;width: 8%;float: left;placeholder="BookStatus">
+                                <option value="">Loại phòng</option>
+                                <option  value="host">Host</option>
+                                <option  value="hotel">Hotel </option>
+                            </select>
+                             <select class="form-control" name="is_full" style="margin:6px 6px 6px 0px;width: 10%;float: left;placeholder="BookStatus">
+                                <option value="">Trạng thái phòng</option>
+                                <option  value="0">Còn phòng </option>
+                                <option  value="1">Hết phòng</option>
+                                
+                            </select>
+                            <button style="margin-right:5px;margin-bottom: 10px; margin-top:10px;" type="submit"
+                            class="btn btn-primary"><?php echo lang('Search supplier'); ?>Search
+                            </button>
                   </div>
               </form>
               </div>
           </div>
+          <br>
         
 	<div class="row">
 		<?php
 		if ($this->session->flashdata('message') != '') echo '<div class="alert alert-success" role="alert">' . $this->session->flashdata('message') . '</div>';
 		?>
 	</div>
-	<br>
-	<div class="row">
-                <div id="form-search2" style="display: block">
-                <h4> Search Detail</h4>
-            <div class="form-2" style="float: left; padding-right: 40px;width: 100%; display: ">
-                      <input style="margin:6px 6px 6px 0px; width: 10%;float: left" type="text" class="form-control" id="supplier_search" name="booking_search" placeholder="Từ khóa">
-                      <input style="margin:6px 6px 6px 0px;width: 20%;float: left" type="text" class="form-control" id="supplier_search" name="booking_search" placeholder="Từ khóa">
-                      <input style="margin:6px 6px 6px 0px;width: 10%;float: left" type="text" class="form-control" id="supplier_search" name="booking_search" placeholder="Từ khóa">
-                <input style="margin:6px 6px 6px 0px;width: 10%;float: left" type="text" class="form-control" id="booking_search" placeholder="Từ khóa">
-
-                <select class="form-control" name="BookStatus" style="margin:6px 6px 6px 0px;width: 13%;float: left;placeholder=" bookstatus"="">
-                    <option value="0">Paid</option>
-                    <option value="1">Holding</option>
-                    <option value="2">Expired</option>
-                </select>
-
-                          <button style="margin-right:5px;margin-bottom: 5px; margin-top:5px;float: left" type="submit" class="btn btn-primary">Tìm kiếm
-                          </button>
-                      </div>
-                </div>
-            </div>
-            <br>
+	
 	<div class="row">
 		<div class="table-responsive">
 			<table class="table table-bordered table-striped">

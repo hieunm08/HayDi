@@ -48,6 +48,11 @@ class Job extends CI_Model
         $this->db->where('id', $id);
         $this->db->delete('jobs');
     }
+    function jobs_search_model($job_search){
+
+                   $query = $this->db->query("SELECT * FROM jobs WHERE id LIKE '%$job_search%' OR name LIKE '%$job_search%'");
+
+    }
   
 }
 ?>
