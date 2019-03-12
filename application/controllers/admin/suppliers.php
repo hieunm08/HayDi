@@ -32,8 +32,7 @@ class Suppliers extends CI_Controller
                 $status = $_POST['status'];
                 $this->addSupplier($userName, $password, $fullname,  $type, $status);
 
-            } elseif (($_POST['id']!= null)|| ($_POST['name']!= null)|| ($_POST['phone']!= null)||($_POST['email']!= null)||($_POST['address']!= null)|| ($_POST['status']!= null)||($_POST['type
-                ']!= null)) {
+            } elseif (($_POST['id']!= null)|| ($_POST['name']!= null)|| ($_POST['phone']!= null)||($_POST['email']!= null)||($_POST['address']!= null)|| ($_POST['status']!= null)||($_POST['type']!= null)) {
                 $this->isCheck = true;
                 $id = $_POST['id'];
                 $name = $_POST['name'];

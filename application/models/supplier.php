@@ -75,9 +75,24 @@ class Supplier extends CI_Model
     }
         //tim kiem tat ca
     function Find_Supplier($id,$name,$phone,$email,$address,$status,$type)
-    {
+    {   
+		$where = '1=1';
+		if(isset($id) && $id!=null && !empty($id)) { $where.=" and id ='".$id ."'";}
+		if(isset($name) && $name!=null && !empty($name)) { $where.=" and name ='".$name."'" ;}
+		if(isset($phone) &&$phone!=null && !empty($phone)) { $where.=" and phone ='".$phone."'" ;}
+		if(isset($email) && $email!=null && !empty($email)) { $where.=" and email ='".$email."'" ;}
+		if(isset($address) && $address!=null && !empty($address)) { $where.=" and address ='".$address."'" ;}
+		if(isset($status) && $status!=null && !empty($status)) { $where.=" and status ='".$status."'" ;}
+		if(isset($type) && $type!=null && !empty($type)) { $where.=" and type ='".$type."'" ;}
+		
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where($where, NULL, FALSE);
+		$query = $this->db->get();
+		return $query->result();
+		/*
            $query = $this->db->query("SELECT * FROM users WHERE id ='$id' OR name='$name' OR phone ='$phone' OR email='$email' OR address ='$address' OR status ='$status' OR type= '$type'");
-           return $query->result();
+           return $query->result();*/
     }
         //tim kiem theo muc
     function Find_Supplier_By_Item($supplier_u, $supplier_f, $supplier_t, $supplier_s)
